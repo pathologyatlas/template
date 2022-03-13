@@ -3,6 +3,8 @@ template for pathology atlas repositories
 
 see [make-html-WSI](https://github.com/pathologyatlas/make-html-WSI) for more information and [TODO](https://github.com/pathologyatlas/TODO) to add cases
 
+do not forget to activate github pages for the new repository
+
 ```zsh
 vips dzsave HE.svs HE
 ```
