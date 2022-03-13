@@ -7,8 +7,8 @@ see [make-html-WSI](https://github.com/pathologyatlas/make-html-WSI) for more in
 vips dzsave HE.svs HE
 ```
 
-- [https://pathologyatlas.github.io/template/HE.html](https://pathologyatlas.github.io/template/HE.html)
+[https://pathologyatlas.github.io/template/HE.html](https://pathologyatlas.github.io/template/HE.html)
 
-- See Microscopy with viewer: 
+See Microscopy with viewer: 
 
 <iframe src="https://pathologyatlas.github.io/template/HE.html" width="100%" height="400px"></iframe>
