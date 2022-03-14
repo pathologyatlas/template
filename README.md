@@ -13,4 +13,4 @@ vips dzsave HE.svs HE
 
 See Microscopy with viewer: 
 
-<iframe src="https://pathologyatlas.github.io/template/HE.html" width="100%" height="400px"></iframe>
+<iframe src="https://pathologyatlas.github.io/template/HE.html" style="height:400px;width:100%;></iframe>
