@@ -1,6 +1,7 @@
 # template
 
-template for pathology atlas repositories
+**template for pathology atlas repositories**
+
 
 > see [make-html-WSI](https://github.com/pathologyatlas/make-html-WSI) for more information and [TODO](https://github.com/pathologyatlas/TODO) to add cases
 
@@ -17,6 +18,16 @@ vips dzsave HE.svs HE
 # language <- "EN"
 # language <- "TR"
 ```
+
+```{asis, echo = language == "TR"}
+# TemplateTR
+```
+
+
+```{asis, echo = language == "EN"}
+# TemplateEN
+```
+
 
 
 ```{asis, echo = language == "TR"}
