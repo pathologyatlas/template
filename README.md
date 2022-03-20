@@ -13,6 +13,13 @@
 vips dzsave HE.svs HE
 ```
 
+```{r}
+#! language
+#! echo=FALSE
+#! include=TRUE
+source("./R/language.R")
+```
+
 
 ```{asis}
 #| echo = (language == "TR")
