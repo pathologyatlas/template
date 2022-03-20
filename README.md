@@ -19,18 +19,18 @@ vips dzsave HE.svs HE
 # language <- "TR"
 ```
 
-```{asis, echo = language == "TR"}
+```{asis, echo = (language == "TR")}
 # TemplateTR
 ```
 
 
-```{asis, echo = language == "EN"}
+```{asis, echo = (language == "EN")}
 # TemplateEN
 ```
 
 
 
-```{asis, echo = language == "TR"}
+```{asis, echo = (language == "TR")}
 
 **templateTR**
 
@@ -44,7 +44,7 @@ Mikroskopik görüntüleri inceleyin:
 ```
 
 
-```{asis, echo = language == "EN"}
+```{asis, echo = (language == "EN")}
 
 **templateEN**
 
