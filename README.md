@@ -21,7 +21,8 @@ vips dzsave HE.svs HE
 
 ```{asis, echo = language == "TR"}
 
-## templateTR
+**templateTR**
+
 
 [https://pathologyatlas.github.io/template/HE.html](https://pathologyatlas.github.io/template/HE.html)
 
@@ -34,7 +35,8 @@ Mikroskopik görüntüleri inceleyin:
 
 ```{asis, echo = language == "EN"}
 
-## templateEN
+**templateEN**
+
 
 [https://pathologyatlas.github.io/template/HE.html](https://pathologyatlas.github.io/template/HE.html)
 
