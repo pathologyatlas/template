@@ -18,28 +18,36 @@
 
 
 ```zsh
+
 vips dzsave HE.svs HE
+
 ```
 
 
 
 
 ```{r language template, echo=FALSE, include=TRUE}
+
 source("./R/language.R")
+
 ```
 
 
 
 
 ```{asis, echo = (language == "TR")}
+
 # TemplateTR
+
 ```
 
 
 
 
 ```{asis, echo = (language == "EN")}
+
 # TemplateEN
+
 ```
 
 
