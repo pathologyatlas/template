@@ -62,7 +62,7 @@ source("./R/language.R")
 
 Mikroskopik görüntüleri inceleyin:
 
-<iframe src="https://pathologyatlas.github.io/template/HE.html" style="height:400px;width:100%;"></iframe>
+<iframe src="https://pathologyatlas.github.io/template/HE.html" style="height:400px;width:100%;" data-external="1"></iframe>
 
 ```
 
@@ -78,7 +78,7 @@ Mikroskopik görüntüleri inceleyin:
 
 See Microscopy with viewer: 
 
-<iframe src="https://pathologyatlas.github.io/template/HE.html" style="height:400px;width:100%;"></iframe>
+<iframe src="https://pathologyatlas.github.io/template/HE.html" style="height:400px;width:100%;" data-external="1"></iframe>
 
 ```
 
