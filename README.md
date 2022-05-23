@@ -37,7 +37,7 @@ source("./R/language.R")
 
 ```{asis, echo = (language == "TR")}
 
-# TemplateTR
+## TemplateTR
 
 ```
 
@@ -46,7 +46,7 @@ source("./R/language.R")
 
 ```{asis, echo = (language == "EN")}
 
-# TemplateEN
+## TemplateEN
 
 ```
 
