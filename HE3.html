@@ -1,0 +1,78 @@
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="https://pathologyatlas.github.io/annotorious/annotorious.min.css">
+
+
+</head>
+
+<body>
+    <div id="lego" style="width: 100%; height: 95%;"></div>
+
+
+
+
+    <script src="https://pathologyatlas.github.io/openseadragon/openseadragon.min.js"></script>
+    <script src="https://pathologyatlas.github.io/annotorious/openseadragon-annotorious.min.js"></script>
+
+
+    <script>
+        window.onload = function () {
+            var viewer = OpenSeadragon({
+                id: "lego",
+                tileSources: {
+                    type: "image",
+                    url: "./trial/1280px-Hallstatt.jpg"
+                }
+            });
+
+            // Initialize the Annotorious plugin
+            var anno = OpenSeadragon.Annotorious(viewer);
+
+
+            var cannedAnnotations = {
+                lego: { id: '#ffe68c32', x: 850, y: 30, w: 470, h: 270, text: 'Open source software. Free for non-commercial and commercial projects.' }
+            };
+
+            // Lazy-initialized Annotorious instances
+            var annoInstances = {
+                lego: null
+            };
+
+            createAnimatedAnnotation(cannedAnnotations[id], anno, 4000);
+
+
+            observer.observe(document.getElementById('lego'));
+
+
+        }
+    </script>
+
+
+
+
+    <!-- <script type="text/javascript">
+    var viewer = OpenSeadragon({
+        id: "openseadragon2",
+        prefixUrl: "https://pathologyatlas.github.io/openseadragon/images/",
+        tileSources: [{
+            type: "image",
+            url: "./trial/1280px-Hallstatt.jpg"
+        }]
+    });
+
+
+    var anno = Annotorious.init({
+        image: 'openseadragon2' // image element or ID
+    });
+
+
+    anno.loadAnnotations('annotations.w3c.json');
+
+
+</script> -->
+
+
+
+
+
+</body>
