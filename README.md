@@ -66,6 +66,36 @@ Mikroskopik görüntüleri inceleyin:
 
 ```
 
+```{comment}
+asis, echo = (language == "TR")
+
+
+
+<button id="tani-case-template-btn">Tanıyı Göster</button>
+<div id="answer-template" style="display: none;">templateTR</div>
+
+<script>
+  const showAnswer-templateBtn = document.getElementById('tani-case-template-btn');
+  const answer-template = document.getElementById('answer-template');
+
+  showAnswer-templateBtn.addEventListener('click', () => {
+    if (answer-template.style.display === 'none') {
+      answer-template.style.display = 'block';
+      showAnswer-templateBtn.textContent = 'Tanıyı Gizle';
+    } else {
+      answer-template.style.display = 'none';
+      showAnswer-templateBtn.textContent = 'Tanıyı Göster';
+    }
+  });
+</script>
+
+
+
+{{< video https://www.youtube.com/embed/ >}}
+
+
+
+```
 
 
 
@@ -83,3 +113,30 @@ See Microscopy with viewer:
 ```
 
 
+```{comment}
+asis, echo = (language == "EN")
+
+<button id="dx-case-template-btn">Show the Diagnosis</button>
+<div id="answer-template" style="display: none;">templateEN</div>
+
+<script>
+  const showAnswer-templateBtn = document.getElementById('dx-case-template-btn');
+  const answer-template = document.getElementById('answer-template');
+
+  showAnswer-templateBtn.addEventListener('click', () => {
+    if (answer-template.style.display === 'none') {
+      answer-template.style.display = 'block';
+      showAnswer-templateBtn.textContent = 'Hide the Diagnosis';
+    } else {
+      answer-template.style.display = 'none';
+      showAnswer-templateBtn.textContent = 'Show the Diagnosis';
+    }
+  });
+</script>
+
+
+{{< video https://www.youtube.com/embed/ >}}
+
+
+
+```
