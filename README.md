@@ -66,6 +66,22 @@ Mikroskopik görüntüleri inceleyin:
 
 ```
 
+```{comment} 
+asis, echo = (language == "TR")
+
+**templateTR**
+
+
+[https://images.patolojiatlasi.com/template/HE_annotated.html](https://images.patolojiatlasi.com/template/HE_annotated.html)
+
+İşaretlenmiş mikroskopik görüntüleri inceleyin:
+
+<iframe src="https://images.patolojiatlasi.com/template/HE_annotated.html" style="height:400px;width:100%;" data-external="1"></iframe>
+
+```
+
+
+
 ```{comment}
 asis, echo = (language == "TR")
 
@@ -112,6 +128,22 @@ See Microscopy with viewer:
 
 ```
 
+
+```{comment}
+asis, echo = (language == "EN")
+
+**templateEN**
+
+
+[https://images.patolojiatlasi.com/template/HE_annotated.html](https://images.patolojiatlasi.com/template/HE_annotated.html)
+
+See Annotated Microscopy with viewer: 
+
+<iframe src="https://images.patolojiatlasi.com/template/HE_annotated.html" style="height:400px;width:100%;" data-external="1"></iframe>
+
+
+
+```
 
 ```{comment}
 asis, echo = (language == "EN")
