@@ -62,7 +62,7 @@ source("./R/language.R")
 
 Mikroskopik görüntüleri inceleyin:
 
-<iframe src="https://images.patolojiatlasi.com/template/HE.html" style="height:400px;width:100%;" data-external="1"></iframe>
+<iframe src="https://images.patolojiatlasi.com/template/HE.html" style="height:600px;width:100%;" data-external="1"></iframe>
 
 ```
 
@@ -76,7 +76,7 @@ asis, echo = (language == "TR")
 
 İşaretlenmiş mikroskopik görüntüleri inceleyin:
 
-<iframe src="https://images.patolojiatlasi.com/template/HE_annotated.html" style="height:400px;width:100%;" data-external="1"></iframe>
+<iframe src="https://images.patolojiatlasi.com/template/HE_annotated.html" style="height:600px;width:100%;" data-external="1"></iframe>
 
 ```
 
@@ -124,7 +124,7 @@ asis, echo = (language == "TR")
 
 See Microscopy with viewer: 
 
-<iframe src="https://images.patolojiatlasi.com/template/HE.html" style="height:400px;width:100%;" data-external="1"></iframe>
+<iframe src="https://images.patolojiatlasi.com/template/HE.html" style="height:600px;width:100%;" data-external="1"></iframe>
 
 ```
 
@@ -139,7 +139,7 @@ asis, echo = (language == "EN")
 
 See Annotated Microscopy with viewer: 
 
-<iframe src="https://images.patolojiatlasi.com/template/HE_annotated.html" style="height:400px;width:100%;" data-external="1"></iframe>
+<iframe src="https://images.patolojiatlasi.com/template/HE_annotated.html" style="height:600px;width:100%;" data-external="1"></iframe>
 
 
 
