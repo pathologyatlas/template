@@ -58,7 +58,7 @@ source("./R/language.R")
 **templateTR**
 
 
-[https://images.patolojiatlasi.com/template/HE.html](https://images.patolojiatlasi.com/template/HE.html)
+[Tam Ekran](https://images.patolojiatlasi.com/template/HE.html)
 
 Mikroskopik görüntüleri inceleyin:
 
@@ -72,7 +72,7 @@ asis, echo = (language == "TR")
 **templateTR**
 
 
-[https://images.patolojiatlasi.com/template/HE_annotated.html](https://images.patolojiatlasi.com/template/HE_annotated.html)
+[Tam Ekran](https://images.patolojiatlasi.com/template/HE_annotated.html)
 
 İşaretlenmiş mikroskopik görüntüleri inceleyin:
 
@@ -120,7 +120,7 @@ asis, echo = (language == "TR")
 **templateEN**
 
 
-[https://images.patolojiatlasi.com/template/HE.html](https://images.patolojiatlasi.com/template/HE.html)
+[Full Screen](https://images.patolojiatlasi.com/template/HE.html)
 
 See Microscopy with viewer: 
 
@@ -135,7 +135,7 @@ asis, echo = (language == "EN")
 **templateEN**
 
 
-[https://images.patolojiatlasi.com/template/HE_annotated.html](https://images.patolojiatlasi.com/template/HE_annotated.html)
+[Full Screen](https://images.patolojiatlasi.com/template/HE_annotated.html)
 
 See Annotated Microscopy with viewer: 
 
