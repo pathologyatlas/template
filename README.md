@@ -15,11 +15,10 @@ update html files:
 
 <title>TemplateEN</title>
 
-<meta name="keywords" content="HTML, CSS, JavaScript">
+<meta name="keywords" content="TemplateEN">
 
-<meta name="description" content="Free Web tutorials for HTML and CSS">
+<meta name="description" content="TemplateEN">
 
-<link rel="icon" href="favicon.ico" type="image/x-icon" />
 ```
 
 
