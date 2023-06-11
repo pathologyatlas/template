@@ -6,21 +6,21 @@
 
 
 
+```
+see [make-html-WSI](https://github.com/pathologyatlas/make-html-WSI) for more information and [TODO](https://github.com/pathologyatlas/TODO) to add cases
+```
 
-> see [make-html-WSI](https://github.com/pathologyatlas/make-html-WSI) for more information and [TODO](https://github.com/pathologyatlas/TODO) to add cases
-
-
-> update html files:
+```
+update html files:
 
 <title>TemplateEN</title>
-
 
 <meta name="keywords" content="HTML, CSS, JavaScript">
 
 <meta name="description" content="Free Web tutorials for HTML and CSS">
 
 <link rel="icon" href="favicon.ico" type="image/x-icon" />
-
+```
 
 
 > do not forget to activate github pages for the new repository
