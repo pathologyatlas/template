@@ -15,7 +15,7 @@ update html files:
 
 <title>TemplateEN</title>
 
-<meta name="keywords" content="TemplateEN">
+<meta name="keywords" content="TemplateEN, patoloji, atlas, pathology, whole slide image">
 
 <meta name="description" content="TemplateEN">
 
