@@ -77,7 +77,7 @@ webshot2::webshot(
 **templateTR**
 
 
-[![Tam Ekran](./screenshots/template_screenshot.png)](https://images.patolojiatlasi.com/template/HE.html)
+[![Tam Ekran Görmek İçin Resmi Tıklayın](./screenshots/template_screenshot.png){width="50%"}](https://images.patolojiatlasi.com/template/HE.html)
 
 [Tam Ekran](https://images.patolojiatlasi.com/template/HE.html)
 
