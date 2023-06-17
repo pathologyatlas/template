@@ -13,11 +13,11 @@ see [make-html-WSI](https://github.com/pathologyatlas/make-html-WSI) for more in
 ```
 update html files:
 
-<title>TemplateEN</title>
+<title>TemplateEN templateTR</title>
 
-<meta name="keywords" content="TemplateEN, patoloji, atlas, pathology, whole slide image">
+<meta name="keywords" content="TemplateEN, templateTR, patoloji, atlas, pathology, whole slide image">
 
-<meta name="description" content="TemplateEN">
+<meta name="description" content="TemplateEN templateTR">
 
 ```
 
@@ -60,13 +60,24 @@ source("./R/language.R")
 
 ```
 
+```{r, eval=TRUE, include=FALSE}
+if (!file.exists("./screenshots/template_screenshot.png")) {
+webshot2::webshot(
+  url = "https://images.patolojiatlasi.com/template/HE.html",
+  file = "./screenshots/template_screenshot.png"
+)
+}
 
+
+```
 
 
 ```{asis, echo = (language == "TR")}
 
 **templateTR**
 
+
+[![Tam Ekran](./screenshots/template_screenshot.png)](https://images.patolojiatlasi.com/template/HE.html)
 
 [Tam Ekran](https://images.patolojiatlasi.com/template/HE.html)
 

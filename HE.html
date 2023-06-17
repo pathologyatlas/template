@@ -1,12 +1,12 @@
-<html>
+<html> <!-- do not use <!DOCTYPE html> -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!--- <title>TemplateEN</title>
+<!--- <title>TemplateEN templateTR</title>
 
-<meta name="keywords" content="TemplateEN, patoloji, atlas, pathology, whole slide image">
+<meta name="keywords" content="TemplateEN, templateTR, patoloji, atlas, pathology, whole slide image">
 
-<meta name="description" content="TemplateEN">
+<meta name="description" content="TemplateEN templateTR">
 
 -->
 
@@ -18,13 +18,14 @@
 
 <div id="openseadragon1" style="width: 100%; height: 95%;"></div>
 <script src="https://images.patolojiatlasi.com/openseadragon/openseadragon.min.js"></script>
-<script src="/openseadragon/openseadragon.min.js"></script>
+<script src="./openseadragon/openseadragon.min.js"></script>
 
 <!-- <script src="openseadragon/openseadragon-scalebar.js"></script> -->
 <script type="text/javascript">
     var viewer = OpenSeadragon({
         id: 'openseadragon1',
-        prefixUrl: 'https://images.patolojiatlasi.com/openseadragon/images/',
+//        prefixUrl: 'https://images.patolojiatlasi.com/openseadragon/images/',
+        prefixUrl: './openseadragon/images/',
 
         showHomeControl: false,
         showRotationControl: true,
@@ -40,7 +41,7 @@
                 Overlap: '1', // see .dzi file
                 Format: 'jpeg', // see .dzi file
                 ServerFormat: 'Default', // optional
-                xmlns: 'http://schemas.microsoft.com/deepzoom/2009', // see .dzi file
+                xmlns: 'http://schemas.microsoft.com/deepzoom/2008', // see .dzi file
                 Size: {
                     Width: '51792', // see .dzi file
                     Height: '30580' // see .dzi file
@@ -75,6 +76,27 @@
             xOffset: '10',
             yOffset: '10'
         }); */
+
+
+
+
+
+
+  // Add a keydown event listener to the document
+  document.addEventListener("keydown", function (event) {
+    // Check if the pressed key is 'Z' (key code 90) to zoom in
+    if (event.keyCode === 90) {
+      // Zoom in
+      viewer.viewport.zoomBy(1.2);
+    }
+    // Check if the pressed key is 'X' (key code 88) to zoom out
+    else if (event.keyCode === 88) {
+      // Zoom out
+      viewer.viewport.zoomBy(0.8);
+    }
+  });
+
+
 
 </script>
 

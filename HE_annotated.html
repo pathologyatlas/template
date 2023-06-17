@@ -1,4 +1,4 @@
-<html>
+<html> <!-- do not use <!DOCTYPE html> -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -18,7 +18,7 @@
 
 <div id="openseadragon2" style="width: 100%; height: 95%;"></div>
 <link rel="stylesheet" href="https://images.patolojiatlasi.com/annotorious/annotorious.min.css">
-<link rel="stylesheet" href="/annotorious/annotorious.min.css">
+<link rel="stylesheet" href="./annotorious/annotorious.min.css">
 
 <style>
     .navigator .highlight {
@@ -66,7 +66,7 @@
                 Overlap: '1', // see .dzi file
                 Format: 'jpeg', // see .dzi file
                 ServerFormat: 'Default', // optional
-                xmlns: 'http://schemas.microsoft.com/deepzoom/2009', // see .dzi file
+                xmlns: 'http://schemas.microsoft.com/deepzoom/2008', // see .dzi file
                 Size: {
                     Width: '33283', // see .dzi file
                     Height: '29324' // see .dzi file
@@ -126,6 +126,38 @@
             tip.hide(); //Hide tooltip
         });
     };
+
+
+
+
+  // Add a keydown event listener to the document
+  document.addEventListener("keydown", function (event) {
+    // Check if the pressed key is 'Z' (key code 90) to zoom in
+    if (event.keyCode === 90) {
+      // Zoom in
+      viewer.viewport.zoomBy(1.2);
+    }
+    // Check if the pressed key is 'X' (key code 88) to zoom out
+    else if (event.keyCode === 88) {
+      // Zoom out
+      viewer.viewport.zoomBy(0.8);
+    }
+  });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 </script>
 
