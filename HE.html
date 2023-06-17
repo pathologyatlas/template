@@ -1,67 +1,81 @@
 <html> <!-- do not use <!DOCTYPE html> -->
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!--- <title>TemplateEN templateTR</title>
+<head>
+  <title>TemplateEN templateTR</title>
+  <meta name="keywords" content="TemplateEN, templateTR, patoloji, atlas, pathology, whole slide image">
 
-<meta name="keywords" content="TemplateEN, templateTR, patoloji, atlas, pathology, whole slide image">
+  <meta name="description" content="TemplateEN templateTR">
 
-<meta name="description" content="TemplateEN templateTR">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
--->
 
-<link rel="apple-touch-icon" sizes="180x180" href="https://images.patolojiatlasi.com/img/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://images.patolojiatlasi.com/img/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="https://images.patolojiatlasi.com/img/favicon-16x16.png">
-<link rel="manifest" href="https://images.patolojiatlasi.com/img/site.webmanifest">
-<link rel="icon" href="https://images.patolojiatlasi.com/img/favicon.ico" type="image/x-icon" />
 
-<div id="openseadragon1" style="width: 100%; height: 95%;"></div>
-<script src="https://images.patolojiatlasi.com/openseadragon/openseadragon.min.js"></script>
-<script src="./openseadragon/openseadragon.min.js"></script>
+  <link rel="apple-touch-icon" sizes="180x180" href="https://images.patolojiatlasi.com/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://images.patolojiatlasi.com/img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://images.patolojiatlasi.com/img/favicon-16x16.png">
+  <link rel="manifest" href="https://images.patolojiatlasi.com/img/site.webmanifest">
+  <link rel="icon" href="https://images.patolojiatlasi.com/img/favicon.ico" type="image/x-icon" />
 
-<!-- <script src="openseadragon/openseadragon-scalebar.js"></script> -->
-<script type="text/javascript">
+
+  <script src="https://images.patolojiatlasi.com/openseadragon/openseadragon.min.js"></script>
+  <script src="./openseadragon/openseadragon.min.js"></script>
+
+  <!-- <script src="openseadragon/openseadragon-scalebar.js"></script> -->
+
+</head>
+
+<body>
+
+  <div id="openseadragon1" style="width: 100%; height: 95%;"></div>
+
+
+
+
+
+
+
+  <script type="text/javascript">
     var viewer = OpenSeadragon({
-        id: 'openseadragon1',
-//        prefixUrl: 'https://images.patolojiatlasi.com/openseadragon/images/',
-        prefixUrl: './openseadragon/images/',
+      id: 'openseadragon1',
+      //        prefixUrl: 'https://images.patolojiatlasi.com/openseadragon/images/',
+      prefixUrl: './openseadragon/images/',
 
-        showHomeControl: false,
-        showRotationControl: true,
-        showNavigator: true,
-        showFlipControl: true,
-        navigatorBackground: 'rgb(240, 240, 240)',
+      showHomeControl: false,
+      showRotationControl: true,
+      showNavigator: true,
+      showFlipControl: true,
+      navigatorBackground: 'rgb(240, 240, 240)',
 
 
-        tileSources: {
-            Image: {
-                Url: './HE_files/', // name of image folder
-                TileSize: '254', // see .dzi file
-                Overlap: '1', // see .dzi file
-                Format: 'jpeg', // see .dzi file
-                ServerFormat: 'Default', // optional
-                xmlns: 'http://schemas.microsoft.com/deepzoom/2008', // see .dzi file
-                Size: {
-                    Width: '51792', // see .dzi file
-                    Height: '30580' // see .dzi file
-                }
-            }
+      tileSources: {
+        Image: {
+          Url: './HE_files/', // name of image folder
+          TileSize: '254', // see .dzi file
+          Overlap: '1', // see .dzi file
+          Format: 'jpeg', // see .dzi file
+          ServerFormat: 'Default', // optional
+          xmlns: 'http://schemas.microsoft.com/deepzoom/2008', // see .dzi file
+          Size: {
+            Width: '51792', // see .dzi file
+            Height: '30580' // see .dzi file
+          }
         }
-        // ,
-        // tileSources: "yourwsi.dzi",
-        // sequenceMode: false,
-        // autoHideControls: true,
-        // animationTime: 1.0,
-        // blendTime: 0.6,
-        // constrainDuringPan: true,
-        // maxZoomPixelRatio: 1,
-        // visibilityRatio: 1,
-        // zoomPerScrolli: 1,
-        // defaultZoomLevel: 1,
-        // showReferenceStrip: true,
-        // showNavigator:  true,
-        // showFullPageControl: false
+      }
+      // ,
+      // tileSources: "yourwsi.dzi",
+      // sequenceMode: false,
+      // autoHideControls: true,
+      // animationTime: 1.0,
+      // blendTime: 0.6,
+      // constrainDuringPan: true,
+      // maxZoomPixelRatio: 1,
+      // visibilityRatio: 1,
+      // zoomPerScrolli: 1,
+      // defaultZoomLevel: 1,
+      // showReferenceStrip: true,
+      // showNavigator:  true,
+      // showFullPageControl: false
 
 
     });
@@ -82,22 +96,23 @@
 
 
 
-  // Add a keydown event listener to the document
-  document.addEventListener("keydown", function (event) {
-    // Check if the pressed key is 'Z' (key code 90) to zoom in
-    if (event.keyCode === 90) {
-      // Zoom in
-      viewer.viewport.zoomBy(1.2);
-    }
-    // Check if the pressed key is 'X' (key code 88) to zoom out
-    else if (event.keyCode === 88) {
-      // Zoom out
-      viewer.viewport.zoomBy(0.8);
-    }
-  });
+    // Add a keydown event listener to the document
+    document.addEventListener("keydown", function (event) {
+      // Check if the pressed key is 'Z' (key code 90) to zoom in
+      if (event.keyCode === 90) {
+        // Zoom in
+        viewer.viewport.zoomBy(1.2);
+      }
+      // Check if the pressed key is 'X' (key code 88) to zoom out
+      else if (event.keyCode === 88) {
+        // Zoom out
+        viewer.viewport.zoomBy(0.8);
+      }
+    });
 
 
 
-</script>
+  </script>
+</body>
 
 </html>
