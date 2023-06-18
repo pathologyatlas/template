@@ -77,9 +77,7 @@ webshot2::webshot(
 **templateTR**
 
 
-[![Tam Ekran Görmek İçin Resmi Tıklayın](./screenshots/template_screenshot.png){width="50%"}](https://images.patolojiatlasi.com/template/HE.html)
-
-[Tam Ekran](https://images.patolojiatlasi.com/template/HE.html)
+[![Tam Ekran Görmek İçin Resmi Tıklayın](./screenshots/template_screenshot.png){width="25%"}](https://images.patolojiatlasi.com/template/HE.html) [Tam Ekran Görmek İçin Resmi Tıklayın](https://images.patolojiatlasi.com/template/HE.html)
 
 Mikroskopik görüntüleri inceleyin:
 
@@ -93,7 +91,7 @@ asis, echo = (language == "TR")
 **templateTR**
 
 
-[Tam Ekran](https://images.patolojiatlasi.com/template/HE_annotated.html)
+[![İşaretlenmiş mikroskopik görüntüleri Tam Ekran Görmek İçin Resmi Tıklayın](./screenshots/template_screenshot.png){width="25%"}](https://images.patolojiatlasi.com/template/HE_annotated.html) [İşaretlenmiş mikroskopik görüntüleri Tam Ekran Görmek İçin Resmi Tıklayın](https://images.patolojiatlasi.com/template/HE_annotated.html)
 
 İşaretlenmiş mikroskopik görüntüleri inceleyin:
 
@@ -140,8 +138,7 @@ asis, echo = (language == "TR")
 
 **templateEN**
 
-
-[Full Screen](https://images.patolojiatlasi.com/template/HE.html)
+[![Click for Full Screen WSI](./screenshots/template_screenshot.png){width="25%"}](https://images.patolojiatlasi.com/template/HE.html) [Click for Full Screen WSI](https://images.patolojiatlasi.com/template/HE.html)
 
 See Microscopy with viewer: 
 
@@ -155,8 +152,8 @@ asis, echo = (language == "EN")
 
 **templateEN**
 
+[![Click for Full Screen Annotated WSI](./screenshots/template_screenshot.png){width="25%"}](https://images.patolojiatlasi.com/template/HE_annotated.html) [Click for Full Screen Annotated WSI](https://images.patolojiatlasi.com/template/HE_annotated.html)
 
-[Full Screen](https://images.patolojiatlasi.com/template/HE_annotated.html)
 
 See Annotated Microscopy with viewer: 
 
