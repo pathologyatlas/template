@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# chmod +x git_push2.sh
+# ./git_push2.sh
+
 files=( $(find ./ -type f) )   # Find all files in the current directory and subdirectories
 batch_size=2000                 # Define the batch size
 total_files=${#files[@]}       # Get total number of files
