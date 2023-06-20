@@ -1,9 +1,7 @@
 #!/bin/bash
 
-# chmod +x git_push.sh
-
-files=( $(find ./CD3_files -type f) )   # Find all files in the current directory and subdirectories
-batch_size=5000                 # Define the batch size
+files=( $(find ./ -type f) )   # Find all files in the current directory and subdirectories
+batch_size=2000                 # Define the batch size
 total_files=${#files[@]}       # Get total number of files
 batches=$((($total_files + $batch_size - 1) / $batch_size))
 
@@ -17,11 +15,16 @@ do
   fi
 
   echo "Adding files from $start to $end"
+  file_group=""
   for ((j=start; j<=end; j++))
   do
-    git add "${files[$j]}"
+    file_group+=" ${files[$j]}"
   done
 
+  git add $file_group
   git commit -m "Adding files from $start to $end"
-  git push
+  echo "Push start after adding files from $start to $end"
+  git push origin
+  echo "Pushed files from $start to $end"
+  sleep 10
 done
