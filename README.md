@@ -1,10 +1,6 @@
 # template
 
-
-
 **template for pathology atlas repositories**
-
-
 
 ```
 see [make-html-WSI](https://github.com/pathologyatlas/make-html-WSI) for more information and [TODO](https://github.com/pathologyatlas/TODO) to add cases
@@ -21,11 +17,7 @@ update html files:
 
 ```
 
-
-> do not forget to activate github pages for the new repository
-
-
-
+> after upload complete, do not forget to activate github pages for the new repository
 
 ```zsh
 
@@ -33,34 +25,25 @@ vips dzsave HE.svs HE
 
 ```
 
-
-
-
-```{r language template, echo=FALSE, include=TRUE}
+```{r
 
 source("./R/language.R")
 
 ```
 
-
-
-
-```{asis, echo = (language == "TR")}
+```{asis,
 
 ## TemplateTR {#sec-template}
 
 ```
 
-
-
-
-```{asis, echo = (language == "EN")}
+```{asis,
 
 ## TemplateEN {#sec-template}
 
 ```
 
-```{r, eval=TRUE, include=FALSE}
+```{r,
 if (!file.exists("./screenshots/template_screenshot.png")) {
 webshot2::webshot(
   url = "https://images.patolojiatlasi.com/template/HE.html",
@@ -71,8 +54,7 @@ webshot2::webshot(
 
 ```
 
-
-```{asis, echo = (language == "TR")}
+```{asis,
 
 **templateTR**
 
@@ -85,7 +67,7 @@ Mikroskopik görüntüleri inceleyin:
 
 ```
 
-```{comment} 
+```{comment}
 asis, echo = (language == "TR")
 
 **templateTR**
@@ -98,8 +80,6 @@ asis, echo = (language == "TR")
 <iframe src="https://images.patolojiatlasi.com/template/HE_annotated.html" style="height:600px;width:100%;" data-external="1"></iframe>
 
 ```
-
-
 
 ```{comment}
 asis, echo = (language == "TR")
@@ -132,9 +112,7 @@ asis, echo = (language == "TR")
 
 ```
 
-
-
-```{asis, echo = (language == "EN")}
+```{asis,
 
 **templateEN**
 
@@ -145,7 +123,6 @@ See Microscopy with viewer:
 <iframe src="https://images.patolojiatlasi.com/template/HE.html" style="height:600px;width:100%;" data-external="1"></iframe>
 
 ```
-
 
 ```{comment}
 asis, echo = (language == "EN")
