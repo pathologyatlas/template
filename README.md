@@ -23,6 +23,7 @@ update html files:
 
 
 > after upload complete, do not forget to activate github pages for the new repository
+> consider using git_push2.sh script to upload files to github, since the number of generated files is huge
 
 
 
@@ -37,38 +38,32 @@ vips dzsave HE.svs HE
 
 
 ```{r language template, echo=FALSE, include=TRUE}
-
 source("./R/language.R")
-
+output_type <- knitr::opts_knit$get("rmarkdown.pandoc.to")
 ```
 
 
 
 
 ```{asis, echo = (language == "TR")}
-
 ## TemplateTR {#sec-template}
-
 ```
 
 
 
 
 ```{asis, echo = (language == "EN")}
-
 ## TemplateEN {#sec-template}
-
 ```
 
-```{r, eval=TRUE, include=FALSE}
+
+```{r template screenshot, eval=TRUE, include=FALSE}
 if (!file.exists("./screenshots/template_screenshot.png")) {
 webshot2::webshot(
   url = "https://images.patolojiatlasi.com/template/HE.html",
   file = "./screenshots/template_screenshot.png"
 )
 }
-
-
 ```
 
 
@@ -78,12 +73,17 @@ webshot2::webshot(
 
 
 [![Tam Ekran Görmek İçin Resmi Tıklayın](./screenshots/template_screenshot.png){width="25%"}](https://images.patolojiatlasi.com/template/HE.html) [Tam Ekran Görmek İçin Resmi Tıklayın](https://images.patolojiatlasi.com/template/HE.html)
+```
 
+
+```{asis, echo = ((language=="TR") & (output_type=="html"))}
 Mikroskopik görüntüleri inceleyin:
 
 <iframe src="https://images.patolojiatlasi.com/template/HE.html" style="height:600px;width:100%;" data-external="1"></iframe>
 
 ```
+
+
 
 ```{comment} 
 asis, echo = (language == "TR")
@@ -124,13 +124,23 @@ asis, echo = (language == "TR")
   });
 </script>
 
+```
 
+```{comment}
+asis, echo = ((language=="TR") & (output_type=="html"))
 
 {{< video https://www.youtube.com/embed/ >}}
 
+```
 
+```{comment}
+asis, echo = ((language=="TR") & (output_type!="html"))
+
+[https://www.youtube.com/watch?v=](https://www.youtube.com/watch?v=)
 
 ```
+
+
 
 
 
@@ -139,6 +149,13 @@ asis, echo = (language == "TR")
 **templateEN**
 
 [![Click for Full Screen WSI](./screenshots/template_screenshot.png){width="25%"}](https://images.patolojiatlasi.com/template/HE.html) [Click for Full Screen WSI](https://images.patolojiatlasi.com/template/HE.html)
+
+
+```
+
+
+
+```{asis, echo = ((language == "EN") & (output_type=="html"))} 
 
 See Microscopy with viewer: 
 
@@ -184,9 +201,19 @@ asis, echo = (language == "EN")
   });
 </script>
 
+```
+
+```{comment}
+asis, echo = ((language=="EN") & (output_type=="html"))
 
 {{< video https://www.youtube.com/embed/ >}}
 
+```
 
+```{comment}
+asis, echo = ((language=="EN") & (output_type!="html"))
+
+[https://www.youtube.com/watch?v=](https://www.youtube.com/watch?v=)
 
 ```
+
