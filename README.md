@@ -50,8 +50,6 @@ output_type <- knitr::opts_knit$get("rmarkdown.pandoc.to")
 ```
 
 
-
-
 ```{asis, echo = (language == "EN")}
 ## TemplateEN {#sec-template}
 ```
@@ -64,6 +62,10 @@ webshot2::webshot(
   file = "./screenshots/template_screenshot.png"
 )
 }
+```
+
+```{r, echo=FALSE, include=TRUE, eval=TRUE}
+knitr::include_url(url = "https://images.patolojiatlasi.com/template/HE.html")
 ```
 
 
@@ -215,5 +217,11 @@ asis, echo = ((language=="EN") & (output_type!="html"))
 
 [https://www.youtube.com/watch?v=](https://www.youtube.com/watch?v=)
 
+```
+
+
+```{comment}
+=html
+<iframe src="https://images.patolojiatlasi.com/ectopic-adrenal/HE.html" style="height:600px;width:100%;" data-external="1"></iframe>
 ```
 
