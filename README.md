@@ -37,9 +37,9 @@ update html file to match .dzi file
 
 
 
-> after upload complete, do not forget to activate github pages for the new repository
 > consider using git_push2.sh script to upload files to github, since the number of generated files is huge
 
+> after upload complete, do not forget to activate github pages for the new repository
 
 
 
