@@ -229,6 +229,24 @@ asis, echo = (language == "EN")
 
 ```
 
+
+```{comment}
+r, eval=TRUE, echo=FALSE, include=FALSE, error=TRUE
+if (!file.exists("./screenshots/template_screenshot.png")) {
+
+url <- "https://img.youtube.com/vi/U9glkfQLTm4/maxresdefault.jpg"
+download.file(url, destfile = "./screenshots/template_screenshot.png", mode = "wb")
+}
+
+**TemplateTR**
+
+[![Video İçin Tıklayın](./screenshots/tempalte_screenshot.png){width="25%"}](https://www.youtube.com/watch?v=) [Video İçin Tıklayın](https://www.youtube.com/watch?v=)
+
+```
+
+
+
+
 ```{comment}
 asis, echo = ((language=="EN") & (output_type=="html"))
 
