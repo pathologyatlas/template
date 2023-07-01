@@ -75,6 +75,23 @@ webshot2::webshot(
 knitr::include_url(url = "https://images.patolojiatlasi.com/template/HE.html")
 ```
 
+```{r, echo=FALSE, include=TRUE, eval=TRUE}
+#| label: template_screenshot
+#| fig-cap: "TemplateTR"
+knitr::include_graphics("./screenshots/template_screenshot.png")
+```
+
+See @template_screenshot for TemplateTR.
+
+::: {.content-hidden when-format="pdf"}
+TemplateTR
+:::
+
+::: {.content-visible when-format="pdf"}
+TemplateTR
+:::
+
+
 
 ```{asis, echo = (language == "TR")}
 
@@ -231,4 +248,3 @@ asis, echo = ((language=="EN") & (output_type!="html"))
 =html
 <iframe src="https://images.patolojiatlasi.com/ectopic-adrenal/HE.html" style="height:600px;width:100%;" data-external="1"></iframe>
 ```
-
