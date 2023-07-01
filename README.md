@@ -5,13 +5,12 @@
 **template for pathology atlas repositories**
 
 
-
 ```
 see [make-html-WSI](https://github.com/pathologyatlas/make-html-WSI) for more information and [TODO](https://github.com/pathologyatlas/TODO) to add cases
 ```
 
 ```
-update html files:
+update html file heading:
 
 <title>TemplateEN templateTR</title>
 
@@ -22,17 +21,25 @@ update html files:
 ```
 
 
-> after upload complete, do not forget to activate github pages for the new repository
-> consider using git_push2.sh script to upload files to github, since the number of generated files is huge
-
-
-
 
 ```zsh
 
 vips dzsave HE.svs HE
 
 ```
+
+
+
+```
+update html file to match .dzi file
+
+```
+
+
+
+> consider using git_push2.sh script to upload files to github, since the number of generated files is huge
+
+> after upload complete, do not forget to activate github pages for the new repository
 
 
 
