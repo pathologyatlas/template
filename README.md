@@ -36,11 +36,23 @@ update html file to match .dzi file
 ```
 
 
+```
+add to begining of qmd page
+
+---
+title: "template"
+description: "TemplateEN templateTR"
+date: last-modified
+categories: [template]
+page-layout: full
+---
+```
+
+
 
 > consider using git_push.sh script to upload files to github, since the number of generated files is huge
 
 > after upload complete, do not forget to activate github pages for the new repository
-
 
 
 
