@@ -40,12 +40,15 @@ update html file to match .dzi file
 add to begining of qmd page
 
 ---
-title: "template"
-description: "TemplateEN templateTR"
+description: |
+    TemplateEN
+    TemplateTR
 date: last-modified
 categories: [template]
 page-layout: full
+bibliography: references.bib
 ---
+
 ```
 
 
