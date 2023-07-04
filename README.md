@@ -279,5 +279,5 @@ asis, echo = ((language=="EN") & (output_type!="html"))
 
 ```{comment}
 =html
-<iframe src="https://images.patolojiatlasi.com/ectopic-adrenal/HE.html" style="height:600px;width:100%;" data-external="1"></iframe>
+<iframe src="https://images.patolojiatlasi.com/template/HE.html" style="height:600px;width:100%;" data-external="1"></iframe>
 ```
