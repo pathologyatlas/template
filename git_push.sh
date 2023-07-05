@@ -59,5 +59,6 @@ do
   echo "Push start after adding files from $start to $end"
   git push origin
   echo "Pushed files from $start to $end. There are $total_files files in total."
+  echo "Batch number $((i+1)) has been processed."
   sleep 20
 done
