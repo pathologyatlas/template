@@ -86,19 +86,18 @@ webshot2::webshot(
 }
 ```
 
-```{r, echo=FALSE, include=TRUE, eval=TRUE}
+```{r, echo=FALSE, include=FALSE, eval=FALSE}
 knitr::include_url(url = "https://images.patolojiatlasi.com/template/HE.html")
 ```
 
-```{r, echo=FALSE, include=TRUE, eval=TRUE}
+```{r, echo=FALSE, include=FALSE, eval=FALSE}
 #| label: template_screenshot
 #| fig-cap: "TemplateTR"
 knitr::include_graphics("./screenshots/template_screenshot.png")
 ```
 
-See @template_screenshot for TemplateTR.
 
-::: {.content-hidden when-format="pdf"}
+::: {.content-hidden when-format="html"}
 TemplateTR
 :::
 
