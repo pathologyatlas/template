@@ -10,6 +10,15 @@ see [make-html-WSI](https://github.com/pathologyatlas/make-html-WSI) for more in
 ```
 
 ```
+In this README file replace the following:
+TemplateEN with description of file in English
+TemplateTR with description of file in Turkish
+template with repository name
+
+```
+
+
+```
 update html file heading:
 
 <title>TemplateEN templateTR</title>
