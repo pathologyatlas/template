@@ -19,7 +19,7 @@ template with repository name
 
 
 ```
-update html file heading:
+update html file <head>
 
 <title>TemplateEN templateTR</title>
 
