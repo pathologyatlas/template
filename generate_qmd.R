@@ -1,9 +1,11 @@
-qmd_text <- function(TemplateTR = "TemplateTR",
-                     TemplateEN = "TemplateEN",
-                     template = "template",
-                     youtube_link = "youtube_link") {
+# qmd_text_info ----
+qmd_text_info <- function(TemplateTR = "TemplateTR",
+                       TemplateEN = "TemplateEN",
+                       template = "template") {
 
-  template_string <- '# {{template}}
+template_string <- '# {{template}}
+
+
 
 
 
@@ -51,12 +53,47 @@ update html file to match .dzi file
 
 
 
+
+
+
+
+
+'
+
+
+  data <- list(
+    TemplateTR = TemplateTR,
+    TemplateEN = TemplateEN,
+    template = template
+  )
+
+  qmdtextinfo <- whisker::whisker.render(template_string, data)
+
+  qmdtextinfo <- gsub(pattern = "((<", replacement = "{{<", x = qmdtextinfo, fixed = TRUE)
+
+  qmdtextinfo <- gsub(pattern = ">))", replacement = ">}}", x = qmdtextinfo, fixed = TRUE)
+
+  return(qmdtextinfo)
+
+
+  }
+
+
+
+# qmd_text_base ----
+
+qmd_text_base <- function(TemplateTR = "TemplateTR",
+                          TemplateEN = "TemplateEN",
+                          template = "template",
+                          stain = c("HE1", "HE2")) {
+
+template_string_1 <- '
+
+
 ```{r language {{template}}, echo=FALSE, include=TRUE}
 source("./R/language.R")
 output_type <- knitr::opts_knit$get("rmarkdown.pandoc.to")
 ```
-
-
 
 
 ```{asis, echo = (language == "TR")}
@@ -68,38 +105,18 @@ output_type <- knitr::opts_knit$get("rmarkdown.pandoc.to")
 ## {{TemplateEN}} {#sec-{{template}} }
 ```
 
+'
 
-```{r {{template}} screenshot, eval=TRUE, include=FALSE}
-if (!file.exists("./screenshots/{{template}}_screenshot.png")) {
+template_string_2 <- '
+
+```{r {{template}} screenshot {{stain}}, eval=TRUE, include=FALSE}
+if (!file.exists("./screenshots/{{template}}-{{stain}}_screenshot.png")) {
 webshot2::webshot(
-  url = "https://images.patolojiatlasi.com/{{template}}/HE.html",
-  file = "./screenshots/{{template}}_screenshot.png"
+  url = "https://images.patolojiatlasi.com/{{template}}/{{stain}}.html",
+  file = "./screenshots/{{template}}-{{stain}}_screenshot.png"
 )
 }
 ```
-
-
-```{r, echo=FALSE, include=TRUE, eval=TRUE}
-knitr::include_url(url = "https://images.patolojiatlasi.com/{{template}}/HE.html")
-```
-
-```{r, echo=FALSE, include=TRUE, eval=TRUE}
-#| label: {{template}}_screenshot
-#| fig-cap: "{{TemplateTR}}"
-knitr::include_graphics("./screenshots/{{template}}_screenshot.png")
-```
-
-See @{{template}}_screenshot for {{TemplateTR}}.
-
-
-
-::: {.content-hidden when-format="pdf"}
-{{TemplateTR}}
-:::
-
-::: {.content-visible when-format="pdf"}
-{{TemplateTR}}
-:::
 
 
 
@@ -108,32 +125,77 @@ See @{{template}}_screenshot for {{TemplateTR}}.
 **{{TemplateTR}}**
 
 
-[![Tam Ekran Görmek İçin Resmi Tıklayın](./screenshots/{{template}}_screenshot.png){width="25%"}](https://images.patolojiatlasi.com/{{template}}/HE.html) [Tam Ekran Görmek İçin Resmi Tıklayın](https://images.patolojiatlasi.com/{{template}}/HE.html)
+[![Tam Ekran Görmek İçin Resmi Tıklayın](./screenshots/{{template}}-{{stain}}_screenshot.png){width="25%"}](https://images.patolojiatlasi.com/{{template}}/{{stain}}.html) [Tam Ekran Görmek İçin Resmi Tıklayın](https://images.patolojiatlasi.com/{{template}}/{{stain}}.html)
 ```
 
 
 ```{asis, echo = ((language=="TR") & (output_type=="html"))}
 Mikroskopik görüntüleri inceleyin:
 
-<iframe src="https://images.patolojiatlasi.com/{{template}}/HE.html" style="height:600px;width:100%;" data-external="1"></iframe>
+<iframe src="https://images.patolojiatlasi.com/{{template}}/{{stain}}.html" style="height:600px;width:100%;" data-external="1"></iframe>
 
 ```
 
 
-```{comment}
-asis, echo = (language == "TR")
+```{asis, echo = (language == "EN")}
 
-**{{TemplateTR}}**
+**{{TemplateEN}}**
 
-
-[![İşaretlenmiş mikroskopik görüntüleri Tam Ekran Görmek İçin Resmi Tıklayın](./screenshots/{{template}}_screenshot.png){width="25%"}](https://images.patolojiatlasi.com/{{template}}/HE_annotated.html) [İşaretlenmiş mikroskopik görüntüleri Tam Ekran Görmek İçin Resmi Tıklayın](https://images.patolojiatlasi.com/{{template}}/HE_annotated.html)
-
-İşaretlenmiş mikroskopik görüntüleri inceleyin:
-
-<iframe src="https://images.patolojiatlasi.com/{{template}}/HE_annotated.html" style="height:600px;width:100%;" data-external="1"></iframe>
+[![Click for Full Screen WSI](./screenshots/{{template}}-{{stain}}_screenshot.png){width="25%"}](https://images.patolojiatlasi.com/{{template}}/{{stain}}.html) [Click for Full Screen WSI](https://images.patolojiatlasi.com/{{template}}/{{stain}}.html)
 
 ```
 
+
+
+```{asis, echo = ((language == "EN") & (output_type=="html"))}
+
+See Microscopy with viewer:
+
+<iframe src="https://images.patolojiatlasi.com/{{template}}/{{stain}}.html" style="height:600px;width:100%;" data-external="1"></iframe>
+
+```
+
+
+'
+
+data_1 <- list(
+  TemplateTR = TemplateTR,
+  TemplateEN = TemplateEN,
+  template = template)
+
+qmdtextbase <- whisker::whisker.render(template_string_1, data_1)
+
+
+for (s in stain) {
+  data_2 <- list(
+    TemplateTR = TemplateTR,
+    TemplateEN = TemplateEN,
+    template = template,
+    stain = s
+  )
+
+  temp <- whisker::whisker.render(template_string_2, data_2)
+
+
+  qmdtextbase <- paste(qmdtextbase, temp, sep = "\n\n")
+
+}
+
+qmdtextbase <- gsub(pattern = "((<", replacement = "{{<", x = qmdtextbase, fixed = TRUE)
+qmdtextbase <- gsub(pattern = ">))", replacement = ">}}", x = qmdtextbase, fixed = TRUE)
+
+return(qmdtextbase)
+
+}
+
+# qmd_text_question_answer ----
+
+qmd_text_question_answer <- function(TemplateTR = "TemplateTR",
+                          TemplateEN = "TemplateEN",
+                          template = "template",
+                          youtube_link = "youtube_link") {
+
+  template_string <- '
 
 
 ```{comment}
@@ -163,57 +225,6 @@ asis, echo = (language == "TR")
 
 
 ```{comment}
-asis, echo = ((language=="TR") & (output_type=="html"))
-
-((< video https://www.youtube.com/embed/{{youtube_link}} >))
-
-```
-
-
-```{comment}
-asis, echo = ((language=="TR") & (output_type!="html"))
-
-[https://www.youtube.com/watch?v={{youtube_link}}](https://www.youtube.com/watch?v={{youtube_link}})
-
-```
-
-
-
-```{asis, echo = (language == "EN")}
-
-**{{TemplateEN}}**
-
-[![Click for Full Screen WSI](./screenshots/{{template}}_screenshot.png){width="25%"}](https://images.patolojiatlasi.com/{{template}}/HE.html) [Click for Full Screen WSI](https://images.patolojiatlasi.com/{{template}}/HE.html)
-
-```
-
-
-
-```{asis, echo = ((language == "EN") & (output_type=="html"))}
-
-See Microscopy with viewer:
-
-<iframe src="https://images.patolojiatlasi.com/{{template}}/HE.html" style="height:600px;width:100%;" data-external="1"></iframe>
-
-```
-
-
-```{comment}
-asis, echo = (language == "EN")
-
-**{{TemplateEN}}**
-
-[![Click for Full Screen Annotated WSI](./screenshots/{{template}}_screenshot.png){width="25%"}](https://images.patolojiatlasi.com/{{template}}/HE_annotated.html) [Click for Full Screen Annotated WSI](https://images.patolojiatlasi.com/{{template}}/HE_annotated.html)
-
-
-See Annotated Microscopy with viewer:
-
-<iframe src="https://images.patolojiatlasi.com/{{template}}/HE_annotated.html" style="height:600px;width:100%;" data-external="1"></iframe>
-
-```
-
-
-```{comment}
 asis, echo = (language == "EN")
 
 <button id="dx-case-{{template}}-btn">Show the Diagnosis</button>
@@ -237,17 +248,63 @@ asis, echo = (language == "EN")
 ```
 
 
+'
+
+  data <- list(
+    TemplateTR = TemplateTR,
+    TemplateEN = TemplateEN,
+    template = template,
+    youtube_link = youtube_link
+  )
+
+  qmdtextqa <- whisker::whisker.render(template_string, data)
+
+  qmdtextqa <- gsub(pattern = "((<", replacement = "{{<", x = qmdtextqa, fixed = TRUE)
+
+  qmdtextqa <- gsub(pattern = ">))", replacement = ">}}", x = qmdtextqa, fixed = TRUE)
+
+  return(qmdtextqa)
+
+
+}
+
+
+# qmd_text_video ----
+
+qmd_text_video <- function(TemplateTR = "TemplateTR",
+                          TemplateEN = "TemplateEN",
+                          template = "template",
+                          youtube_link = "youtube_link") {
+
+  template_string <- '
+
+
+```{comment}
+asis, echo = ((language=="TR") & (output_type=="html"))
+
+((< video https://www.youtube.com/embed/{{youtube_link}} >))
+
+```
+
+
+```{comment}
+asis, echo = ((language=="TR") & (output_type!="html"))
+
+[https://www.youtube.com/watch?v={{youtube_link}}](https://www.youtube.com/watch?v={{youtube_link}})
+
+```
+
 ```{comment}
 r, eval=TRUE, echo=FALSE, include=FALSE, error=TRUE
-if (!file.exists("./screenshots/{{template}}_screenshot.png")) {
+if (!file.exists("./screenshots/{{template}}-{{stain}}_screenshot.png")) {
 
 url <- "https://img.youtube.com/vi/{{youtube_link}}/maxresdefault.jpg"
-download.file(url, destfile = "./screenshots/{{template}}_screenshot.png", mode = "wb")
+download.file(url, destfile = "./screenshots/{{template}}-{{stain}}_screenshot.png", mode = "wb")
 }
 
 **{{TemplateTR}}**
 
-[![Video İçin Tıklayın](./screenshots/{{template}}_screenshot.png){width="25%"}](https://www.youtube.com/watch?v={{youtube_link}}) [Video İçin Tıklayın](https://www.youtube.com/watch?v={{youtube_link}})
+[![Video İçin Tıklayın](./screenshots/{{template}}-{{stain}}_screenshot.png){width="25%"}](https://www.youtube.com/watch?v={{youtube_link}}) [Video İçin Tıklayın](https://www.youtube.com/watch?v={{youtube_link}})
 
 ```
 
@@ -268,11 +325,6 @@ asis, echo = ((language=="EN") & (output_type!="html"))
 ```
 
 
-```{comment}
-=html
-<iframe src="https://images.patolojiatlasi.com/{{template}}/HE.html" style="height:600px;width:100%;" data-external="1"></iframe>
-```
-
 '
 
   data <- list(
@@ -280,6 +332,94 @@ asis, echo = ((language=="EN") & (output_type!="html"))
     TemplateEN = TemplateEN,
     template = template,
     youtube_link = youtube_link
+  )
+
+  qmdtextvideo <- whisker::whisker.render(template_string, data)
+
+  qmdtextvideo <- gsub(pattern = "((<", replacement = "{{<", x = qmdtextvideo, fixed = TRUE)
+
+  qmdtextvideo <- gsub(pattern = ">))", replacement = ">}}", x = qmdtextvideo, fixed = TRUE)
+
+  return(qmdtextvideo)
+
+}
+
+
+# qmd_text_comment ----
+
+qmd_text_comment <- function(TemplateTR = "TemplateTR",
+                     TemplateEN = "TemplateEN",
+                     template = "template") {
+
+template_string <- '
+
+
+
+```{r, echo=FALSE, include=FALSE, eval=FALSE}
+knitr::include_url(url = "https://images.patolojiatlasi.com/{{template}}/{{stain}}.html")
+```
+
+```{r, echo=FALSE, include=FALSE, eval=FALSE}
+#| label: {{template}}_screenshot
+#| fig-cap: "{{TemplateTR}}"
+knitr::include_graphics("./screenshots/{{template}}-{{stain}}_screenshot.png")
+```
+
+
+::: {.content-hidden when-format="pdf"}
+{{TemplateTR}}
+:::
+
+::: {.content-visible when-format="pdf"}
+{{TemplateTR}}
+:::
+
+
+
+
+
+```{comment}
+asis, echo = (language == "TR")
+
+**{{TemplateTR}}**
+
+
+[![İşaretlenmiş mikroskopik görüntüleri Tam Ekran Görmek İçin Resmi Tıklayın](./screenshots/{{template}}-{{stain}}_screenshot.png){width="25%"}](https://images.patolojiatlasi.com/{{template}}/HE_annotated.html) [İşaretlenmiş mikroskopik görüntüleri Tam Ekran Görmek İçin Resmi Tıklayın](https://images.patolojiatlasi.com/{{template}}/HE_annotated.html)
+
+İşaretlenmiş mikroskopik görüntüleri inceleyin:
+
+<iframe src="https://images.patolojiatlasi.com/{{template}}/HE_annotated.html" style="height:600px;width:100%;" data-external="1"></iframe>
+
+```
+
+
+
+```{comment}
+asis, echo = (language == "EN")
+
+**{{TemplateEN}}**
+
+[![Click for Full Screen Annotated WSI](./screenshots/{{template}}-{{stain}}_screenshot.png){width="25%"}](https://images.patolojiatlasi.com/{{template}}/HE_annotated.html) [Click for Full Screen Annotated WSI](https://images.patolojiatlasi.com/{{template}}/HE_annotated.html)
+
+
+See Annotated Microscopy with viewer:
+
+<iframe src="https://images.patolojiatlasi.com/{{template}}/HE_annotated.html" style="height:600px;width:100%;" data-external="1"></iframe>
+
+```
+
+
+```{comment}
+=html
+<iframe src="https://images.patolojiatlasi.com/{{template}}/{{stain}}.html" style="height:600px;width:100%;" data-external="1"></iframe>
+```
+
+'
+
+  data <- list(
+    TemplateTR = TemplateTR,
+    TemplateEN = TemplateEN,
+    template = template
   )
 
   qmdtext <- whisker::whisker.render(template_string, data)
@@ -291,5 +431,14 @@ asis, echo = ((language=="EN") & (output_type!="html"))
   return(qmdtext)
 }
 
-text_to_write <- qmd_text()
+
+
+info_text <- qmd_text_info()
+base_text <- qmd_text_base()
+qa_text <- qmd_text_question_answer()
+video_text <- qmd_text_video()
+comment_text <- qmd_text_comment()
+
+text_to_write <- paste0(info_text, base_text, qa_text, video_text, comment_text, collapse = "\r\n\n")
+
 writeLines(text = text_to_write, con = "./newqmd.qmd", sep = "\n")

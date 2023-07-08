@@ -2,6 +2,8 @@
 
 
 
+
+
 **template for pathology atlas repositories**
 
 
@@ -46,12 +48,18 @@ update html file to match .dzi file
 
 
 
+
+
+
+
+
+
+
+
 ```{r language template, echo=FALSE, include=TRUE}
 source("./R/language.R")
 output_type <- knitr::opts_knit$get("rmarkdown.pandoc.to")
 ```
-
-
 
 
 ```{asis, echo = (language == "TR")}
@@ -64,37 +72,17 @@ output_type <- knitr::opts_knit$get("rmarkdown.pandoc.to")
 ```
 
 
+
+
+
 ```{r template screenshot, eval=TRUE, include=FALSE}
-if (!file.exists("./screenshots/template_screenshot.png")) {
+if (!file.exists("./screenshots/template-HE1_screenshot.png")) {
 webshot2::webshot(
-  url = "https://images.patolojiatlasi.com/template/HE.html",
-  file = "./screenshots/template_screenshot.png"
+  url = "https://images.patolojiatlasi.com/template/HE1.html",
+  file = "./screenshots/template-HE1_screenshot.png"
 )
 }
 ```
-
-
-```{r, echo=FALSE, include=TRUE, eval=TRUE}
-knitr::include_url(url = "https://images.patolojiatlasi.com/template/HE.html")
-```
-
-```{r, echo=FALSE, include=TRUE, eval=TRUE}
-#| label: template_screenshot
-#| fig-cap: "TemplateTR"
-knitr::include_graphics("./screenshots/template_screenshot.png")
-```
-
-See @template_screenshot for TemplateTR.
-
-
-
-::: {.content-hidden when-format="pdf"}
-TemplateTR
-:::
-
-::: {.content-visible when-format="pdf"}
-TemplateTR
-:::
 
 
 
@@ -103,31 +91,88 @@ TemplateTR
 **TemplateTR**
 
 
-[![Tam Ekran Görmek İçin Resmi Tıklayın](./screenshots/template_screenshot.png){width="25%"}](https://images.patolojiatlasi.com/template/HE.html) [Tam Ekran Görmek İçin Resmi Tıklayın](https://images.patolojiatlasi.com/template/HE.html)
+[![Tam Ekran Görmek İçin Resmi Tıklayın](./screenshots/template-HE1_screenshot.png){width="25%"}](https://images.patolojiatlasi.com/template/HE1.html) [Tam Ekran Görmek İçin Resmi Tıklayın](https://images.patolojiatlasi.com/template/HE1.html)
 ```
 
 
 ```{asis, echo = ((language=="TR") & (output_type=="html"))}
 Mikroskopik görüntüleri inceleyin:
 
-<iframe src="https://images.patolojiatlasi.com/template/HE.html" style="height:600px;width:100%;" data-external="1"></iframe>
+<iframe src="https://images.patolojiatlasi.com/template/HE1.html" style="height:600px;width:100%;" data-external="1"></iframe>
 
 ```
 
 
-```{comment}
-asis, echo = (language == "TR")
+```{asis, echo = (language == "EN")}
+
+**TemplateEN**
+
+[![Click for Full Screen WSI](./screenshots/template-HE1_screenshot.png){width="25%"}](https://images.patolojiatlasi.com/template/HE1.html) [Click for Full Screen WSI](https://images.patolojiatlasi.com/template/HE1.html)
+
+```
+
+
+
+```{asis, echo = ((language == "EN") & (output_type=="html"))}
+
+See Microscopy with viewer:
+
+<iframe src="https://images.patolojiatlasi.com/template/HE1.html" style="height:600px;width:100%;" data-external="1"></iframe>
+
+```
+
+
+
+
+
+
+```{r template screenshot, eval=TRUE, include=FALSE}
+if (!file.exists("./screenshots/template-HE2_screenshot.png")) {
+webshot2::webshot(
+  url = "https://images.patolojiatlasi.com/template/HE2.html",
+  file = "./screenshots/template-HE2_screenshot.png"
+)
+}
+```
+
+
+
+```{asis, echo = (language == "TR")}
 
 **TemplateTR**
 
 
-[![İşaretlenmiş mikroskopik görüntüleri Tam Ekran Görmek İçin Resmi Tıklayın](./screenshots/template_screenshot.png){width="25%"}](https://images.patolojiatlasi.com/template/HE_annotated.html) [İşaretlenmiş mikroskopik görüntüleri Tam Ekran Görmek İçin Resmi Tıklayın](https://images.patolojiatlasi.com/template/HE_annotated.html)
+[![Tam Ekran Görmek İçin Resmi Tıklayın](./screenshots/template-HE2_screenshot.png){width="25%"}](https://images.patolojiatlasi.com/template/HE2.html) [Tam Ekran Görmek İçin Resmi Tıklayın](https://images.patolojiatlasi.com/template/HE2.html)
+```
 
-İşaretlenmiş mikroskopik görüntüleri inceleyin:
 
-<iframe src="https://images.patolojiatlasi.com/template/HE_annotated.html" style="height:600px;width:100%;" data-external="1"></iframe>
+```{asis, echo = ((language=="TR") & (output_type=="html"))}
+Mikroskopik görüntüleri inceleyin:
+
+<iframe src="https://images.patolojiatlasi.com/template/HE2.html" style="height:600px;width:100%;" data-external="1"></iframe>
 
 ```
+
+
+```{asis, echo = (language == "EN")}
+
+**TemplateEN**
+
+[![Click for Full Screen WSI](./screenshots/template-HE2_screenshot.png){width="25%"}](https://images.patolojiatlasi.com/template/HE2.html) [Click for Full Screen WSI](https://images.patolojiatlasi.com/template/HE2.html)
+
+```
+
+
+
+```{asis, echo = ((language == "EN") & (output_type=="html"))}
+
+See Microscopy with viewer:
+
+<iframe src="https://images.patolojiatlasi.com/template/HE2.html" style="height:600px;width:100%;" data-external="1"></iframe>
+
+```
+
+
 
 
 
@@ -158,57 +203,6 @@ asis, echo = (language == "TR")
 
 
 ```{comment}
-asis, echo = ((language=="TR") & (output_type=="html"))
-
-{{< video https://www.youtube.com/embed/youtube_link >}}
-
-```
-
-
-```{comment}
-asis, echo = ((language=="TR") & (output_type!="html"))
-
-[https://www.youtube.com/watch?v=youtube_link](https://www.youtube.com/watch?v=youtube_link)
-
-```
-
-
-
-```{asis, echo = (language == "EN")}
-
-**TemplateEN**
-
-[![Click for Full Screen WSI](./screenshots/template_screenshot.png){width="25%"}](https://images.patolojiatlasi.com/template/HE.html) [Click for Full Screen WSI](https://images.patolojiatlasi.com/template/HE.html)
-
-```
-
-
-
-```{asis, echo = ((language == "EN") & (output_type=="html"))}
-
-See Microscopy with viewer:
-
-<iframe src="https://images.patolojiatlasi.com/template/HE.html" style="height:600px;width:100%;" data-external="1"></iframe>
-
-```
-
-
-```{comment}
-asis, echo = (language == "EN")
-
-**TemplateEN**
-
-[![Click for Full Screen Annotated WSI](./screenshots/template_screenshot.png){width="25%"}](https://images.patolojiatlasi.com/template/HE_annotated.html) [Click for Full Screen Annotated WSI](https://images.patolojiatlasi.com/template/HE_annotated.html)
-
-
-See Annotated Microscopy with viewer:
-
-<iframe src="https://images.patolojiatlasi.com/template/HE_annotated.html" style="height:600px;width:100%;" data-external="1"></iframe>
-
-```
-
-
-```{comment}
 asis, echo = (language == "EN")
 
 <button id="dx-case-template-btn">Show the Diagnosis</button>
@@ -232,17 +226,35 @@ asis, echo = (language == "EN")
 ```
 
 
+
+
+
+```{comment}
+asis, echo = ((language=="TR") & (output_type=="html"))
+
+{{< video https://www.youtube.com/embed/youtube_link >}}
+
+```
+
+
+```{comment}
+asis, echo = ((language=="TR") & (output_type!="html"))
+
+[https://www.youtube.com/watch?v=youtube_link](https://www.youtube.com/watch?v=youtube_link)
+
+```
+
 ```{comment}
 r, eval=TRUE, echo=FALSE, include=FALSE, error=TRUE
-if (!file.exists("./screenshots/template_screenshot.png")) {
+if (!file.exists("./screenshots/template-_screenshot.png")) {
 
 url <- "https://img.youtube.com/vi/youtube_link/maxresdefault.jpg"
-download.file(url, destfile = "./screenshots/template_screenshot.png", mode = "wb")
+download.file(url, destfile = "./screenshots/template-_screenshot.png", mode = "wb")
 }
 
 **TemplateTR**
 
-[![Video İçin Tıklayın](./screenshots/template_screenshot.png){width="25%"}](https://www.youtube.com/watch?v=youtube_link) [Video İçin Tıklayın](https://www.youtube.com/watch?v=youtube_link)
+[![Video İçin Tıklayın](./screenshots/template-_screenshot.png){width="25%"}](https://www.youtube.com/watch?v=youtube_link) [Video İçin Tıklayın](https://www.youtube.com/watch?v=youtube_link)
 
 ```
 
@@ -263,9 +275,67 @@ asis, echo = ((language=="EN") & (output_type!="html"))
 ```
 
 
+
+
+
+
+```{r, echo=FALSE, include=FALSE, eval=FALSE}
+knitr::include_url(url = "https://images.patolojiatlasi.com/template/.html")
+```
+
+```{r, echo=FALSE, include=FALSE, eval=FALSE}
+#| label: template_screenshot
+#| fig-cap: "TemplateTR"
+knitr::include_graphics("./screenshots/template-_screenshot.png")
+```
+
+
+::: {.content-hidden when-format="pdf"}
+TemplateTR
+:::
+
+::: {.content-visible when-format="pdf"}
+TemplateTR
+:::
+
+
+
+
+
+```{comment}
+asis, echo = (language == "TR")
+
+**TemplateTR**
+
+
+[![İşaretlenmiş mikroskopik görüntüleri Tam Ekran Görmek İçin Resmi Tıklayın](./screenshots/template-_screenshot.png){width="25%"}](https://images.patolojiatlasi.com/template/HE_annotated.html) [İşaretlenmiş mikroskopik görüntüleri Tam Ekran Görmek İçin Resmi Tıklayın](https://images.patolojiatlasi.com/template/HE_annotated.html)
+
+İşaretlenmiş mikroskopik görüntüleri inceleyin:
+
+<iframe src="https://images.patolojiatlasi.com/template/HE_annotated.html" style="height:600px;width:100%;" data-external="1"></iframe>
+
+```
+
+
+
+```{comment}
+asis, echo = (language == "EN")
+
+**TemplateEN**
+
+[![Click for Full Screen Annotated WSI](./screenshots/template-_screenshot.png){width="25%"}](https://images.patolojiatlasi.com/template/HE_annotated.html) [Click for Full Screen Annotated WSI](https://images.patolojiatlasi.com/template/HE_annotated.html)
+
+
+See Annotated Microscopy with viewer:
+
+<iframe src="https://images.patolojiatlasi.com/template/HE_annotated.html" style="height:600px;width:100%;" data-external="1"></iframe>
+
+```
+
+
 ```{comment}
 =html
-<iframe src="https://images.patolojiatlasi.com/template/HE.html" style="height:600px;width:100%;" data-external="1"></iframe>
+<iframe src="https://images.patolojiatlasi.com/template/.html" style="height:600px;width:100%;" data-external="1"></iframe>
 ```
 
 
