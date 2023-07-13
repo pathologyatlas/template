@@ -85,7 +85,8 @@ update html file to match .dzi file
 qmd_text_base <- function(TemplateTR = "TemplateTR",
                           TemplateEN = "TemplateEN",
                           template = "template",
-                          stain = c("HE1", "HE2")) {
+                          stain = c("HE1", "HE2"),
+                          youtube_link = NULL) {
 
 template_string_1 <- '
 
@@ -155,8 +156,15 @@ See Microscopy with viewer:
 
 ```
 
-
 '
+
+
+if (!is.null(youtube_link) && youtube_link != "") {
+  youtube_string <- '((< video https://www.youtube.com/embed/{{youtube_link}} >))'
+  template_string_2 <- paste(template_string_2, youtube_string, sep = "\n")
+}
+
+
 
 data_1 <- list(
   TemplateTR = TemplateTR,
@@ -171,7 +179,8 @@ for (s in stain) {
     TemplateTR = TemplateTR,
     TemplateEN = TemplateEN,
     template = template,
-    stain = s
+    stain = s,
+    youtube_link = youtube_link
   )
 
   temp <- whisker::whisker.render(template_string_2, data_2)
@@ -433,6 +442,8 @@ See Annotated Microscopy with viewer:
 
 
 
+# combine ----
+
 info_text <- qmd_text_info()
 base_text <- qmd_text_base()
 qa_text <- qmd_text_question_answer()
@@ -442,3 +453,52 @@ comment_text <- qmd_text_comment()
 text_to_write <- paste0(info_text, base_text, qa_text, video_text, comment_text, collapse = "\r\n\n")
 
 writeLines(text = text_to_write, con = "./newqmd.qmd", sep = "\n")
+
+
+
+# case list text ----
+
+if (FALSE) {
+
+template_string <- '
+
+
+```{asis BS Olgu-{{no}}, echo = (language == "TR")}
+## Olgu-{{no}} (#sec-BS-olgu-{{no}})
+```
+
+```{asis BS Case-{{no}}, echo = (language == "EN")}
+## Case-{{no}} (#sec-BS-case-{{no}})
+```
+
+'
+
+# Initialize qmdtextbase
+qmdtextbase <- ""
+
+# Loop over the sequence of numbers
+for (i in 1:33) {
+  # Prepare the data for substitution in the template
+  data <- list(
+    no = i
+  )
+
+  # Render the template string with the data
+  temp <- whisker::whisker.render(template_string, data)
+
+  # Concatenate the rendered template to the base text
+  qmdtextbase <- paste(qmdtextbase, temp, sep = "\n\n")
+}
+
+
+qmdtextbase <- gsub(pattern = "(", replacement = "{", x = qmdtextbase, fixed = TRUE)
+qmdtextbase <- gsub(pattern = ")", replacement = "}", x = qmdtextbase, fixed = TRUE)
+
+# Check the result
+# cat(qmdtextbase)
+
+# clipr::write_clip(qmdtextbase)
+
+}
+
+

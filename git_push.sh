@@ -19,46 +19,45 @@
 # git lfs untrack "*.docx"
 # git lfs untrack "*.epub"
 
-files=( $(find ./ -type f) )   # Find all files in the current directory and subdirectories
+# increases the git http buffer size to 500 MB
+# git config --global http.postBuffer 524288000
+
+items=( $(find ./ -type f -o -type d) )   # Find all files and directories
+
 # files=( $(find ./CD3_files -type f) )
 
-batch_size=5000                 # Define the batch size
-total_files=${#files[@]}       # Get total number of files
-batches=$((($total_files + $batch_size - 1) / $batch_size))
+batch_size=2000
+total_items=${#items[@]}
+batches=$((($total_items + $batch_size - 1) / $batch_size))
 
-# for ((i=0; i<$batches; i++))
-# do
-#   start=$((i*batch_size))
-#   end=$((start+batch_size-1))
-
-#   if [[ $end -gt $((total_files-1)) ]]; then
-#     end=$((total_files-1))
-#   fi
 
 start_batch=0    # Define starting batch number
+
 
 for ((i=$start_batch; i<$batches; i++))
 do
   start=$((i*batch_size))
   end=$((start+batch_size-1))
 
-  if [[ $end -gt $((total_files-1)) ]]; then
-    end=$((total_files-1))
+  if [[ $end -gt $((total_items-1)) ]]; then
+    end=$((total_items-1))
   fi
 
-
-  echo "Adding files from $start to $end"
-  file_group=""
+  echo "Processing items from $start to $end"
   for ((j=start; j<=end; j++))
   do
-    file_group+=" ${files[$j]}"
+    if [ -e "${items[$j]}" ]; then
+      git add "${items[$j]}"
+    else
+      git rm -r "${items[$j]}"   # The -r option allows git rm to delete directories
+    fi
   done
 
-  git add $file_group
-  git commit -m "WIP Adding files from $start to $end"
-  echo "Push start after adding files from $start to $end"
+  git commit -m "WIP Adding items from $start to $end"
+  echo "Committing after adding items from $start to $end. There are $total_items items in total."
+  echo "Batch number $((i+1)) is being processed."
   git push origin
-  echo "Pushed files from $start to $end. There are $total_files files in total."
+  echo "Pushed items from $start to $end. There are $total_items items in total."
   echo "Batch number $((i+1)) has been processed."
-  sleep 20
+  sleep 120
 done
