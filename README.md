@@ -116,6 +116,22 @@ TemplateTR
 
 
 
+::: panel-tabset
+#### Tab A
+
+Content for `Tab A`
+
+#### Tab B
+
+Content for `Tab B`
+:::
+
+
+
+
+
+
+
 ```{asis, echo = (language == "TR")}
 
 **templateTR**
