@@ -116,22 +116,6 @@ TemplateTR
 
 
 
-::: panel-tabset
-#### Tab A
-
-Content for `Tab A`
-
-#### Tab B
-
-Content for `Tab B`
-:::
-
-
-
-
-
-
-
 ```{asis, echo = (language == "TR")}
 
 **templateTR**
@@ -157,6 +141,10 @@ asis, echo = (language == "TR")
 
 
 [![İşaretlenmiş mikroskopik görüntüleri Tam Ekran Görmek İçin Resmi Tıklayın](./screenshots/template_screenshot.png){width="25%"}](https://images.patolojiatlasi.com/template/HE_annotated.html) [İşaretlenmiş mikroskopik görüntüleri Tam Ekran Görmek İçin Resmi Tıklayın](https://images.patolojiatlasi.com/template/HE_annotated.html)
+```
+
+```{comment} 
+asis, echo = ((language=="TR") & (output_type=="html"))
 
 İşaretlenmiş mikroskopik görüntüleri inceleyin:
 
@@ -191,23 +179,6 @@ asis, echo = (language == "TR")
 
 ```
 
-```{comment}
-asis, echo = ((language=="TR") & (output_type=="html"))
-
-{{< video https://www.youtube.com/embed/ >}}
-
-```
-
-```{comment}
-asis, echo = ((language=="TR") & (output_type!="html"))
-
-[https://www.youtube.com/watch?v=](https://www.youtube.com/watch?v=)
-
-```
-
-
-
-
 
 ```{asis, echo = (language == "EN")}
 
@@ -235,15 +206,21 @@ asis, echo = (language == "EN")
 **templateEN**
 
 [![Click for Full Screen Annotated WSI](./screenshots/template_screenshot.png){width="25%"}](https://images.patolojiatlasi.com/template/HE_annotated.html) [Click for Full Screen Annotated WSI](https://images.patolojiatlasi.com/template/HE_annotated.html)
+```
 
+
+
+```{comment}
+asis, echo = ((language=="EN") & (output_type=="html"))
 
 See Annotated Microscopy with viewer: 
 
 <iframe src="https://images.patolojiatlasi.com/template/HE_annotated.html" style="height:600px;width:100%;" data-external="1"></iframe>
 
-
-
 ```
+
+
+
 
 ```{comment}
 asis, echo = (language == "EN")
@@ -276,10 +253,36 @@ if (!file.exists("./screenshots/template_screenshot.png")) {
 url <- "https://img.youtube.com/vi/U9glkfQLTm4/maxresdefault.jpg"
 download.file(url, destfile = "./screenshots/template_screenshot.png", mode = "wb")
 }
+```
 
+```{comment}
+asis, echo = (language == "TR")
 **TemplateTR**
 
 [![Video İçin Tıklayın](./screenshots/template_screenshot.png){width="25%"}](https://www.youtube.com/watch?v=) [Video İçin Tıklayın](https://www.youtube.com/watch?v=)
+
+```
+
+```{comment}
+asis, echo = (language == "EN")
+**TemplateEN**
+
+[![Click for Video](./screenshots/template_screenshot.png){width="25%"}](https://www.youtube.com/watch?v=) [Click for Video](https://www.youtube.com/watch?v=)
+
+```
+
+
+```{comment}
+asis, echo = ((language=="TR") & (output_type=="html"))
+
+{{< video https://www.youtube.com/embed/ >}}
+
+```
+
+```{comment}
+asis, echo = ((language=="TR") & (output_type!="html"))
+
+[https://www.youtube.com/watch?v=](https://www.youtube.com/watch?v=)
 
 ```
 
