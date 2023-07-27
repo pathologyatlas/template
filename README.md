@@ -95,11 +95,11 @@ webshot2::webshot(
 }
 ```
 
-```{r, echo=FALSE, include=FALSE, eval=FALSE}
+```{comment, echo=FALSE, include=FALSE, eval=FALSE}
 knitr::include_url(url = "https://images.patolojiatlasi.com/template/HE.html")
 ```
 
-```{r, echo=FALSE, include=FALSE, eval=FALSE}
+```{comment, echo=FALSE, include=FALSE, eval=FALSE}
 #| label: template_screenshot
 #| fig-cap: "TemplateTR"
 knitr::include_graphics("./screenshots/template_screenshot.png")
@@ -158,24 +158,14 @@ asis, echo = ((language=="TR") & (output_type=="html"))
 asis, echo = (language == "TR")
 
 
+::: {.callout-tip collapse="true" appearance="default" icon="true"}
+### Tanı için tıklayın
 
-<button id="tani-case-template-btn">Tanıyı Göster</button>
-<div id="answer-template" style="display: none;">templateTR</div>
+{{TemplateTR}}
 
-<script>
-  const showAnswer-templateBtn = document.getElementById('tani-case-template-btn');
-  const answer-template = document.getElementById('answer-template');
+:::
 
-  showAnswer-templateBtn.addEventListener('click', () => {
-    if (answer-template.style.display === 'none') {
-      answer-template.style.display = 'block';
-      showAnswer-templateBtn.textContent = 'Tanıyı Gizle';
-    } else {
-      answer-template.style.display = 'none';
-      showAnswer-templateBtn.textContent = 'Tanıyı Göster';
-    }
-  });
-</script>
+
 
 ```
 
@@ -225,86 +215,42 @@ See Annotated Microscopy with viewer:
 ```{comment}
 asis, echo = (language == "EN")
 
-<button id="dx-case-template-btn">Show the Diagnosis</button>
-<div id="answer-template" style="display: none;">templateEN</div>
+::: {.callout-tip collapse="true" appearance="default" icon="true"}
+### Tanı için tıklayın
 
-<script>
-  const showAnswer-templateBtn = document.getElementById('dx-case-template-btn');
-  const answer-template = document.getElementById('answer-template');
+{{TemplateEN}}
 
-  showAnswer-templateBtn.addEventListener('click', () => {
-    if (answer-template.style.display === 'none') {
-      answer-template.style.display = 'block';
-      showAnswer-templateBtn.textContent = 'Hide the Diagnosis';
-    } else {
-      answer-template.style.display = 'none';
-      showAnswer-templateBtn.textContent = 'Show the Diagnosis';
-    }
-  });
-</script>
+:::
+
+
 
 ```
 
 
-```{comment}
-r, eval=TRUE, echo=FALSE, include=FALSE, error=TRUE
-if (!file.exists("./screenshots/template_screenshot.png")) {
 
-url <- "https://img.youtube.com/vi/U9glkfQLTm4/maxresdefault.jpg"
-download.file(url, destfile = "./screenshots/template_screenshot.png", mode = "wb")
-}
-```
 
-```{comment}
-asis, echo = (language == "TR")
-**TemplateTR**
 
-[![Video İçin Tıklayın](./screenshots/template_screenshot.png){width="25%"}](https://www.youtube.com/watch?v=) [Video İçin Tıklayın](https://www.youtube.com/watch?v=)
+```{asis, echo = (language == "TR")}
 
-```
-
-```{comment}
-asis, echo = (language == "EN")
-**TemplateEN**
-
-[![Click for Video](./screenshots/template_screenshot.png){width="25%"}](https://www.youtube.com/watch?v=) [Click for Video](https://www.youtube.com/watch?v=)
+[Video İçin Tıklayın](https://www.youtube.com/watch?v=)
 
 ```
 
 
-```{comment}
-asis, echo = ((language=="TR") & (output_type=="html"))
+```{asis, echo = (language == "EN")}
+
+[Click for Video](https://www.youtube.com/watch?v=)
+
+```
+
+
+
+::: {.content-visible when-format="html"}
 
 {{< video https://www.youtube.com/embed/ >}}
 
-```
-
-```{comment}
-asis, echo = ((language=="TR") & (output_type!="html"))
-
-[https://www.youtube.com/watch?v=](https://www.youtube.com/watch?v=)
-
-```
+:::
 
 
 
 
-```{comment}
-asis, echo = ((language=="EN") & (output_type=="html"))
-
-{{< video https://www.youtube.com/embed/ >}}
-
-```
-
-```{comment}
-asis, echo = ((language=="EN") & (output_type!="html"))
-
-[https://www.youtube.com/watch?v=](https://www.youtube.com/watch?v=)
-
-```
-
-
-```{comment}
-=html
-<iframe src="https://images.patolojiatlasi.com/template/HE.html" style="height:600px;width:100%;" data-external="1"></iframe>
-```

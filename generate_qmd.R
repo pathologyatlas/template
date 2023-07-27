@@ -1,12 +1,19 @@
-# qmd_text_info ----
-qmd_text_info <- function(TemplateTR = "TemplateTR",
-                       TemplateEN = "TemplateEN",
-                       template = "template") {
+qmd_text <- function(
+    base_template = FALSE,
+    TemplateTR = "TemplateTR",
+    TemplateEN = "TemplateEN",
+    template = "template",
+    stain = c("HE1", "HE2"),
+    diagnosis = FALSE,
+    use_youtube = FALSE,
+    youtube_link = "youtube_link"
+    ) {
 
-template_string <- '# {{template}}
+# base_string ----
 
+base_string <- '
 
-
+# {{template}}
 
 
 **{{template}} for pathology atlas repositories**
@@ -36,59 +43,21 @@ vips dzsave HE.svs HE
 ```
 
 
-
 ```
 update html file to match .dzi file
 
 ```
 
 
-
-
-
 > consider using git_push.sh script to upload files to github, since the number of generated files is huge
 
 > after upload complete, do not forget to activate github pages for the new repository
 
-
-
-
-
-
-
-
-
 '
 
+# head_string ----
 
-  data <- list(
-    TemplateTR = TemplateTR,
-    TemplateEN = TemplateEN,
-    template = template
-  )
-
-  qmdtextinfo <- whisker::whisker.render(template_string, data)
-
-  qmdtextinfo <- gsub(pattern = "((<", replacement = "{{<", x = qmdtextinfo, fixed = TRUE)
-
-  qmdtextinfo <- gsub(pattern = ">))", replacement = ">}}", x = qmdtextinfo, fixed = TRUE)
-
-  return(qmdtextinfo)
-
-
-  }
-
-
-
-# qmd_text_base ----
-
-qmd_text_base <- function(TemplateTR = "TemplateTR",
-                          TemplateEN = "TemplateEN",
-                          template = "template",
-                          stain = c("HE1", "HE2"),
-                          youtube_link = NULL) {
-
-template_string_1 <- '
+head_string <- '
 
 
 ```{r language {{template}}, echo=FALSE, include=TRUE}
@@ -97,18 +66,22 @@ output_type <- knitr::opts_knit$get("rmarkdown.pandoc.to")
 ```
 
 
-```{asis, echo = (language == "TR")}
+```{asis {{TemplateTR}} , echo = (language == "TR")}
 ## {{TemplateTR}} {#sec-{{template}} }
 ```
 
 
-```{asis, echo = (language == "EN")}
+```{asis {{TemplateEN}} , echo = (language == "EN")}
 ## {{TemplateEN}} {#sec-{{template}} }
 ```
 
 '
 
-template_string_2 <- '
+
+# screenshot_string ----
+
+screenshot_string <- '
+
 
 ```{r {{template}} screenshot {{stain}}, eval=TRUE, include=FALSE}
 if (!file.exists("./screenshots/{{template}}-{{stain}}_screenshot.png")) {
@@ -119,6 +92,23 @@ webshot2::webshot(
 }
 ```
 
+'
+
+# tab1 ----
+
+tab1 <- '
+
+::::: panel-tabset
+
+
+### WSI - Link
+
+
+'
+
+# wsi_link_string ----
+
+wsi_link_string <- '
 
 
 ```{asis, echo = (language == "TR")}
@@ -129,6 +119,31 @@ webshot2::webshot(
 [![Tam Ekran Görmek İçin Resmi Tıklayın](./screenshots/{{template}}-{{stain}}_screenshot.png){width="25%"}](https://images.patolojiatlasi.com/{{template}}/{{stain}}.html) [Tam Ekran Görmek İçin Resmi Tıklayın](https://images.patolojiatlasi.com/{{template}}/{{stain}}.html)
 ```
 
+```{asis, echo = (language == "EN")}
+
+**{{TemplateEN}}**
+
+[![Click for Full Screen WSI](./screenshots/{{template}}-{{stain}}_screenshot.png){width="25%"}](https://images.patolojiatlasi.com/{{template}}/{{stain}}.html) [Click for Full Screen WSI](https://images.patolojiatlasi.com/{{template}}/{{stain}}.html)
+
+```
+
+'
+
+# tab2 ----
+
+tab2 <- '
+
+### WSI
+
+
+'
+
+
+# wsi_string ----
+
+wsi_string <- '
+
+
 
 ```{asis, echo = ((language=="TR") & (output_type=="html"))}
 Mikroskopik görüntüleri inceleyin:
@@ -138,13 +153,6 @@ Mikroskopik görüntüleri inceleyin:
 ```
 
 
-```{asis, echo = (language == "EN")}
-
-**{{TemplateEN}}**
-
-[![Click for Full Screen WSI](./screenshots/{{template}}-{{stain}}_screenshot.png){width="25%"}](https://images.patolojiatlasi.com/{{template}}/{{stain}}.html) [Click for Full Screen WSI](https://images.patolojiatlasi.com/{{template}}/{{stain}}.html)
-
-```
 
 
 
@@ -159,346 +167,269 @@ See Microscopy with viewer:
 '
 
 
-if (!is.null(youtube_link) && youtube_link != "") {
-  youtube_string <- '((< video https://www.youtube.com/embed/{{youtube_link}} >))'
-  template_string_2 <- paste(template_string_2, youtube_string, sep = "\n")
-}
+
+# diagnosis_string ----
+
+
+  diagnosis_string <-
+'
+
+### Diagnosis
+
+
+```{comment}
+asis, echo = (language == "TR")
+
+
+::: {.callout-tip collapse="true" appearance="default" icon="true"}
+### Tanı için tıklayın
+
+{{TemplateTR}}
+
+:::
+
+
+```
+
+
+```{comment}
+asis, echo = (language == "EN")
+
+
+::: {.callout-tip collapse="true" appearance="default" icon="true"}
+### Tanı için tıklayın
+
+{{TemplateEN}}
+
+:::
+
+```
 
 
 
-data_1 <- list(
+
+'
+
+# youtube_string ----
+
+
+    youtube_string <-
+
+'
+
+### Video
+
+
+
+```{asis, echo = (language == "TR")}
+
+[Video İçin Tıklayın](https://www.youtube.com/watch?v={{youtube_link}})
+
+```
+
+
+```{asis, echo = (language == "EN")}
+
+[Click for Video](https://www.youtube.com/watch?v={{youtube_link}})
+
+```
+
+
+
+::: {.content-visible when-format="html"}
+
+((< video https://www.youtube.com/embed/{{youtube_link}} >))
+
+:::
+
+'
+
+
+# end_string ----
+
+end_string <-
+  '
+
+
+:::::
+
+<hr>
+
+
+'
+
+# qmd_text ----
+
+qmd_text <- ''
+
+
+# base render ----
+
+if (base_template) {
+
+  data_base <- list(
+    TemplateTR = TemplateTR,
+    TemplateEN = TemplateEN,
+    template = template)
+
+  base_string <- whisker::whisker.render(base_string, data_base)
+
+
+    qmd_text <- paste(qmd_text, base_string, sep = "\n\n")
+
+
+  }
+
+
+
+# head render ----
+
+
+data_head <- list(
   TemplateTR = TemplateTR,
   TemplateEN = TemplateEN,
   template = template)
 
-qmdtextbase <- whisker::whisker.render(template_string_1, data_1)
+head_text <- whisker::whisker.render(head_string, data_head)
 
+
+qmd_text <- paste(qmd_text, head_text, sep = "\n\n")
+
+
+
+# screenshot render ----
 
 for (s in stain) {
-  data_2 <- list(
+  data_screenshot <- list(
+    template = template,
+    stain = s
+  )
+
+  screenshot_text <- whisker::whisker.render(screenshot_string, data_screenshot)
+
+
+  qmd_text <- paste(qmd_text, screenshot_text, sep = "\n\n")
+
+}
+
+
+
+qmd_text <- paste(qmd_text, tab1, sep = "\n\n")
+
+
+
+
+# wsi_link_string render ----
+
+for (s in stain) {
+  data_wsi_link <- list(
     TemplateTR = TemplateTR,
     TemplateEN = TemplateEN,
     template = template,
-    stain = s,
-    youtube_link = youtube_link
-  )
+    stain = s
+    )
 
-  temp <- whisker::whisker.render(template_string_2, data_2)
+  wsi_link_text <- whisker::whisker.render(wsi_link_string, data_wsi_link)
 
 
-  qmdtextbase <- paste(qmdtextbase, temp, sep = "\n\n")
-
-}
-
-qmdtextbase <- gsub(pattern = "((<", replacement = "{{<", x = qmdtextbase, fixed = TRUE)
-qmdtextbase <- gsub(pattern = ">))", replacement = ">}}", x = qmdtextbase, fixed = TRUE)
-
-return(qmdtextbase)
+  qmd_text <- paste(qmd_text, wsi_link_text, sep = "\n\n")
 
 }
 
-# qmd_text_question_answer ----
-
-qmd_text_question_answer <- function(TemplateTR = "TemplateTR",
-                          TemplateEN = "TemplateEN",
-                          template = "template",
-                          youtube_link = "youtube_link") {
-
-  template_string <- '
 
 
-```{comment}
-asis, echo = (language == "TR")
+qmd_text <- paste(qmd_text, tab2, sep = "\n\n")
 
 
 
-<button id="tani-case-{{template}}-btn">Tanıyı Göster</button>
-<div id="answer-{{template}}" style="display: none;">{{TemplateTR}}</div>
 
-<script>
-  const showAnswer-{{template}}Btn = document.getElementById("tani-case-{{template}}-btn");
-  const answer-{{template}} = document.getElementById("answer-{{template}}");
+# wsi_string render ----
 
-  showAnswer-{{template}}Btn.addEventListener("click", () => {
-    if (answer-{{template}}.style.display === "none") {
-      answer-{{template}}.style.display = "block";
-      showAnswer-{{template}}Btn.textContent = "Tanıyı Gizle";
-    } else {
-      answer-{{template}}.style.display = "none";
-      showAnswer-{{template}}Btn.textContent = "Tanıyı Göster";
-    }
-  });
-</script>
-
-```
-
-
-```{comment}
-asis, echo = (language == "EN")
-
-<button id="dx-case-{{template}}-btn">Show the Diagnosis</button>
-<div id="answer-{{template}}" style="display: none;">{{TemplateEN}}</div>
-
-<script>
-  const showAnswer-{{template}}Btn = document.getElementById("dx-case-{{template}}-btn");
-  const answer-{{template}} = document.getElementById("answer-{{template}}");
-
-  showAnswer-{{template}}Btn.addEventListener("click", () => {
-    if (answer-{{template}}.style.display === "none") {
-      answer-{{template}}.style.display = "block";
-      showAnswer-{{template}}Btn.textContent = "Hide the Diagnosis";
-    } else {
-      answer-{{template}}.style.display = "none";
-      showAnswer-{{template}}Btn.textContent = "Show the Diagnosis";
-    }
-  });
-</script>
-
-```
-
-
-'
-
-  data <- list(
+for (s in stain) {
+  data_wsi <- list(
     TemplateTR = TemplateTR,
     TemplateEN = TemplateEN,
     template = template,
-    youtube_link = youtube_link
+    stain = s
   )
 
-  qmdtextqa <- whisker::whisker.render(template_string, data)
+  wsi_text <- whisker::whisker.render(wsi_string, data_wsi)
 
-  qmdtextqa <- gsub(pattern = "((<", replacement = "{{<", x = qmdtextqa, fixed = TRUE)
 
-  qmdtextqa <- gsub(pattern = ">))", replacement = ">}}", x = qmdtextqa, fixed = TRUE)
-
-  return(qmdtextqa)
-
+  qmd_text <- paste(qmd_text, wsi_text, sep = "\n\n")
 
 }
 
 
-# qmd_text_video ----
-
-qmd_text_video <- function(TemplateTR = "TemplateTR",
-                          TemplateEN = "TemplateEN",
-                          template = "template",
-                          youtube_link = "youtube_link") {
-
-  template_string <- '
 
 
-```{comment}
-asis, echo = ((language=="TR") & (output_type=="html"))
+# diagnosis render ----
 
-((< video https://www.youtube.com/embed/{{youtube_link}} >))
+if (diagnosis) {
 
-```
-
-
-```{comment}
-asis, echo = ((language=="TR") & (output_type!="html"))
-
-[https://www.youtube.com/watch?v={{youtube_link}}](https://www.youtube.com/watch?v={{youtube_link}})
-
-```
-
-```{comment}
-r, eval=TRUE, echo=FALSE, include=FALSE, error=TRUE
-if (!file.exists("./screenshots/{{template}}-{{stain}}_screenshot.png")) {
-
-url <- "https://img.youtube.com/vi/{{youtube_link}}/maxresdefault.jpg"
-download.file(url, destfile = "./screenshots/{{template}}-{{stain}}_screenshot.png", mode = "wb")
-}
-
-**{{TemplateTR}}**
-
-[![Video İçin Tıklayın](./screenshots/{{template}}-{{stain}}_screenshot.png){width="25%"}](https://www.youtube.com/watch?v={{youtube_link}}) [Video İçin Tıklayın](https://www.youtube.com/watch?v={{youtube_link}})
-
-```
-
-
-```{comment}
-asis, echo = ((language=="EN") & (output_type=="html"))
-
-((< video https://www.youtube.com/embed/{{youtube_link}} >))
-
-```
-
-
-```{comment}
-asis, echo = ((language=="EN") & (output_type!="html"))
-
-[https://www.youtube.com/watch?v={{youtube_link}}](https://www.youtube.com/watch?v={{youtube_link}})
-
-```
-
-
-'
-
-  data <- list(
+  data_diagnosis <- list(
     TemplateTR = TemplateTR,
     TemplateEN = TemplateEN,
-    template = template,
+    template = template)
+
+  diagnosis_string <- whisker::whisker.render(diagnosis_string, data_diagnosis)
+
+
+  qmd_text <- paste(qmd_text, diagnosis_string, sep = "\n\n")
+
+}
+
+
+# youtube render ----
+
+if (use_youtube) {
+
+  data_youtube <- list(
     youtube_link = youtube_link
-  )
+    )
 
-  qmdtextvideo <- whisker::whisker.render(template_string, data)
+  youtube_string <- whisker::whisker.render(youtube_string, data_youtube)
 
-  qmdtextvideo <- gsub(pattern = "((<", replacement = "{{<", x = qmdtextvideo, fixed = TRUE)
 
-  qmdtextvideo <- gsub(pattern = ">))", replacement = ">}}", x = qmdtextvideo, fixed = TRUE)
+  qmd_text <- paste(qmd_text, youtube_string, sep = "\n\n")
 
-  return(qmdtextvideo)
+}
+
+# end render ----
+
+qmd_text <- paste(qmd_text, end_string, sep = "\n\n")
+
+
+qmd_text <- gsub(pattern = "((<", replacement = "{{<", x = qmd_text, fixed = TRUE)
+qmd_text <- gsub(pattern = ">))", replacement = ">}}", x = qmd_text, fixed = TRUE)
+
+return(qmd_text)
 
 }
 
 
-# qmd_text_comment ----
-
-qmd_text_comment <- function(TemplateTR = "TemplateTR",
-                     TemplateEN = "TemplateEN",
-                     template = "template") {
-
-template_string <- '
-
-
-
-```{r, echo=FALSE, include=FALSE, eval=FALSE}
-knitr::include_url(url = "https://images.patolojiatlasi.com/{{template}}/{{stain}}.html")
-```
-
-```{r, echo=FALSE, include=FALSE, eval=FALSE}
-#| label: {{template}}_screenshot
-#| fig-cap: "{{TemplateTR}}"
-knitr::include_graphics("./screenshots/{{template}}-{{stain}}_screenshot.png")
-```
-
-
-::: {.content-hidden when-format="pdf"}
-{{TemplateTR}}
-:::
-
-::: {.content-visible when-format="pdf"}
-{{TemplateTR}}
-:::
-
-
-
-
-
-```{comment}
-asis, echo = (language == "TR")
-
-**{{TemplateTR}}**
-
-
-[![İşaretlenmiş mikroskopik görüntüleri Tam Ekran Görmek İçin Resmi Tıklayın](./screenshots/{{template}}-{{stain}}_screenshot.png){width="25%"}](https://images.patolojiatlasi.com/{{template}}/HE_annotated.html) [İşaretlenmiş mikroskopik görüntüleri Tam Ekran Görmek İçin Resmi Tıklayın](https://images.patolojiatlasi.com/{{template}}/HE_annotated.html)
-
-İşaretlenmiş mikroskopik görüntüleri inceleyin:
-
-<iframe src="https://images.patolojiatlasi.com/{{template}}/HE_annotated.html" style="height:600px;width:100%;" data-external="1"></iframe>
-
-```
-
-
-
-```{comment}
-asis, echo = (language == "EN")
-
-**{{TemplateEN}}**
-
-[![Click for Full Screen Annotated WSI](./screenshots/{{template}}-{{stain}}_screenshot.png){width="25%"}](https://images.patolojiatlasi.com/{{template}}/HE_annotated.html) [Click for Full Screen Annotated WSI](https://images.patolojiatlasi.com/{{template}}/HE_annotated.html)
-
-
-See Annotated Microscopy with viewer:
-
-<iframe src="https://images.patolojiatlasi.com/{{template}}/HE_annotated.html" style="height:600px;width:100%;" data-external="1"></iframe>
-
-```
-
-
-```{comment}
-=html
-<iframe src="https://images.patolojiatlasi.com/{{template}}/{{stain}}.html" style="height:600px;width:100%;" data-external="1"></iframe>
-```
-
-'
-
-  data <- list(
-    TemplateTR = TemplateTR,
-    TemplateEN = TemplateEN,
-    template = template
-  )
-
-  qmdtext <- whisker::whisker.render(template_string, data)
-
-  qmdtext <- gsub(pattern = "((<", replacement = "{{<", x = qmdtext, fixed = TRUE)
-
-  qmdtext <- gsub(pattern = ">))", replacement = ">}}", x = qmdtext, fixed = TRUE)
-
-  return(qmdtext)
-}
 
 
 
 # combine ----
 
-info_text <- qmd_text_info()
-base_text <- qmd_text_base()
-qa_text <- qmd_text_question_answer()
-video_text <- qmd_text_video()
-comment_text <- qmd_text_comment()
 
-text_to_write <- paste0(info_text, base_text, qa_text, video_text, comment_text, collapse = "\r\n\n")
+# text_to_write <- qmd_text()
+
+
+text_to_write <- qmd_text(
+  base_template = TRUE,
+  TemplateTR = "deneme TR",
+  TemplateEN = "deneme EN",
+  template = "deneme",
+  stain = c("ER", "PR", "CMV"),
+  diagnosis = TRUE,
+  use_youtube = TRUE,
+  youtube_link = "deneme"
+)
+
 
 writeLines(text = text_to_write, con = "./newqmd.qmd", sep = "\n")
 
-
-
-# case list text ----
-
-if (FALSE) {
-
-template_string <- '
-
-
-```{asis BS Olgu-{{no}}, echo = (language == "TR")}
-## Olgu-{{no}} (#sec-BS-olgu-{{no}})
-```
-
-```{asis BS Case-{{no}}, echo = (language == "EN")}
-## Case-{{no}} (#sec-BS-case-{{no}})
-```
-
-'
-
-# Initialize qmdtextbase
-qmdtextbase <- ""
-
-# Loop over the sequence of numbers
-for (i in 1:33) {
-  # Prepare the data for substitution in the template
-  data <- list(
-    no = i
-  )
-
-  # Render the template string with the data
-  temp <- whisker::whisker.render(template_string, data)
-
-  # Concatenate the rendered template to the base text
-  qmdtextbase <- paste(qmdtextbase, temp, sep = "\n\n")
-}
-
-
-qmdtextbase <- gsub(pattern = "(", replacement = "{", x = qmdtextbase, fixed = TRUE)
-qmdtextbase <- gsub(pattern = ")", replacement = "}", x = qmdtextbase, fixed = TRUE)
-
-# Check the result
-# cat(qmdtextbase)
-
-# clipr::write_clip(qmdtextbase)
-
-}
 
 

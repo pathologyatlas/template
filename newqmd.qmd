@@ -1,10 +1,11 @@
-# template
 
 
 
 
+# deneme
 
-**template for pathology atlas repositories**
+
+**deneme for pathology atlas repositories**
 
 
 ```
@@ -14,11 +15,11 @@ see [make-html-WSI](https://github.com/pathologyatlas/make-html-WSI) for more in
 ```
 update html file heading:
 
-<title>TemplateEN TemplateTR</title>
+<title>deneme EN deneme TR</title>
 
-<meta name="keywords" content="TemplateEN, TemplateTR, patoloji, atlas, pathology, whole slide image">
+<meta name="keywords" content="deneme EN, deneme TR, patoloji, atlas, pathology, whole slide image">
 
-<meta name="description" content="TemplateEN TemplateTR">
+<meta name="description" content="deneme EN deneme TR">
 
 ```
 
@@ -31,14 +32,10 @@ vips dzsave HE.svs HE
 ```
 
 
-
 ```
 update html file to match .dzi file
 
 ```
-
-
-
 
 
 > consider using git_push.sh script to upload files to github, since the number of generated files is huge
@@ -50,66 +47,157 @@ update html file to match .dzi file
 
 
 
-
-
-
-
-
-
-```{r language template, echo=FALSE, include=TRUE}
+```{r language deneme, echo=FALSE, include=TRUE}
 source("./R/language.R")
 output_type <- knitr::opts_knit$get("rmarkdown.pandoc.to")
 ```
 
 
-```{asis, echo = (language == "TR")}
-## TemplateTR {#sec-template }
+```{asis deneme TR , echo = (language == "TR")}
+## deneme TR {#sec-deneme }
 ```
 
 
-```{asis, echo = (language == "EN")}
-## TemplateEN {#sec-template }
+```{asis deneme EN , echo = (language == "EN")}
+## deneme EN {#sec-deneme }
 ```
 
 
 
 
 
-```{r template screenshot HE1, eval=TRUE, include=FALSE}
-if (!file.exists("./screenshots/template-HE1_screenshot.png")) {
+
+```{r deneme screenshot ER, eval=TRUE, include=FALSE}
+if (!file.exists("./screenshots/deneme-ER_screenshot.png")) {
 webshot2::webshot(
-  url = "https://images.patolojiatlasi.com/template/HE1.html",
-  file = "./screenshots/template-HE1_screenshot.png"
+  url = "https://images.patolojiatlasi.com/deneme/ER.html",
+  file = "./screenshots/deneme-ER_screenshot.png"
 )
 }
 ```
 
 
 
+
+
+
+```{r deneme screenshot PR, eval=TRUE, include=FALSE}
+if (!file.exists("./screenshots/deneme-PR_screenshot.png")) {
+webshot2::webshot(
+  url = "https://images.patolojiatlasi.com/deneme/PR.html",
+  file = "./screenshots/deneme-PR_screenshot.png"
+)
+}
+```
+
+
+
+
+
+
+```{r deneme screenshot CMV, eval=TRUE, include=FALSE}
+if (!file.exists("./screenshots/deneme-CMV_screenshot.png")) {
+webshot2::webshot(
+  url = "https://images.patolojiatlasi.com/deneme/CMV.html",
+  file = "./screenshots/deneme-CMV_screenshot.png"
+)
+}
+```
+
+
+
+
+
+::::: panel-tabset
+
+
+### WSI - Link
+
+
+
+
+
+
+
 ```{asis, echo = (language == "TR")}
 
-**TemplateTR**
+**deneme TR**
 
 
-[![Tam Ekran Görmek İçin Resmi Tıklayın](./screenshots/template-HE1_screenshot.png){width="25%"}](https://images.patolojiatlasi.com/template/HE1.html) [Tam Ekran Görmek İçin Resmi Tıklayın](https://images.patolojiatlasi.com/template/HE1.html)
+[![Tam Ekran Görmek İçin Resmi Tıklayın](./screenshots/deneme-ER_screenshot.png){width="25%"}](https://images.patolojiatlasi.com/deneme/ER.html) [Tam Ekran Görmek İçin Resmi Tıklayın](https://images.patolojiatlasi.com/deneme/ER.html)
 ```
+
+```{asis, echo = (language == "EN")}
+
+**deneme EN**
+
+[![Click for Full Screen WSI](./screenshots/deneme-ER_screenshot.png){width="25%"}](https://images.patolojiatlasi.com/deneme/ER.html) [Click for Full Screen WSI](https://images.patolojiatlasi.com/deneme/ER.html)
+
+```
+
+
+
+
+
+
+```{asis, echo = (language == "TR")}
+
+**deneme TR**
+
+
+[![Tam Ekran Görmek İçin Resmi Tıklayın](./screenshots/deneme-PR_screenshot.png){width="25%"}](https://images.patolojiatlasi.com/deneme/PR.html) [Tam Ekran Görmek İçin Resmi Tıklayın](https://images.patolojiatlasi.com/deneme/PR.html)
+```
+
+```{asis, echo = (language == "EN")}
+
+**deneme EN**
+
+[![Click for Full Screen WSI](./screenshots/deneme-PR_screenshot.png){width="25%"}](https://images.patolojiatlasi.com/deneme/PR.html) [Click for Full Screen WSI](https://images.patolojiatlasi.com/deneme/PR.html)
+
+```
+
+
+
+
+
+
+```{asis, echo = (language == "TR")}
+
+**deneme TR**
+
+
+[![Tam Ekran Görmek İçin Resmi Tıklayın](./screenshots/deneme-CMV_screenshot.png){width="25%"}](https://images.patolojiatlasi.com/deneme/CMV.html) [Tam Ekran Görmek İçin Resmi Tıklayın](https://images.patolojiatlasi.com/deneme/CMV.html)
+```
+
+```{asis, echo = (language == "EN")}
+
+**deneme EN**
+
+[![Click for Full Screen WSI](./screenshots/deneme-CMV_screenshot.png){width="25%"}](https://images.patolojiatlasi.com/deneme/CMV.html) [Click for Full Screen WSI](https://images.patolojiatlasi.com/deneme/CMV.html)
+
+```
+
+
+
+
+
+### WSI
+
+
+
+
+
+
 
 
 ```{asis, echo = ((language=="TR") & (output_type=="html"))}
 Mikroskopik görüntüleri inceleyin:
 
-<iframe src="https://images.patolojiatlasi.com/template/HE1.html" style="height:600px;width:100%;" data-external="1"></iframe>
+<iframe src="https://images.patolojiatlasi.com/deneme/ER.html" style="height:600px;width:100%;" data-external="1"></iframe>
 
 ```
 
 
-```{asis, echo = (language == "EN")}
-
-**TemplateEN**
-
-[![Click for Full Screen WSI](./screenshots/template-HE1_screenshot.png){width="25%"}](https://images.patolojiatlasi.com/template/HE1.html) [Click for Full Screen WSI](https://images.patolojiatlasi.com/template/HE1.html)
-
-```
 
 
 
@@ -117,7 +205,7 @@ Mikroskopik görüntüleri inceleyin:
 
 See Microscopy with viewer:
 
-<iframe src="https://images.patolojiatlasi.com/template/HE1.html" style="height:600px;width:100%;" data-external="1"></iframe>
+<iframe src="https://images.patolojiatlasi.com/deneme/ER.html" style="height:600px;width:100%;" data-external="1"></iframe>
 
 ```
 
@@ -125,41 +213,16 @@ See Microscopy with viewer:
 
 
 
-```{r template screenshot HE2, eval=TRUE, include=FALSE}
-if (!file.exists("./screenshots/template-HE2_screenshot.png")) {
-webshot2::webshot(
-  url = "https://images.patolojiatlasi.com/template/HE2.html",
-  file = "./screenshots/template-HE2_screenshot.png"
-)
-}
-```
-
-
-
-```{asis, echo = (language == "TR")}
-
-**TemplateTR**
-
-
-[![Tam Ekran Görmek İçin Resmi Tıklayın](./screenshots/template-HE2_screenshot.png){width="25%"}](https://images.patolojiatlasi.com/template/HE2.html) [Tam Ekran Görmek İçin Resmi Tıklayın](https://images.patolojiatlasi.com/template/HE2.html)
-```
 
 
 ```{asis, echo = ((language=="TR") & (output_type=="html"))}
 Mikroskopik görüntüleri inceleyin:
 
-<iframe src="https://images.patolojiatlasi.com/template/HE2.html" style="height:600px;width:100%;" data-external="1"></iframe>
+<iframe src="https://images.patolojiatlasi.com/deneme/PR.html" style="height:600px;width:100%;" data-external="1"></iframe>
 
 ```
 
 
-```{asis, echo = (language == "EN")}
-
-**TemplateEN**
-
-[![Click for Full Screen WSI](./screenshots/template-HE2_screenshot.png){width="25%"}](https://images.patolojiatlasi.com/template/HE2.html) [Click for Full Screen WSI](https://images.patolojiatlasi.com/template/HE2.html)
-
-```
 
 
 
@@ -167,35 +230,53 @@ Mikroskopik görüntüleri inceleyin:
 
 See Microscopy with viewer:
 
-<iframe src="https://images.patolojiatlasi.com/template/HE2.html" style="height:600px;width:100%;" data-external="1"></iframe>
+<iframe src="https://images.patolojiatlasi.com/deneme/PR.html" style="height:600px;width:100%;" data-external="1"></iframe>
 
 ```
 
 
 
 
+
+
+
+```{asis, echo = ((language=="TR") & (output_type=="html"))}
+Mikroskopik görüntüleri inceleyin:
+
+<iframe src="https://images.patolojiatlasi.com/deneme/CMV.html" style="height:600px;width:100%;" data-external="1"></iframe>
+
+```
+
+
+
+
+
+```{asis, echo = ((language == "EN") & (output_type=="html"))}
+
+See Microscopy with viewer:
+
+<iframe src="https://images.patolojiatlasi.com/deneme/CMV.html" style="height:600px;width:100%;" data-external="1"></iframe>
+
+```
+
+
+
+
+
+### Diagnosis
+
+
 ```{comment}
 asis, echo = (language == "TR")
 
 
+::: {.callout-tip collapse="true" appearance="default" icon="true"}
+### Tanı için tıklayın
 
-<button id="tani-case-template-btn">Tanıyı Göster</button>
-<div id="answer-template" style="display: none;">TemplateTR</div>
+deneme TR
 
-<script>
-  const showAnswer-templateBtn = document.getElementById("tani-case-template-btn");
-  const answer-template = document.getElementById("answer-template");
+:::
 
-  showAnswer-templateBtn.addEventListener("click", () => {
-    if (answer-template.style.display === "none") {
-      answer-template.style.display = "block";
-      showAnswer-templateBtn.textContent = "Tanıyı Gizle";
-    } else {
-      answer-template.style.display = "none";
-      showAnswer-templateBtn.textContent = "Tanıyı Göster";
-    }
-  });
-</script>
 
 ```
 
@@ -203,137 +284,56 @@ asis, echo = (language == "TR")
 ```{comment}
 asis, echo = (language == "EN")
 
-<button id="dx-case-template-btn">Show the Diagnosis</button>
-<div id="answer-template" style="display: none;">TemplateEN</div>
 
-<script>
-  const showAnswer-templateBtn = document.getElementById("dx-case-template-btn");
-  const answer-template = document.getElementById("answer-template");
+::: {.callout-tip collapse="true" appearance="default" icon="true"}
+### Tanı için tıklayın
 
-  showAnswer-templateBtn.addEventListener("click", () => {
-    if (answer-template.style.display === "none") {
-      answer-template.style.display = "block";
-      showAnswer-templateBtn.textContent = "Hide the Diagnosis";
-    } else {
-      answer-template.style.display = "none";
-      showAnswer-templateBtn.textContent = "Show the Diagnosis";
-    }
-  });
-</script>
+deneme EN
 
-```
-
-
-
-
-
-```{comment}
-asis, echo = ((language=="TR") & (output_type=="html"))
-
-{{< video https://www.youtube.com/embed/youtube_link >}}
-
-```
-
-
-```{comment}
-asis, echo = ((language=="TR") & (output_type!="html"))
-
-[https://www.youtube.com/watch?v=youtube_link](https://www.youtube.com/watch?v=youtube_link)
-
-```
-
-```{comment}
-r, eval=TRUE, echo=FALSE, include=FALSE, error=TRUE
-if (!file.exists("./screenshots/template-_screenshot.png")) {
-
-url <- "https://img.youtube.com/vi/youtube_link/maxresdefault.jpg"
-download.file(url, destfile = "./screenshots/template-_screenshot.png", mode = "wb")
-}
-
-**TemplateTR**
-
-[![Video İçin Tıklayın](./screenshots/template-_screenshot.png){width="25%"}](https://www.youtube.com/watch?v=youtube_link) [Video İçin Tıklayın](https://www.youtube.com/watch?v=youtube_link)
-
-```
-
-
-```{comment}
-asis, echo = ((language=="EN") & (output_type=="html"))
-
-{{< video https://www.youtube.com/embed/youtube_link >}}
-
-```
-
-
-```{comment}
-asis, echo = ((language=="EN") & (output_type!="html"))
-
-[https://www.youtube.com/watch?v=youtube_link](https://www.youtube.com/watch?v=youtube_link)
-
-```
-
-
-
-
-
-
-```{r, echo=FALSE, include=FALSE, eval=FALSE}
-knitr::include_url(url = "https://images.patolojiatlasi.com/template/.html")
-```
-
-```{r, echo=FALSE, include=FALSE, eval=FALSE}
-#| label: template_screenshot
-#| fig-cap: "TemplateTR"
-knitr::include_graphics("./screenshots/template-_screenshot.png")
-```
-
-
-::: {.content-hidden when-format="pdf"}
-TemplateTR
 :::
 
-::: {.content-visible when-format="pdf"}
-TemplateTR
+```
+
+
+
+
+
+
+
+
+### Video
+
+
+
+```{asis, echo = (language == "TR")}
+
+[Video İçin Tıklayın](https://www.youtube.com/watch?v=deneme)
+
+```
+
+
+```{asis, echo = (language == "EN")}
+
+[Click for Video](https://www.youtube.com/watch?v=deneme)
+
+```
+
+
+
+::: {.content-visible when-format="html"}
+
+{{< video https://www.youtube.com/embed/deneme >}}
+
 :::
 
 
 
 
 
-```{comment}
-asis, echo = (language == "TR")
 
-**TemplateTR**
+:::::
 
+<hr>
 
-[![İşaretlenmiş mikroskopik görüntüleri Tam Ekran Görmek İçin Resmi Tıklayın](./screenshots/template-_screenshot.png){width="25%"}](https://images.patolojiatlasi.com/template/HE_annotated.html) [İşaretlenmiş mikroskopik görüntüleri Tam Ekran Görmek İçin Resmi Tıklayın](https://images.patolojiatlasi.com/template/HE_annotated.html)
-
-İşaretlenmiş mikroskopik görüntüleri inceleyin:
-
-<iframe src="https://images.patolojiatlasi.com/template/HE_annotated.html" style="height:600px;width:100%;" data-external="1"></iframe>
-
-```
-
-
-
-```{comment}
-asis, echo = (language == "EN")
-
-**TemplateEN**
-
-[![Click for Full Screen Annotated WSI](./screenshots/template-_screenshot.png){width="25%"}](https://images.patolojiatlasi.com/template/HE_annotated.html) [Click for Full Screen Annotated WSI](https://images.patolojiatlasi.com/template/HE_annotated.html)
-
-
-See Annotated Microscopy with viewer:
-
-<iframe src="https://images.patolojiatlasi.com/template/HE_annotated.html" style="height:600px;width:100%;" data-external="1"></iframe>
-
-```
-
-
-```{comment}
-=html
-<iframe src="https://images.patolojiatlasi.com/template/.html" style="height:600px;width:100%;" data-external="1"></iframe>
-```
 
 
