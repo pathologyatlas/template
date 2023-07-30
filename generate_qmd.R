@@ -66,12 +66,12 @@ output_type <- knitr::opts_knit$get("rmarkdown.pandoc.to")
 ```
 
 
-```{asis {{TemplateTR}} , echo = (language == "TR")}
+```{asis {{TemplateTR}} TR, echo = (language == "TR")}
 ## {{TemplateTR}} {#sec-{{template}} }
 ```
 
 
-```{asis {{TemplateEN}} , echo = (language == "EN")}
+```{asis {{TemplateEN}} EN, echo = (language == "EN")}
 ## {{TemplateEN}} {#sec-{{template}} }
 ```
 
