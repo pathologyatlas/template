@@ -17,12 +17,13 @@ ui <- fluidPage(
       checkboxInput("diagnosis", "Diagnosis", value = FALSE),
       checkboxInput("use_youtube", "Use YouTube", value = FALSE),
       textInput("youtube_link", "YouTube Link", value = "youtube_link"),
-      actionButton("generate", "Generate"),
+      actionButton("generate", "Generate qmd"),
       downloadButton('downloadFile', 'Download newfile.qmd')
     ),
 
     mainPanel(
       verbatimTextOutput("qmdtext"),
+      verbatimTextOutput("readmetext"),
       textOutput("fileWriteStatus")
     )
   )
@@ -49,6 +50,30 @@ server <- function(input, output) {
     req(qmd_data())
     qmd_data()
   })
+
+  readme_data <- eventReactive(input$generate, {
+    stain <- strsplit(input$stain, ",")[[1]]
+    stain <- trimws(stain)
+
+    readme_text(
+      base_template = input$base_template,
+      TemplateTR = input$TemplateTR,
+      TemplateEN = input$TemplateEN,
+      template = input$template,
+      stain = stain,
+      diagnosis = input$diagnosis,
+      use_youtube = input$use_youtube,
+      youtube_link = input$youtube_link
+    )
+  })
+
+
+  output$readmetext <- renderText({
+    req(readme_data())
+    readme_data()
+  })
+
+
 
   output$downloadFile <- downloadHandler(
     filename = function() {

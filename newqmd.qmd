@@ -46,6 +46,13 @@ update html file to match .dzi file
 
 
 
+<title>deneme EN deneme TR</title>
+<meta name="keywords" content="deneme EN, deneme TR, patoloji, atlas, pathology, whole slide image">
+<meta name="description" content="deneme EN deneme TR">
+
+
+
+
 
 ```{r language deneme, echo=FALSE, include=TRUE}
 source("./R/language.R")
@@ -266,8 +273,7 @@ See Microscopy with viewer:
 ### Diagnosis
 
 
-```{comment}
-asis, echo = (language == "TR")
+```{asis, echo = (language == "TR")}
 
 
 ::: {.callout-tip collapse="true" appearance="default" icon="true"}
@@ -281,12 +287,11 @@ deneme TR
 ```
 
 
-```{comment}
-asis, echo = (language == "EN")
+```{asis, echo = (language == "EN")}
 
 
 ::: {.callout-tip collapse="true" appearance="default" icon="true"}
-### Tanı için tıklayın
+### Click for Diagnosis
 
 deneme EN
 
