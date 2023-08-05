@@ -46,6 +46,13 @@ update html file to match .dzi file
 
 
 
+<title>deneme EN deneme TR</title>
+<meta name="keywords" content="deneme EN, deneme TR, patoloji, atlas, pathology, whole slide image">
+<meta name="description" content="deneme EN deneme TR">
+
+
+
+
 
 ```{r language deneme, echo=FALSE, include=TRUE}
 source("./R/language.R")
@@ -53,12 +60,12 @@ output_type <- knitr::opts_knit$get("rmarkdown.pandoc.to")
 ```
 
 
-```{asis deneme TR , echo = (language == "TR")}
+```{asis deneme TR TR, echo = (language == "TR")}
 ## deneme TR {#sec-deneme }
 ```
 
 
-```{asis deneme EN , echo = (language == "EN")}
+```{asis deneme EN EN, echo = (language == "EN")}
 ## deneme EN {#sec-deneme }
 ```
 
