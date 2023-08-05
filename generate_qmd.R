@@ -59,6 +59,17 @@ update html file to match .dzi file
 
 head_string <- '
 
+```{comment}
+---
+description: |
+    {{TemplateTR}}, {{TemplateEN}}, patoloji, atlas, pathology, whole slide image
+date: last-modified
+categories: [{{TemplateTR}}, {{TemplateEN}}]
+page-layout: full
+bibliography: references.bib
+---
+```
+
 
 ```{r language {{template}}, echo=FALSE, include=TRUE}
 source("./R/language.R")
