@@ -61,6 +61,11 @@ update html file to match .dzi file
 
 head_string <- '
 
+
+((< include ./_subchapters/_{{template}}.qmd >))
+
+
+
 ```{comment}
 ---
 description: |
