@@ -111,6 +111,25 @@ webshot2::webshot(
 }
 ```
 
+
+
+```{r, eval=TRUE, echo=FALSE, include=FALSE, error=TRUE}
+if (!file.exists("./qrcodes/{{stain}}_qrcode.svg")) {
+
+  qrcode_svg <- qrcode::qr_code("https://images.patolojiatlasi.com/{{template}}/{{stain}}.html")
+
+  qrcode::generate_svg(qrcode = qrcode_svg,
+                       filename = "./qrcodes/{{stain}}_qrcode.svg",
+                       show = FALSE)
+}
+```
+
+
+
+
+
+
+
 '
 
 # tab1 ----
@@ -135,16 +154,20 @@ wsi_link_string <- '
 **{{TemplateTR}}**
 
 
-[![Tam Ekran Görmek İçin Resmi Tıklayın](./screenshots/{{template}}-{{stain}}_screenshot.png){width="25%"}](https://images.patolojiatlasi.com/{{template}}/{{stain}}.html) [Tam Ekran Görmek İçin Resmi Tıklayın](https://images.patolojiatlasi.com/{{template}}/{{stain}}.html)
+[![Tam Ekran Görmek İçin Resmi Tıklayın](./screenshots/{{template}}-{{stain}}_screenshot.png){width="25%"}](https://images.patolojiatlasi.com/{{template}}/{{stain}}.html) [Tam Ekran Görmek İçin Resmi Tıklayın](https://images.patolojiatlasi.com/{{template}}/{{stain}}.html)  ![](./qrcodes/{{stain}}_qrcode.svg){width="15%"}
+
 ```
+
+
 
 ```{asis, echo = (language == "EN")}
 
 **{{TemplateEN}}**
 
-[![Click for Full Screen WSI](./screenshots/{{template}}-{{stain}}_screenshot.png){width="25%"}](https://images.patolojiatlasi.com/{{template}}/{{stain}}.html) [Click for Full Screen WSI](https://images.patolojiatlasi.com/{{template}}/{{stain}}.html)
+[![Click for Full Screen WSI](./screenshots/{{template}}-{{stain}}_screenshot.png){width="25%"}](https://images.patolojiatlasi.com/{{template}}/{{stain}}.html) [Click for Full Screen WSI](https://images.patolojiatlasi.com/{{template}}/{{stain}}.html)  ![](./qrcodes/{{stain}}_qrcode.svg){width="15%"}
 
 ```
+
 
 '
 
