@@ -75,10 +75,10 @@ output_type <- knitr::opts_knit$get("rmarkdown.pandoc.to")
 
 
 ```{r deneme screenshot ER, eval=TRUE, include=FALSE}
-if (!file.exists("./screenshots/deneme-ER_screenshot.png")) {
+if (!file.exists("./screenshots/thumbnail_deneme-ER.png")) {
 webshot2::webshot(
   url = "https://images.patolojiatlasi.com/deneme/ER.html",
-  file = "./screenshots/deneme-ER_screenshot.png"
+  file = "./screenshots/thumbnail_deneme-ER.png"
 )
 }
 ```
@@ -89,10 +89,10 @@ webshot2::webshot(
 
 
 ```{r deneme screenshot PR, eval=TRUE, include=FALSE}
-if (!file.exists("./screenshots/deneme-PR_screenshot.png")) {
+if (!file.exists("./screenshots/thumbnail_deneme-PR.png")) {
 webshot2::webshot(
   url = "https://images.patolojiatlasi.com/deneme/PR.html",
-  file = "./screenshots/deneme-PR_screenshot.png"
+  file = "./screenshots/thumbnail_deneme-PR.png"
 )
 }
 ```
@@ -103,10 +103,10 @@ webshot2::webshot(
 
 
 ```{r deneme screenshot CMV, eval=TRUE, include=FALSE}
-if (!file.exists("./screenshots/deneme-CMV_screenshot.png")) {
+if (!file.exists("./screenshots/thumbnail_deneme-CMV.png")) {
 webshot2::webshot(
   url = "https://images.patolojiatlasi.com/deneme/CMV.html",
-  file = "./screenshots/deneme-CMV_screenshot.png"
+  file = "./screenshots/thumbnail_deneme-CMV.png"
 )
 }
 ```
@@ -131,14 +131,14 @@ webshot2::webshot(
 **deneme TR**
 
 
-[![Tam Ekran Görmek İçin Resmi Tıklayın](./screenshots/deneme-ER_screenshot.png){width="25%"}](https://images.patolojiatlasi.com/deneme/ER.html) [Tam Ekran Görmek İçin Resmi Tıklayın](https://images.patolojiatlasi.com/deneme/ER.html)
+[![Tam Ekran Görmek İçin Resmi Tıklayın](./screenshots/thumbnail_deneme-ER.png){width="25%"}](https://images.patolojiatlasi.com/deneme/ER.html) [Tam Ekran Görmek İçin Resmi Tıklayın](https://images.patolojiatlasi.com/deneme/ER.html)
 ```
 
 ```{asis, echo = (language == "EN")}
 
 **deneme EN**
 
-[![Click for Full Screen WSI](./screenshots/deneme-ER_screenshot.png){width="25%"}](https://images.patolojiatlasi.com/deneme/ER.html) [Click for Full Screen WSI](https://images.patolojiatlasi.com/deneme/ER.html)
+[![Click for Full Screen WSI](./screenshots/thumbnail_deneme-ER.png){width="25%"}](https://images.patolojiatlasi.com/deneme/ER.html) [Click for Full Screen WSI](https://images.patolojiatlasi.com/deneme/ER.html)
 
 ```
 
@@ -152,14 +152,14 @@ webshot2::webshot(
 **deneme TR**
 
 
-[![Tam Ekran Görmek İçin Resmi Tıklayın](./screenshots/deneme-PR_screenshot.png){width="25%"}](https://images.patolojiatlasi.com/deneme/PR.html) [Tam Ekran Görmek İçin Resmi Tıklayın](https://images.patolojiatlasi.com/deneme/PR.html)
+[![Tam Ekran Görmek İçin Resmi Tıklayın](./screenshots/thumbnail_deneme-PR.png){width="25%"}](https://images.patolojiatlasi.com/deneme/PR.html) [Tam Ekran Görmek İçin Resmi Tıklayın](https://images.patolojiatlasi.com/deneme/PR.html)
 ```
 
 ```{asis, echo = (language == "EN")}
 
 **deneme EN**
 
-[![Click for Full Screen WSI](./screenshots/deneme-PR_screenshot.png){width="25%"}](https://images.patolojiatlasi.com/deneme/PR.html) [Click for Full Screen WSI](https://images.patolojiatlasi.com/deneme/PR.html)
+[![Click for Full Screen WSI](./screenshots/thumbnail_deneme-PR.png){width="25%"}](https://images.patolojiatlasi.com/deneme/PR.html) [Click for Full Screen WSI](https://images.patolojiatlasi.com/deneme/PR.html)
 
 ```
 
@@ -173,14 +173,14 @@ webshot2::webshot(
 **deneme TR**
 
 
-[![Tam Ekran Görmek İçin Resmi Tıklayın](./screenshots/deneme-CMV_screenshot.png){width="25%"}](https://images.patolojiatlasi.com/deneme/CMV.html) [Tam Ekran Görmek İçin Resmi Tıklayın](https://images.patolojiatlasi.com/deneme/CMV.html)
+[![Tam Ekran Görmek İçin Resmi Tıklayın](./screenshots/thumbnail_deneme-CMV.png){width="25%"}](https://images.patolojiatlasi.com/deneme/CMV.html) [Tam Ekran Görmek İçin Resmi Tıklayın](https://images.patolojiatlasi.com/deneme/CMV.html)
 ```
 
 ```{asis, echo = (language == "EN")}
 
 **deneme EN**
 
-[![Click for Full Screen WSI](./screenshots/deneme-CMV_screenshot.png){width="25%"}](https://images.patolojiatlasi.com/deneme/CMV.html) [Click for Full Screen WSI](https://images.patolojiatlasi.com/deneme/CMV.html)
+[![Click for Full Screen WSI](./screenshots/thumbnail_deneme-CMV.png){width="25%"}](https://images.patolojiatlasi.com/deneme/CMV.html) [Click for Full Screen WSI](https://images.patolojiatlasi.com/deneme/CMV.html)
 
 ```
 
