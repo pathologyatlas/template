@@ -119,7 +119,7 @@ if (!file.exists("./qrcodes/{{stain}}_qrcode.svg")) {
   qrcode_svg <- qrcode::qr_code("https://images.patolojiatlasi.com/{{template}}/{{stain}}.html")
 
   qrcode::generate_svg(qrcode = qrcode_svg,
-                       filename = "./qrcodes/{{stain}}_qrcode.svg",
+                       filename = "./qrcodes/{{template}}-{{stain}}_qrcode.svg",
                        show = FALSE)
 }
 ```
