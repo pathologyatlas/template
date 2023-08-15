@@ -69,12 +69,12 @@ output_type <- knitr::opts_knit$get("rmarkdown.pandoc.to")
 ```
 
 
-```{asis {{TemplateTR}} , echo = (language == "TR")}
+```{asis {{TemplateTR}} TR , echo = (language == "TR")}
 ## {{template}} - {{TemplateTR}} {#sec-{{template}} }
 ```
 
 
-```{asis {{TemplateEN}} , echo = (language == "EN")}
+```{asis {{TemplateEN}} EN , echo = (language == "EN")}
 ## {{template}} - {{TemplateEN}} {#sec-{{template}} }
 ```
 
@@ -253,6 +253,17 @@ end_string <-
 
 
 :::::
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -456,13 +467,13 @@ output_type <- knitr::opts_knit$get("rmarkdown.pandoc.to")
 
 
 ```
-asis {{TemplateTR}} , echo = (language == "TR")
+asis {{TemplateTR}} TR, echo = (language == "TR")
 ## {{template}} - {{TemplateTR}} {#sec-{{template}} }
 ```
 
 
 ```
-asis {{TemplateEN}} , echo = (language == "EN")
+asis {{TemplateEN}} EN, echo = (language == "EN")
 ## {{template}} - {{TemplateEN}} {#sec-{{template}} }
 ```
 
@@ -501,6 +512,15 @@ tab1 <- '
 # wsi_link_string ----
 
 wsi_link_string <- '
+
+
+
+
+
+[https://images.patolojiatlasi.com/{{template}}/{{stain}}.html](https://images.patolojiatlasi.com/{{template}}/{{stain}}.html)
+
+
+
 
 
 ```
@@ -650,6 +670,17 @@ end_string <-
 
 
 :::::
+
+
+
+
+
+
+
+
+
+
+
 
 
 
