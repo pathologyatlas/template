@@ -62,6 +62,22 @@ update html file to match .dzi file
 head_string <- '
 
 
+((< include ./_subchapters/_{{template}}.qmd >))
+
+
+
+```{comment}
+---
+description: |
+    {{TemplateTR}}, {{TemplateEN}}, patoloji, atlas, pathology, whole slide image
+date: last-modified
+categories: [{{TemplateTR}}, {{TemplateEN}}]
+page-layout: full
+bibliography: references.bib
+---
+```
+
+
 
 ```{r language {{template}}, echo=FALSE, include=TRUE}
 source("./R/language.R")
@@ -87,13 +103,32 @@ screenshot_string <- '
 
 
 ```{r {{template}} screenshot {{stain}}, eval=TRUE, include=FALSE}
-if (!file.exists("./screenshots/{{template}}-{{stain}}_screenshot.png")) {
+if (!file.exists("./screenshots/thumbnail_{{template}}-{{stain}}.png")) {
 webshot2::webshot(
   url = "https://images.patolojiatlasi.com/{{template}}/{{stain}}.html",
-  file = "./screenshots/{{template}}-{{stain}}_screenshot.png"
+  file = "./screenshots/thumbnail_{{template}}-{{stain}}.png"
 )
 }
 ```
+
+
+
+```{r, eval=TRUE, echo=FALSE, include=FALSE, error=TRUE}
+if (!file.exists("./qrcodes/{{template}}-{{stain}}_qrcode.svg")) {
+
+  qrcode_svg <- qrcode::qr_code("https://images.patolojiatlasi.com/{{template}}/{{stain}}.html")
+
+  qrcode::generate_svg(qrcode = qrcode_svg,
+                       filename = "./qrcodes/{{template}}-{{stain}}_qrcode.svg",
+                       show = FALSE)
+}
+```
+
+
+
+
+
+
 
 '
 
@@ -114,21 +149,67 @@ tab1 <- '
 wsi_link_string <- '
 
 
+
+:::: {.content-hidden when-format="pdf"}
+
+
 ```{asis, echo = (language == "TR")}
 
 **{{TemplateTR}}**
 
 
-[![Tam Ekran Görmek İçin Resmi Tıklayın](./screenshots/{{template}}-{{stain}}_screenshot.png){width="25%"}](https://images.patolojiatlasi.com/{{template}}/{{stain}}.html) [Tam Ekran Görmek İçin Resmi Tıklayın](https://images.patolojiatlasi.com/{{template}}/{{stain}}.html)
+[![Tam Ekran Görmek İçin Resmi Tıklayın](./screenshots/thumbnail_{{template}}-{{stain}}.png){width="25%"}](https://images.patolojiatlasi.com/{{template}}/{{stain}}.html) [Tam Ekran Görmek İçin Resmi Tıklayın](https://images.patolojiatlasi.com/{{template}}/{{stain}}.html)
+
 ```
+
+::::
+
+
+:::: {.content-visible when-format="pdf"}
+
+```{asis, echo = (language == "TR")}
+
+**{{TemplateTR}}**
+
+![](./qrcodes/{{template}}-{{stain}}_qrcode.svg){width="15%"} [![Tam Ekran Görmek İçin Resmi Tıklayın](./screenshots/thumbnail_{{template}}-{{stain}}.png){width="25%"}](https://images.patolojiatlasi.com/{{template}}/{{stain}}.html) [Tam Ekran Görmek İçin Resmi Tıklayın](https://images.patolojiatlasi.com/{{template}}/{{stain}}.html)
+
+```
+
+
+
+::::
+
+
+
+
+:::: {.content-hidden when-format="pdf"}
+
 
 ```{asis, echo = (language == "EN")}
 
 **{{TemplateEN}}**
 
-[![Click for Full Screen WSI](./screenshots/{{template}}-{{stain}}_screenshot.png){width="25%"}](https://images.patolojiatlasi.com/{{template}}/{{stain}}.html) [Click for Full Screen WSI](https://images.patolojiatlasi.com/{{template}}/{{stain}}.html)
+[![Click for Full Screen WSI](./screenshots/thumbnail_{{template}}-{{stain}}.png){width="25%"}](https://images.patolojiatlasi.com/{{template}}/{{stain}}.html) [Click for Full Screen WSI](https://images.patolojiatlasi.com/{{template}}/{{stain}}.html)
 
 ```
+
+::::
+
+
+:::: {.content-visible when-format="pdf"}
+
+```{asis, echo = (language == "EN")}
+
+**{{TemplateEN}}**
+
+![](./qrcodes/{{template}}-{{stain}}_qrcode.svg){width="15%"} [![Click for Full Screen WSI](./screenshots/thumbnail_{{template}}-{{stain}}.png){width="25%"}](https://images.patolojiatlasi.com/{{template}}/{{stain}}.html) [Click for Full Screen WSI](https://images.patolojiatlasi.com/{{template}}/{{stain}}.html)
+
+```
+
+
+::::
+
+
 
 '
 
@@ -487,10 +568,10 @@ asis {{TemplateEN}} EN, echo = (language == "EN")
 
 ```
 r {{template}} screenshot {{stain}}, eval=TRUE, include=FALSE
-if (!file.exists("./screenshots/{{template}}-{{stain}}_screenshot.png")) {
+if (!file.exists("./screenshots/thumbnail_{{template}}-{{stain}}.png")) {
 webshot2::webshot(
   url = "https://images.patolojiatlasi.com/{{template}}/{{stain}}.html",
-  file = "./screenshots/{{template}}-{{stain}}_screenshot.png"
+  file = "./screenshots/thumbnail_{{template}}-{{stain}}.png"
 )
 }
 ```
@@ -529,7 +610,7 @@ asis, echo = (language == "TR")
 **{{TemplateTR}}**
 
 
-[![Tam Ekran Görmek İçin Resmi Tıklayın](./screenshots/{{template}}-{{stain}}_screenshot.png){width="25%"}](https://images.patolojiatlasi.com/{{template}}/{{stain}}.html) [Tam Ekran Görmek İçin Resmi Tıklayın](https://images.patolojiatlasi.com/{{template}}/{{stain}}.html)
+[![Tam Ekran Görmek İçin Resmi Tıklayın](./screenshots/thumbnail_{{template}}-{{stain}}.png){width="25%"}](https://images.patolojiatlasi.com/{{template}}/{{stain}}.html) [Tam Ekran Görmek İçin Resmi Tıklayın](https://images.patolojiatlasi.com/{{template}}/{{stain}}.html)
 ```
 
 ```
@@ -537,7 +618,7 @@ asis, echo = (language == "EN")
 
 **{{TemplateEN}}**
 
-[![Click for Full Screen WSI](./screenshots/{{template}}-{{stain}}_screenshot.png){width="25%"}](https://images.patolojiatlasi.com/{{template}}/{{stain}}.html) [Click for Full Screen WSI](https://images.patolojiatlasi.com/{{template}}/{{stain}}.html)
+[![Click for Full Screen WSI](./screenshots/thumbnail_{{template}}-{{stain}}.png){width="25%"}](https://images.patolojiatlasi.com/{{template}}/{{stain}}.html) [Click for Full Screen WSI](https://images.patolojiatlasi.com/{{template}}/{{stain}}.html)
 
 ```
 

@@ -86,10 +86,10 @@ output_type <- knitr::opts_knit$get("rmarkdown.pandoc.to")
 
 
 ```{r template screenshot, eval=TRUE, include=FALSE}
-if (!file.exists("./screenshots/template_screenshot.png")) {
+if (!file.exists("./screenshots/thumbnail_template.png")) {
 webshot2::webshot(
   url = "https://images.patolojiatlasi.com/template/HE.html",
-  file = "./screenshots/template_screenshot.png"
+  file = "./screenshots/thumbnail_template.png"
 )
 }
 ```
@@ -101,7 +101,7 @@ knitr::include_url(url = "https://images.patolojiatlasi.com/template/HE.html")
 ```{comment, echo=FALSE, include=FALSE, eval=FALSE}
 #| label: template_screenshot
 #| fig-cap: "TemplateTR"
-knitr::include_graphics("./screenshots/template_screenshot.png")
+knitr::include_graphics("./screenshots/thumbnail_template.png")
 ```
 
 
@@ -120,7 +120,7 @@ TemplateTR
 **templateTR**
 
 
-[![Tam Ekran Görmek İçin Resmi Tıklayın](./screenshots/template_screenshot.png){width="25%"}](https://images.patolojiatlasi.com/template/HE.html) [Tam Ekran Görmek İçin Resmi Tıklayın](https://images.patolojiatlasi.com/template/HE.html)
+[![Tam Ekran Görmek İçin Resmi Tıklayın](./screenshots/thumbnail_template.png){width="25%"}](https://images.patolojiatlasi.com/template/HE.html) [Tam Ekran Görmek İçin Resmi Tıklayın](https://images.patolojiatlasi.com/template/HE.html)
 ```
 
 
@@ -139,7 +139,7 @@ asis, echo = (language == "TR")
 **templateTR**
 
 
-[![İşaretlenmiş mikroskopik görüntüleri Tam Ekran Görmek İçin Resmi Tıklayın](./screenshots/template_screenshot.png){width="25%"}](https://images.patolojiatlasi.com/template/HE_annotated.html) [İşaretlenmiş mikroskopik görüntüleri Tam Ekran Görmek İçin Resmi Tıklayın](https://images.patolojiatlasi.com/template/HE_annotated.html)
+[![İşaretlenmiş mikroskopik görüntüleri Tam Ekran Görmek İçin Resmi Tıklayın](./screenshots/thumbnail_template.png){width="25%"}](https://images.patolojiatlasi.com/template/HE_annotated.html) [İşaretlenmiş mikroskopik görüntüleri Tam Ekran Görmek İçin Resmi Tıklayın](https://images.patolojiatlasi.com/template/HE_annotated.html)
 ```
 
 ```{comment} 
@@ -173,7 +173,7 @@ asis, echo = (language == "TR")
 
 **templateEN**
 
-[![Click for Full Screen WSI](./screenshots/template_screenshot.png){width="25%"}](https://images.patolojiatlasi.com/template/HE.html) [Click for Full Screen WSI](https://images.patolojiatlasi.com/template/HE.html)
+[![Click for Full Screen WSI](./screenshots/thumbnail_template.png){width="25%"}](https://images.patolojiatlasi.com/template/HE.html) [Click for Full Screen WSI](https://images.patolojiatlasi.com/template/HE.html)
 
 
 ```
@@ -194,7 +194,7 @@ asis, echo = (language == "EN")
 
 **templateEN**
 
-[![Click for Full Screen Annotated WSI](./screenshots/template_screenshot.png){width="25%"}](https://images.patolojiatlasi.com/template/HE_annotated.html) [Click for Full Screen Annotated WSI](https://images.patolojiatlasi.com/template/HE_annotated.html)
+[![Click for Full Screen Annotated WSI](./screenshots/thumbnail_template.png){width="25%"}](https://images.patolojiatlasi.com/template/HE_annotated.html) [Click for Full Screen Annotated WSI](https://images.patolojiatlasi.com/template/HE_annotated.html)
 ```
 
 
