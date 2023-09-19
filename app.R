@@ -22,7 +22,9 @@ ui <- fluidPage(
     ),
 
     mainPanel(
+      h4("QMD Text:"),
       verbatimTextOutput("qmdtext"),
+      h4("README Text:"),
       verbatimTextOutput("readmetext"),
       textOutput("fileWriteStatus")
     )

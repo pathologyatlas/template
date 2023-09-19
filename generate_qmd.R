@@ -941,11 +941,4 @@ return(readme_text)
 # writeLines(text = text_to_write, con = "./newqmd.qmd", sep = "\n")
 
 
-# for (i in 1:41) {
-# writeLines(text = qmd_text(), con = paste0("./subchapters/_hacettepe_com_case_",i, ".qmd"), sep = "\n")
-# }
-
-# cat(
-# paste0("{{< include ./_subchapters/_hacettepe_com_case_", 1:41, ".qmd >}}"), sep = "\n\n\n\n")
-
 
