@@ -1,0 +1,174 @@
+<html> <!-- do not use <!DOCTYPE html> -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- <title>TemplateEN</title>
+
+<meta name="keywords" content="TemplateEN, patoloji, atlas, pathology, whole slide image">
+
+<meta name="description" content="TemplateEN">
+
+-->
+
+<link rel="apple-touch-icon" sizes="180x180" href="https://images.patolojiatlasi.com/img/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://images.patolojiatlasi.com/img/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://images.patolojiatlasi.com/img/favicon-16x16.png">
+<link rel="manifest" href="https://images.patolojiatlasi.com/img/site.webmanifest">
+<link rel="icon" href="https://images.patolojiatlasi.com/img/favicon.ico" type="image/x-icon" />
+
+<div id="openseadragon2" style="width: 100%; height: 95%;"></div>
+<link rel="stylesheet" href="https://images.patolojiatlasi.com/annotorious/annotorious.min.css">
+<link rel="stylesheet" href="./annotorious/annotorious.min.css">
+
+<style>
+    .navigator .highlight {
+        opacity: 0.4;
+        filter: alpha(opacity=40);
+        outline: 2px solid #900;
+        background-color: #900;
+    }
+
+    .highlight {
+        opacity: 0.4;
+        filter: alpha(opacity=40);
+        outline: 12px auto #0A7EbE;
+        background-color: white;
+    }
+
+    .highlight:hover,
+    .highlight:focus {
+        filter: alpha(opacity=70);
+        opacity: 0.7;
+        background-color: transparent;
+    }
+</style>
+
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+
+<script src="https://images.patolojiatlasi.com/openseadragon/openseadragon.min.js"></script>
+<script src="https://images.patolojiatlasi.com/annotorious/openseadragon-annotorious.min.js"></script>
+
+
+<script src="/openseadragon/openseadragon.min.js"></script>
+<script src="/annotorious/openseadragon-annotorious.min.js"></script>
+
+
+<script type="text/javascript">
+    var viewer = OpenSeadragon({
+        id: 'openseadragon2',
+        prefixUrl: 'https://images.patolojiatlasi.com/openseadragon/images/',
+        tileSources: [{
+            Image: {
+                Url: './HE_files/', // name of image folder
+                TileSize: '254', // see .dzi file
+                Overlap: '1', // see .dzi file
+                Format: 'jpeg', // see .dzi file
+                ServerFormat: 'Default', // optional
+                xmlns: 'http://schemas.microsoft.com/deepzoom/2008', // see .dzi file
+                Size: {
+                    Width: '33283', // see .dzi file
+                    Height: '29324' // see .dzi file
+                }
+            },
+
+            overlays: [{
+                id: 'example-overlay',
+                x: 0.10,
+                y: 0.60,
+                width: 0.3,
+                height: 0.25,
+
+                className: 'highlight'
+            },
+
+            {
+                id: 'right-arrow-overlay',
+                x: 0.7318,
+                y: 0.1178,
+                placement: 'RIGHT',
+                checkResize: false
+            }
+            ]
+
+
+        }]
+    });
+
+
+    jQuery(function () {
+        //Tooltips
+        setTimeout(bindtooltip, 2000);
+    });
+
+    function bindtooltip() {
+        var tip = jQuery('#example-tip');
+        jQuery("#example-overlay").hover(function (e) {
+            var mousex = e.pageX + 20, //Get X coodrinates
+                mousey = e.pageY + 20, //Get Y coordinates
+                tipWidth = tip.width(), //Find width of tooltip
+                tipHeight = tip.height(), //Find height of tooltip
+
+                //Distance of element from the right edge of viewport
+                tipVisX = $(window).width() - (mousex + tipWidth),
+                //Distance of element from the bottom of viewport
+                tipVisY = $(window).height() - (mousey + tipHeight);
+
+            if (tipVisX < 20) { //If tooltip exceeds the X coordinate of viewport
+                mousex = e.pageX - tipWidth - 20;
+            } if (tipVisY < 20) { //If tooltip exceeds the Y coordinate of viewport
+                mousey = e.pageY - tipHeight - 20;
+            }
+            tip.css({ top: mousey, left: mousex, position: 'absolute' });
+            tip.show().css({ opacity: 0.8 }); //Show tooltip
+        }, function () {
+            tip.hide(); //Hide tooltip
+        });
+    };
+
+
+
+
+  // Add a keydown event listener to the document
+  document.addEventListener("keydown", function (event) {
+    // Check if the pressed key is 'Z' (key code 90) to zoom in
+    if (event.keyCode === 90) {
+      // Zoom in
+      viewer.viewport.zoomBy(1.2);
+    }
+    // Check if the pressed key is 'X' (key code 88) to zoom out
+    else if (event.keyCode === 88) {
+      // Zoom out
+      viewer.viewport.zoomBy(0.8);
+    }
+  });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+<div id="example-tip" style="display:none;width:250px;background-color:#fff;">
+    <p>
+        The overlay can provide a class name and ID to bind additional events to.
+    </p>
+</div>
+
+<img id="right-arrow-overlay" src="http://upload.wikimedia.org/wikipedia/commons/7/7a/Red_Arrow_Right.svg"
+    alt="Right arrow" width="20">
+
+
+</html>
