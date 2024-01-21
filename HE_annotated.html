@@ -1,18 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
+<html> <!-- do not use <!DOCTYPE html> -->
 
 <head>
+    <title>TemplateEN templateTR</title>
+    <meta name="keywords" content="TemplateEN, templateTR, patoloji, atlas, pathology, whole slide image">
+
+    <meta name="description" content="TemplateEN templateTR">
+
     <meta charset="utf-8" />
-    <title>OpenSeadragon Combined Template</title>
-    <link rel="stylesheet" href="https://images.patolojiatlasi.com/annotorious/annotorious.min.css">
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
     <link rel="apple-touch-icon" sizes="180x180" href="https://images.patolojiatlasi.com/img/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="https://images.patolojiatlasi.com/img/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="https://images.patolojiatlasi.com/img/favicon-16x16.png">
     <link rel="manifest" href="https://images.patolojiatlasi.com/img/site.webmanifest">
     <link rel="icon" href="https://images.patolojiatlasi.com/img/favicon.ico" type="image/x-icon" />
 
-    <!-- Custom styles -->
+
+    <script src="https://images.patolojiatlasi.com/openseadragon/openseadragon.min.js"></script>
+    <script src="./openseadragon/openseadragon.min.js"></script>
+
+    <!-- <script src="openseadragon/openseadragon-scalebar.js"></script> -->
+
+
+
+
+    <link rel="stylesheet" href="https://images.patolojiatlasi.com/annotorious/annotorious.min.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
     <style>
         .navigator .highlight {
             opacity: 0.4;
@@ -38,15 +52,22 @@
 </head>
 
 <body>
+    <div>
+        <button id="featureButton1">Feature Area 1</button>
+        <button id="featureButton2">Feature Area 2</button>
+        <button id="featureButton3">Feature Area 3</button>
+    </div>
+
+
+
     <div id="openseadragon2" style="width: 100%; height: 95%;"></div>
 
     <div id="example-tip" style="display:none;width:250px;background-color:#fff;">
-        <p>Pancreatic Acinar Metaplasia</p>
+        <p>Feature Area 1</p>
     </div>
 
-    <div>
-        <button id="pancreaticacinarmetaplasiaButton">Pancreatic Acinar Metaplasia</button>
-    </div>
+    <img id="right-arrow-overlay" src="http://upload.wikimedia.org/wikipedia/commons/7/7a/Red_Arrow_Right.svg"
+        alt="Right arrow" width="20">
 
     <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
@@ -58,9 +79,16 @@
             var viewer = OpenSeadragon({
                 id: 'openseadragon2',
                 prefixUrl: 'https://images.patolojiatlasi.com/openseadragon/images/',
+
+                showHomeControl: false,
+                showRotationControl: true,
+                showNavigator: true,
+                showFlipControl: true,
+                navigatorBackground: 'rgb(240, 240, 240)',
+
                 tileSources: [{
                     Image: {
-                        Url: './HE_files/', // name of image folder
+                        Url: './HE2_files/', // name of image folder
                         TileSize: '254', // see .dzi file
                         Overlap: '1', // see .dzi file
                         Format: 'jpeg', // see .dzi file
@@ -78,16 +106,106 @@
                         width: 0.10,
                         height: 0.08,
                         className: 'highlight'
+                    },
+                    {
+                        id: 'right-arrow-overlay',
+                        x: 0.7318,
+                        y: 0.1178,
+                        placement: 'RIGHT',
+                        checkResize: false
                     }]
                 }]
+
+                // ,
+                // tileSources: "yourwsi.dzi",
+                // sequenceMode: false,
+                // autoHideControls: true,
+                // animationTime: 1.0,
+                // blendTime: 0.6,
+                // constrainDuringPan: true,
+                // maxZoomPixelRatio: 1,
+                // visibilityRatio: 1,
+                // zoomPerScrolli: 1,
+                // defaultZoomLevel: 1,
+                // showReferenceStrip: true,
+                // showNavigator: true,
+                // showFullPageControl: false
+
             });
 
+            // https://github.com/usnistgov/OpenSeadragonScalebar
+            // viewer.scalebar({
+            //     minWidth: '100px',
+            //     pixelsPerMeter: '1.98255e+06',
+            //     fontFamily: 'Arial',
+            //     backgroundColor: 'rgba(255, 255, 255, 0.5)',
+            //     fontSize: 'small',
+            //     barThickness: '2',
+            //     xOffset: '10',
+            //     yOffset: '10'
+            // });
+
+
+            // Add a keydown event listener to the document
+            document.addEventListener("keydown", function (event) {
+
+
+                switch (event.keyCode) {
+                    case 90: // 'Z' key for zoom in
+                        viewer.viewport.zoomBy(1.2);
+                        viewer.viewport.applyConstraints();
+                        break;
+                    case 88: // 'X' key for zoom out
+                        viewer.viewport.zoomBy(0.8);
+                        viewer.viewport.applyConstraints();
+                        break;
+                    case 37: // Left arrow key
+                    case 65: // 'A' key
+                        viewer.viewport.panBy(new OpenSeadragon.Point(-0.05, 0));
+                        viewer.viewport.applyConstraints();
+                        break;
+                    case 38: // Up arrow key
+                    case 87: // 'W' key
+                        viewer.viewport.panBy(new OpenSeadragon.Point(0, -0.05));
+                        viewer.viewport.applyConstraints();
+                        break;
+                    case 39: // Right arrow key
+                    case 68: // 'D' key
+                        viewer.viewport.panBy(new OpenSeadragon.Point(0.05, 0));
+                        viewer.viewport.applyConstraints();
+                        break;
+                    case 40: // Down arrow key
+                    case 83: // 'S' key
+                        viewer.viewport.panBy(new OpenSeadragon.Point(0, 0.05));
+                        viewer.viewport.applyConstraints();
+                        break;
+                }
+
+
+
+
+
+                // // Check if the pressed key is 'Z' (key code 90) to zoom in
+                // if (event.keyCode === 90) {
+                //     // Zoom in
+                //     viewer.viewport.zoomBy(1.2);
+                //     viewer.viewport.applyConstraints();
+                // }
+                // // Check if the pressed key is 'X' (key code 88) to zoom out
+                // else if (event.keyCode === 88) {
+                //     // Zoom out
+                //     viewer.viewport.zoomBy(0.8);
+                //     viewer.viewport.applyConstraints();
+                // }
+            });
+
+            // Bind tooltip after OpenSeadragon has been initialized
             viewer.addHandler('open', function () {
                 bindtooltip();
             });
 
-            $('#pancreaticacinarmetaplasiaButton').click(function () {
-                var overlayCenter = new OpenSeadragon.Point(0.485, 0.63);
+            $('#featureButton1').click(function () {
+                var overlayCenter = new OpenSeadragon.Point(6800, 9000);
                 var zoomLevel = 4; // Adjust as necessary
 
                 if (viewer && viewer.viewport) {
@@ -96,20 +214,48 @@
                     viewer.viewport.panTo(imagePoint, true);
                 }
             });
+
+
+            $('#featureButton2').click(function () {
+                var overlayCenter = new OpenSeadragon.Point(6800, 9000);
+                var zoomLevel = 2; // Adjust as necessary
+
+                if (viewer && viewer.viewport) {
+                    var imagePoint = viewer.viewport.imageToViewportCoordinates(overlayCenter);
+                    viewer.viewport.zoomTo(zoomLevel);
+                    viewer.viewport.panTo(imagePoint, true);
+                }
+            });
+
+            $('#featureButton3').click(function () {
+                var overlayCenter = new OpenSeadragon.Point(10000, 1480);
+                var zoomLevel = 6; // Adjust as necessary
+
+                if (viewer && viewer.viewport) {
+                    var imagePoint = viewer.viewport.imageToViewportCoordinates(overlayCenter);
+                    viewer.viewport.zoomTo(zoomLevel);
+                    viewer.viewport.panTo(imagePoint, true);
+                }
+            });
+
+
+
+
+
         });
 
         function bindtooltip() {
             var tip = jQuery('#example-tip');
             jQuery("#example-overlay").hover(function (e) {
-                var mousex = e.pageX + 20; //Get X coordinates
-                var mousey = e.pageY + 20; //Get Y coordinates
-                var tipWidth = tip.width(); //Find width of tooltip
-                var tipHeight = tip.height(); //Find height of tooltip
+                var mousex = e.pageX + 20, //Get X coordinates
+                    mousey = e.pageY + 20, //Get Y coordinates
+                    tipWidth = tip.width(), //Find width of tooltip
+                    tipHeight = tip.height(), //Find height of tooltip
 
-                //Distance of element from the right edge of viewport
-                var tipVisX = $(window).width() - (mousex + tipWidth);
-                //Distance of element from the bottom of viewport
-                var tipVisY = $(window).height() - (mousey + tipHeight);
+                    //Distance of element from the right edge of viewport
+                    tipVisX = $(window).width() - (mousex + tipWidth),
+                    //Distance of element from the bottom of viewport
+                    tipVisY = $(window).height() - (mousey + tipHeight);
 
                 if (tipVisX < 20) { //If tooltip exceeds the X coordinate of viewport
                     mousex = e.pageX - tipWidth - 20;
