@@ -3,27 +3,32 @@
 <head>
     <title>TemplateEN templateTR</title>
     <meta name="keywords" content="TemplateEN, templateTR, patoloji, atlas, pathology, whole slide image">
-
     <meta name="description" content="TemplateEN templateTR">
-
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-
+    <!-- Favicon and touch icons -->
     <link rel="apple-touch-icon" sizes="180x180" href="https://images.patolojiatlasi.com/img/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="https://images.patolojiatlasi.com/img/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="https://images.patolojiatlasi.com/img/favicon-16x16.png">
     <link rel="manifest" href="https://images.patolojiatlasi.com/img/site.webmanifest">
     <link rel="icon" href="https://images.patolojiatlasi.com/img/favicon.ico" type="image/x-icon" />
 
-
+    <!-- OpenSeadragon -->
     <script src="https://images.patolojiatlasi.com/openseadragon/openseadragon.min.js"></script>
     <script src="./openseadragon/openseadragon.min.js"></script>
 
+    <!-- Fabric.js -->
+    <script src="https://cdn.jsdelivr.net/npm/fabric"></script>
+    <script src="./fabricjs/fabric.js"></script>
+
+    <!-- OpenSeadragonFabricjsOverlay plugin -->
+    <script src="./fabricjs/fabric.adapted.js"></script>
+    <script src="./fabricjs/openseadragon-fabricjs-overlay.js"></script>
+
+
+
     <!-- <script src="openseadragon/openseadragon-scalebar.js"></script> -->
-
-
-
 
     <link rel="stylesheet" href="https://images.patolojiatlasi.com/annotorious/annotorious.min.css">
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
@@ -71,8 +76,8 @@
 
     <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
-    <script src="https://images.patolojiatlasi.com/openseadragon/openseadragon.min.js"></script>
-    <script src="https://images.patolojiatlasi.com/annotorious/openseadragon-annotorious.min.js"></script>
+    <!-- <script src="https://images.patolojiatlasi.com/openseadragon/openseadragon.min.js"></script> -->
+    <!-- <script src="https://images.patolojiatlasi.com/annotorious/openseadragon-annotorious.min.js"></script> -->
 
     <script type="text/javascript">
         $(document).ready(function () {
@@ -132,6 +137,22 @@
                 // showFullPageControl: false
 
             });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
             // https://github.com/usnistgov/OpenSeadragonScalebar
             // viewer.scalebar({
@@ -202,6 +223,22 @@
             // Bind tooltip after OpenSeadragon has been initialized
             viewer.addHandler('open', function () {
                 bindtooltip();
+
+                var overlay = viewer.fabricjsOverlay();
+
+                var rect = new fabric.Rect({
+                    left: 100,   // Adjust these values
+                    top: 100,    // Adjust these values
+                    fill: 'red',
+                    width: 200,
+                    height: 100
+                });
+
+                overlay.fabricCanvas().add(rect);
+
+
+
+
             });
 
             $('#featureButton1').click(function () {
@@ -214,7 +251,6 @@
                     viewer.viewport.panTo(imagePoint, true);
                 }
             });
-
 
             $('#featureButton2').click(function () {
                 var overlayCenter = new OpenSeadragon.Point(6800, 9000);
@@ -237,7 +273,6 @@
                     viewer.viewport.panTo(imagePoint, true);
                 }
             });
-
 
 
 
@@ -268,6 +303,11 @@
                 tip.hide(); //Hide tooltip
             });
         }
+
+
+
+
+
     </script>
 </body>
 
