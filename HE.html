@@ -98,18 +98,39 @@
 
     // Add a keydown event listener to the document
     document.addEventListener("keydown", function (event) {
-      // Check if the pressed key is 'Z' (key code 90) to zoom in
-      if (event.keyCode === 90) {
-        // Zoom in
-        viewer.viewport.zoomBy(1.2);
-      }
-      // Check if the pressed key is 'X' (key code 88) to zoom out
-      else if (event.keyCode === 88) {
-        // Zoom out
-        viewer.viewport.zoomBy(0.8);
+
+
+      switch (event.keyCode) {
+        case 90: // 'Z' key for zoom in
+          viewer.viewport.zoomBy(1.2);
+          viewer.viewport.applyConstraints();
+          break;
+        case 88: // 'X' key for zoom out
+          viewer.viewport.zoomBy(0.8);
+          viewer.viewport.applyConstraints();
+          break;
+        case 37: // Left arrow key
+        case 65: // 'A' key
+          viewer.viewport.panBy(new OpenSeadragon.Point(-0.05, 0));
+          viewer.viewport.applyConstraints();
+          break;
+        case 38: // Up arrow key
+        case 87: // 'W' key
+          viewer.viewport.panBy(new OpenSeadragon.Point(0, -0.05));
+          viewer.viewport.applyConstraints();
+          break;
+        case 39: // Right arrow key
+        case 68: // 'D' key
+          viewer.viewport.panBy(new OpenSeadragon.Point(0.05, 0));
+          viewer.viewport.applyConstraints();
+          break;
+        case 40: // Down arrow key
+        case 83: // 'S' key
+          viewer.viewport.panBy(new OpenSeadragon.Point(0, 0.05));
+          viewer.viewport.applyConstraints();
+          break;
       }
     });
-
 
 
   </script>

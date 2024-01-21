@@ -18,16 +18,6 @@
     <script src="https://images.patolojiatlasi.com/openseadragon/openseadragon.min.js"></script>
     <script src="./openseadragon/openseadragon.min.js"></script>
 
-    <!-- Fabric.js -->
-    <script src="https://cdn.jsdelivr.net/npm/fabric"></script>
-    <script src="./fabricjs/fabric.js"></script>
-
-    <!-- OpenSeadragonFabricjsOverlay plugin -->
-    <script src="./fabricjs/fabric.adapted.js"></script>
-    <script src="./fabricjs/openseadragon-fabricjs-overlay.js"></script>
-
-
-
     <!-- <script src="openseadragon/openseadragon-scalebar.js"></script> -->
 
     <link rel="stylesheet" href="https://images.patolojiatlasi.com/annotorious/annotorious.min.css">
@@ -62,8 +52,6 @@
         <button id="featureButton2">Feature Area 2</button>
         <button id="featureButton3">Feature Area 3</button>
     </div>
-
-
 
     <div id="openseadragon2" style="width: 100%; height: 95%;"></div>
 
@@ -139,21 +127,6 @@
             });
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             // https://github.com/usnistgov/OpenSeadragonScalebar
             // viewer.scalebar({
             //     minWidth: '100px',
@@ -201,23 +174,6 @@
                         viewer.viewport.applyConstraints();
                         break;
                 }
-
-
-
-
-
-                // // Check if the pressed key is 'Z' (key code 90) to zoom in
-                // if (event.keyCode === 90) {
-                //     // Zoom in
-                //     viewer.viewport.zoomBy(1.2);
-                //     viewer.viewport.applyConstraints();
-                // }
-                // // Check if the pressed key is 'X' (key code 88) to zoom out
-                // else if (event.keyCode === 88) {
-                //     // Zoom out
-                //     viewer.viewport.zoomBy(0.8);
-                //     viewer.viewport.applyConstraints();
-                // }
             });
 
             // Bind tooltip after OpenSeadragon has been initialized
@@ -303,9 +259,6 @@
                 tip.hide(); //Hide tooltip
             });
         }
-
-
-
 
 
     </script>
