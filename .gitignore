@@ -8,3 +8,4 @@ HE4.html
 renv.lock
 renv/activate.R
 HE2_files
+.DS_Store
