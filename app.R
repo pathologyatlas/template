@@ -4,7 +4,30 @@ library(whisker)
 
 source("./generate_qmd.R")
 
+# UI definition
 ui <- fluidPage(
+  # Include ShinyJS for running JavaScript
+  shinyjs::useShinyjs(),
+
+  # Include custom JavaScript for text selection
+  tags$head(
+    tags$script(HTML("
+            function selectText(elementId) {
+                var container = document.getElementById(elementId);
+                if (container) {
+                    var textElement = container.getElementsByTagName('pre')[0];
+                    if (textElement) {
+                        var range = document.createRange();
+                        range.selectNodeContents(textElement);
+                        var sel = window.getSelection();
+                        sel.removeAllRanges();
+                        sel.addRange(range);
+                    }
+                }
+            }
+        "))
+  ),
+
   titlePanel("Template Generator - Generate .qmd File"),
 
   sidebarLayout(
@@ -20,17 +43,21 @@ ui <- fluidPage(
       actionButton("generate", "Generate qmd"),
       downloadButton('downloadFile', 'Download newfile.qmd')
     ),
-
     mainPanel(
       h4("QMD Text:"),
-      verbatimTextOutput("qmdtext"),
+      actionButton("select_qmd", "Select QMD Text"),
+      div(id = "qmdtext-container", verbatimTextOutput("qmdtext")),
       h4("README Text:"),
-      verbatimTextOutput("readmetext"),
+      actionButton("select_readme", "Select README Text"),
+      div(id = "readmetext-container", verbatimTextOutput("readmetext")),
       textOutput("fileWriteStatus")
     )
   )
-)
 
+  )
+
+
+# Server function definition
 server <- function(input, output) {
   qmd_data <- eventReactive(input$generate, {
     stain <- strsplit(input$stain, ",")[[1]]
@@ -69,13 +96,10 @@ server <- function(input, output) {
     )
   })
 
-
   output$readmetext <- renderText({
     req(readme_data())
     readme_data()
   })
-
-
 
   output$downloadFile <- downloadHandler(
     filename = function() {
@@ -90,6 +114,21 @@ server <- function(input, output) {
   observeEvent(input$generate, {
     output$fileWriteStatus <- renderText("File written successfully.")
   })
+
+
+
+
+  # JavaScript actions for the selection buttons
+  observeEvent(input$select_qmd, {
+    shinyjs::runjs('selectText("qmdtext-container")')
+  })
+  observeEvent(input$select_readme, {
+    shinyjs::runjs('selectText("readmetext-container")')
+  })
+
+
+
 }
 
+# Run the Shiny app
 shinyApp(ui, server)
