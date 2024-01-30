@@ -1,3 +1,23 @@
+---
+title: "template"
+author: Serdar Balcı
+format:
+  gfm:
+    preview-mode: raw
+date: last-modified 
+toc: true
+keep-yaml: true
+keep-md: true
+editor: visual
+bibliography: references.bib
+reference-location: document
+shift-heading-level-by: 1
+citation:
+  type: book
+  container-title: "Patoloji Atlası"
+#  doi: 
+---
+
 # template
 
 **template for pathology atlas repositories**

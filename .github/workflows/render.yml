@@ -1,0 +1,563 @@
+name: Quarto Render Chapter for Histopathology Atlas (Patoloji Atlası)
+
+# on:
+  # workflow_dispatch:
+  # push:
+
+jobs:
+  quarto-render-and-deploy:
+    if: "!contains(github.event.head_commit.message, 'WIP') && !contains(github.event.head_commit.message, 'merge') && !contains(github.event.head_commit.message, 'lecture')"
+    runs-on: ubuntu-latest
+    # continue-on-error: true
+    env:
+      RENV_PATHS_ROOT: ~/.local/share/renv
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+
+    steps:
+      - name: "actions checkout"
+        uses: actions/checkout@v3
+
+      # - name: "Setup pandoc"
+      #   uses: r-lib/actions/setup-pandoc@v2
+
+      - name: Install VIPS
+        run: sudo apt-get install -y libvips-tools
+
+      - name: Convert Images
+        run: |
+          for file in ./screenshots/*.png; do vips copy "$file" "${file%.png}.jpg"; done
+
+      - name: Set up Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+        # with:
+          # To install LaTeX to build PDF book
+          # tinytex: true
+          # uncomment below and fill to pin a version
+          #version: 1.3.353
+
+      # - uses: r-lib/actions/setup-tinytex@v2
+      # - run: tlmgr --version
+
+      # - name: Install additional LaTeX packages
+      #   run: |
+      #     tlmgr install titlesec
+      #     tlmgr install svg
+      #     tlmgr install transparent
+      #     tlmgr install tikzfill
+      #     tlmgr install sidenotes
+      #     tlmgr install marginnote
+      #     tlmgr install changepage
+      #     tlmgr list --only-installed
+
+
+      # - uses: actions/setup-python@v2
+      #
+      # - name: "Install Python deps"
+      #   run: |
+      #     pip install -r requirements.txt
+
+
+      # - name: "Install curl for Bioconductor"
+      #   run: |
+      #     sudo apt-get install libcurl4-openssl-dev
+      #     # sudo apt -y install libcurl4-openssl-dev
+      #
+
+      # - name: Setup R
+      #   uses: r-lib/actions/setup-r@v2
+
+      # - name: Setup renv
+      #   uses: r-lib/actions/setup-renv@v2
+
+      # - name: Publish to GitHub Pages (and render)
+      #   uses: quarto-dev/quarto-actions/publish@v2
+      #   with:
+      #     target: gh-pages
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # this secret is always available for github actions
+
+      # - uses: r-lib/actions/setup-r-dependencies@v2
+
+      # - name: Restore R package cache
+      #   uses: actions/cache@v3
+      #   with:
+      #     path: ${{ env.R_LIBS_USER }}
+      #     key: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-${{ hashFiles('.github/depends.Rds') }}
+      #     restore-keys: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-
+
+#
+#       - name: "Install R Packages: Cache packages"
+      #   uses: actions/cache@v3
+      #   with:
+      #     path: ${{ env.RENV_PATHS_ROOT }}
+      #     key: ${{ runner.os }}-renv-${{ hashFiles('**/renv.lock') }}
+      #     restore-keys: |
+      #       ${{ runner.os }}-renv-
+
+
+      # - name: Install R dependencies
+      #   run: |
+      #       if (!requireNamespace("remotes", quietly = TRUE)) {install.packages("remotes", dependencies = TRUE, quiet = TRUE, verbose = FALSE)}
+      #       remotes::install_deps(dependencies = TRUE)
+      #       if (!requireNamespace("renv", quietly = TRUE)) install.packages("renv", dependencies = TRUE, quiet = TRUE, verbose = FALSE)
+      #       renv::restore()
+      #       if (!requireNamespace("fs", quietly = TRUE)) install.packages("fs", dependencies = TRUE, quiet = TRUE, verbose = FALSE)
+      #       if (!requireNamespace("quarto", quietly = TRUE)) install.packages("quarto", dependencies = TRUE, quiet = TRUE, verbose = FALSE)
+      #       if (!requireNamespace("xfun", quietly = TRUE)) {install.packages("xfun", dependencies = TRUE, quiet = TRUE, verbose = FALSE)}
+      #       if (!requireNamespace("readxl", quietly = TRUE)) {install.packages("readxl", dependencies = TRUE, quiet = TRUE, verbose = FALSE)}
+      #       if (!requireNamespace("tinytex", quietly = TRUE)) {install.packages("tinytex, dependencies = TRUE, quiet = TRUE, verbose = FALSE")}
+      #       if (!tinytex::is_tinytex()) {tinytex::install_tinytex()}
+      #       saveRDS(remotes::dev_package_deps(dependencies = TRUE), ".github/depends.Rds", version = 2)
+      #       writeLines(sprintf("R-%i.%i", getRversion()$major, getRversion()$minor), ".github/R-version")
+      #   shell: Rscript {0}
+
+
+      # - name: "Install R Packages: Restore packages"
+      #   shell: Rscript {0}
+      #   run: |
+      #     if (!requireNamespace("quarto", quietly = TRUE)) {install.packages("quarto")}
+      #     if (!requireNamespace("fs", quietly = TRUE)) {install.packages("fs")}
+      #     if (!requireNamespace("renv", quietly = TRUE)) install.packages("renv")
+      #     renv::restore()
+
+
+      # - name: "Setup Quarto"
+      #   uses: quarto-dev/quarto-actions/setup@v2
+
+      # - name: "Render Quarto"
+      #   uses: quarto-dev/quarto-actions/render@v2
+
+      # - name: "Install Quarto"
+      #   # uses: pathologyatlas/quarto-render@main
+      #   # uses: pommevilla/quarto-render@main
+      #   uses: quarto-dev/quarto-actions/install-quarto@v1
+
+
+      # - name: "Render Quarto"
+      #   uses: quarto-dev/quarto-actions/render@v2
+
+
+      # - name: "Prepare Render"
+      #   shell: Rscript {0}
+      #   run: |
+      #     folders_to_delete <- fs::dir_ls(path = ".", recurse = FALSE, regexp = "_files$")
+      #     fs::dir_delete(folders_to_delete)
+      #     if (dir.exists(paths = "./gitlab_atlas/gitlab_atlas")) { fs::dir_delete(path = "./gitlab_atlas/gitlab_atlas") }
+      #     if (dir.exists(paths = "./EN")) { fs::dir_delete(path = "./EN") }
+      #     if (dir.exists(paths = "./docs")) { fs::dir_delete(path = "./docs") }
+      #     if (dir.exists(paths = "./public")) { fs::dir_delete(path = "./public") }
+      #     if (dir.exists(paths = "./_freeze")) { fs::dir_delete(path = "./_freeze") }
+
+      # - name: "Prepare Render EN"
+      #   shell: Rscript {0}
+      #   run: |
+      #     # prepare EN
+      #     if (dir.exists(paths = "./_freeze_EN")) { fs::dir_copy(path = "./_freeze_EN", new_path = "./_freeze", overwrite = TRUE) }
+      #     fs::file_copy(path = "./_quarto_EN.yml", new_path = "./_quarto.yml", overwrite = TRUE)
+      #     fs::file_copy(path = "./R/languageEN.R", new_path = "./R/language.R",overwrite = TRUE)
+      #     # EN qmd
+      #     patolojiatlasi_histopathologyatlas <- readxl::read_excel("./patolojiatlasi_histopathologyatlas.xlsx", sheet = "chapters")
+      #     patolojiatlasi_histopathologyatlas <- patolojiatlasi_histopathologyatlas[, c("TR_chapter_qmd", "EN_chapter_qmd")]
+      #     TR_chapter_qmd <- paste0("./", patolojiatlasi_histopathologyatlas$TR_chapter_qmd, ".qmd")
+      #     EN_chapter_qmd <- paste0("./", patolojiatlasi_histopathologyatlas$EN_chapter_qmd, ".qmd")
+      #     subchapter_files <- list.files(path = "./_subchapters", pattern = "*.qmd", recursive = FALSE)
+      #     subchapter_files  <- paste0("./_subchapters/", subchapter_files)
+      #     subchapter_files_EN <- gsub(pattern = ".qmd", replacement = "_EN.qmd", x = subchapter_files)
+      #     TR_chapter_qmd <- c(TR_chapter_qmd, subchapter_files)
+      #     EN_chapter_qmd <- c(EN_chapter_qmd, subchapter_files_EN)
+      #     fs::file_copy(path = TR_chapter_qmd, new_path = EN_chapter_qmd, overwrite = TRUE)
+      #     xfun::gsub_files(files = EN_chapter_qmd, pattern = ".qmd >}}", replacement = "_EN.qmd >}}")
+
+      - name: "Render Book EN"
+        shell: Rscript {0}
+        run: |
+          # Render EN
+          quarto::quarto_render(".", as_job = FALSE)
+
+#      - name: "render EN"
+#        run: |
+#          quarto render
+
+      # - name: "Post Render Book From EN"
+      #   shell: Rscript {0}
+      #   run: |
+      #     # remove unnecessary files and folders
+      #     if (dir.exists(paths = "./_freeze")) { fs::dir_copy(path = "./_freeze", new_path = "./_freeze_EN", overwrite = TRUE) }
+      #     if (file.exists("./_EN/CNAME")){fs::file_delete(path = "./_EN/CNAME")}
+      #     fs::file_copy(path = "./CNAME-histopathologyatlas", new_path = "./_EN/CNAME", overwrite = TRUE)
+      #     if (dir.exists(paths = "./_EN/public")) { fs::dir_delete(path = "./_EN/public") }
+      #     if (dir.exists(paths = "./_EN/docs")) { fs::dir_delete(path = "./_EN/docs") }
+      #     if (dir.exists(paths = "./_EN/gitlab_atlas")) { fs::dir_delete(path = "./_EN/gitlab_atlas") }
+      #     if (dir.exists(paths = "./_EN/docs")) { fs::dir_delete(path = "./_EN/docs") }
+      #     if (dir.exists(paths = "./_freeze")) { fs::dir_delete(path = "./_freeze") }
+      #     # files to delete and revert
+      #     patolojiatlasi_histopathologyatlas <- readxl::read_excel("./patolojiatlasi_histopathologyatlas.xlsx", sheet = "chapters")
+      #     patolojiatlasi_histopathologyatlas <- patolojiatlasi_histopathologyatlas[, c("TR_chapter_qmd", "EN_chapter_qmd")]
+      #     TR_chapter_qmd <- paste0("./", patolojiatlasi_histopathologyatlas$TR_chapter_qmd, ".qmd")
+      #     EN_chapter_qmd <- paste0("./", patolojiatlasi_histopathologyatlas$EN_chapter_qmd, ".qmd")
+      #     subchapter_files <- list.files(path = "./_subchapters", pattern = "*.qmd", recursive = FALSE)
+      #     subchapter_files  <- paste0("./_subchapters/", subchapter_files)
+      #     subchapter_files_EN <- gsub(pattern = ".qmd", replacement = "_EN.qmd", x = subchapter_files)
+      #     TR_chapter_qmd <- c(TR_chapter_qmd, subchapter_files)
+      #     EN_chapter_qmd <- c(EN_chapter_qmd, subchapter_files_EN)
+      #     files_to_revert <- EN_chapter_qmd[EN_chapter_qmd %in% TR_chapter_qmd]
+      #     xfun::gsub_files(files = files_to_revert, pattern = "_EN.qmd >}}", replacement = ".qmd >}}")
+      #     files_to_delete <- list.files(path = "./", pattern = "_EN.qmd", recursive = FALSE)
+      #     fs::file_delete(path = files_to_delete)
+      #     files_to_delete <- list.files(path = "./_subchapters", pattern = "_EN.qmd", recursive = FALSE)
+      #     files_to_delete  <- paste0("./_subchapters/", files_to_delete)
+      #     fs::file_delete(path = files_to_delete)
+
+      # - name: "Render Book From TR"
+      #   shell: Rscript {0}
+      #   run: |
+      #     # prepare TR
+      #     fs::file_copy(path = "./_quarto_TR.yml", new_path = "./_quarto.yml", overwrite = TRUE)
+      #     fs::file_copy(path = "./R/languageTR.R", new_path = "./R/language.R", overwrite = TRUE)
+      #     if (dir.exists(paths = "./_freeze")) { fs::dir_delete(path = "./_freeze") }
+      #     if (dir.exists(paths = "./_freeze_TR")) { fs::dir_copy(path = "./_freeze_TR", new_path = "./_freeze", overwrite = TRUE) }
+      #     if (dir.exists(paths = "./docs")) { fs::dir_delete(path = "./docs") }
+      #     if (dir.exists(paths = "./gitlab_atlas/gitlab_atlas")) { fs::dir_delete(path = "./gitlab_atlas/gitlab_atlas") }
+      #     # render TR
+      #     quarto::quarto_render(".", as_job = FALSE)
+      #     # post render TR
+      #     if (dir.exists(paths = "./_freeze")) { fs::dir_copy(path = "./_freeze", new_path = "./_freeze_TR", overwrite = TRUE) }
+      #     if (dir.exists(paths = "./_freeze")) { fs::dir_delete(path = "./_freeze") }
+      #     if (dir.exists(paths = "./_docs/public")) { fs::dir_delete(path = "./_docs/public") }
+      #     if (dir.exists(paths = "./_docs/_public")) { fs::dir_delete(path = "./_docs/_public") }
+      #     if (dir.exists(paths = "./_docs/EN")) { fs::dir_delete(path = "./_docs/EN") }
+      #     if (dir.exists(paths = "./_docs/_EN")) { fs::dir_delete(path = "./_docs/_EN") }
+      #     if (dir.exists(paths = "./_docs/_lecture-notes")) { fs::dir_delete(path = "./_docs/_lecture-notes") }
+      #     if (dir.exists(paths = "./_docs/lecture-notes")) { fs::dir_delete(path = "./_docs/lecture-notes") }
+      #     if (dir.exists(paths = "./_docs/gitlab_atlas")) { fs::dir_delete(path = "./_docs/gitlab_atlas") }
+      #     folders_to_delete <- fs::dir_ls(path = "./_docs", recurse = FALSE, regexp = "_files$")
+      #     fs::dir_delete(folders_to_delete)
+      #     folders_to_delete <- fs::dir_ls(path = "./_docs", recurse = FALSE, regexp = "_pdf_")
+      #     fs::dir_delete(folders_to_delete)
+      #     folders_to_delete <- fs::dir_ls(path = "./_docs", recurse = FALSE, regexp = "_epub_")
+      #     fs::dir_delete(folders_to_delete)
+      #     folders_to_delete <- fs::dir_ls(path = "./_docs", recurse = FALSE, regexp = "_freeze")
+      #     fs::dir_delete(folders_to_delete)
+      #     fs::dir_copy(path = "./_docs", new_path = "./public", overwrite = TRUE)
+      #     if (file.exists("./public/CNAME")){ fs::file_delete(path = "./public/CNAME") }
+      #     fs::dir_copy(path = "./_docs", new_path = "./gitlab_atlas/public", overwrite = TRUE)
+      #     fs::dir_copy(path = "./_docs", new_path = "./docs", overwrite = TRUE)
+      #     if (dir.exists(paths = "./_docs")) { fs::dir_delete(path = "./_docs") }
+      #     if (dir.exists(paths = "./_EN")) { fs::dir_copy(path = "./_EN", new_path = "./EN", overwrite = TRUE) }
+      #     if (dir.exists(paths = "./_EN")) { fs::dir_delete(path = "./_EN") }
+      #     folders_to_delete <- fs::dir_ls(path = ".", recurse = FALSE, regexp = "_files$")
+      #     fs::dir_delete(folders_to_delete)
+      #     if (file.exists("./gitlab_atlas/public/CNAME")){fs::file_delete(path = "./gitlab_atlas/public/CNAME")}
+      #     if (dir.exists(paths = "./docs/EN/lecture-notes")) { fs::dir_delete(path = "./docs/EN/lecture-notes") }
+      #     if (dir.exists(paths = "./docs/EN")) { fs::dir_delete(path = "./docs/EN") }
+      #     if (dir.exists(paths = "./docs/public")) {fs::dir_delete(path = "./docs/public")}
+      #     if (dir.exists(paths = "./docs/gitlab_atlas")) {fs::dir_delete(path = "./docs/gitlab_atlas")}
+      #     folders_to_delete <- fs::dir_ls(path = "./EN", recurse = FALSE, regexp = "_freeze")
+      #     fs::dir_delete(folders_to_delete)
+      #     folders_to_delete <- fs::dir_ls(path = "./docs", recurse = FALSE, regexp = "_freeze")
+      #     fs::dir_delete(folders_to_delete)
+      #     if (dir.exists(paths = "./EN/docs")) {fs::dir_delete(path = "./EN/docs")}
+      #     if (dir.exists(paths = "./EN/_docs")) {fs::dir_delete(path = "./EN/_docs")}
+
+
+#      - name: "render TR"
+#        run: |
+#          quarto render
+
+#       - name: "Deploy to gh-pages"
+#         uses: peaceiris/actions-gh-pages@v3
+#         if: github.ref == 'refs/heads/main'
+#         with:
+#           github_token: ${{ secrets.GITHUB_TOKEN }}
+#           publish_dir: ./docs
+
+
+
+      - name: Commit results to main branch
+        run: |
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Actions"
+          git add .
+          git commit -m "CI added changes `date +'%Y-%m-%d %H:%M:%S'`" || echo "No changes to commit"
+          git push origin || echo "No changes to commit"
+      - name: Push changes # push the output folder to your repo
+        uses: ad-m/github-push-action@master
+        with:
+          branch: main
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          # WORKFLOW_GITHUB_TOKEN
+          force: true
+
+      # - name: Pushes to patolojiatlasi EN
+      #   uses: cpina/github-action-push-to-another-repository@main
+      #   env:
+      #     API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+      #   with:
+      #     source-directory: 'EN'
+      #     destination-github-username: 'patolojiatlasi'
+      #     destination-repository-name: 'EN'
+      #     user-email: drserdarbalci@gmail.com
+      #     target-branch: main
+
+
+
+      # - name: Pushes to histopathologyatlas
+      #   uses: cpina/github-action-push-to-another-repository@main
+      #   env:
+      #     API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+      #   with:
+      #     source-directory: 'EN'
+      #     destination-github-username: 'histopathologyatlas'
+      #     destination-repository-name: 'histopathologyatlas.github.io'
+      #     user-email: drserdarbalci@gmail.com
+      #     target-branch: main
+
+
+
+      # - name: Pushes to atlas
+      #   uses: cpina/github-action-push-to-another-repository@main
+      #   env:
+      #     API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+      #   with:
+      #      source-directory: 'gitlab_atlas'
+      #      destination-github-username: 'sbalci'
+      #      destination-repository-name: 'atlas'
+      #      user-email: drserdarbalci@gmail.com
+      #      target-branch: main
+
+      # - name: Pushes to pathologyatlas EN2
+      #   uses: cpina/github-action-push-to-another-repository@main
+      #   env:
+      #     API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+      #   with:
+      #     source-directory: 'EN'
+      #     destination-github-username: 'pathologyatlas'
+      #     destination-repository-name: 'EN2'
+      #     user-email: drserdarbalci@gmail.com
+      #     target-branch: main
+
+
+  # send-tweet:
+  #   if: "!contains(github.event.head_commit.message, 'WIP') && !contains(github.event.head_commit.message, 'merge')   && !contains(github.event.head_commit.message, 'notweet')"
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - name: "Tweet"
+  #       id: date
+  #       run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
+  #     - uses: ethomson/send-tweet-action@v1
+  #       with:
+  #         status: '#Patoloji atlası güncellendi ${{ steps.date.outputs.date }} ${{github.event.head_commit.message}}. #dijitalpatoloji #WSI #preparat #memorialpatoloji #memorialsaglik https://www.patolojiatlasi.com/'
+  #         consumer-key: ${{ secrets.API_KEY }}
+  #         consumer-secret: ${{ secrets.API_SECRET_KEY }}
+  #         access-token: ${{ secrets.ACCESS_TOKEN }}
+  #         access-token-secret: ${{ secrets.ACCESS_TOKEN_SECRET }}
+
+
+  # send-tweet-EN:
+  #   if: "!contains(github.event.head_commit.message, 'WIP') && !contains(github.event.head_commit.message, 'merge')  && !contains(github.event.head_commit.message, 'notweet')"
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - name: "Tweet-EN"
+  #       id: date
+  #       run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
+  #     - uses: ethomson/send-tweet-action@v1
+  #       with:
+  #         status: '#Pathology #atlas is updated ${{ steps.date.outputs.date }} ${{github.event.head_commit.message}}. #digitalpathology #WSI #slides https://www.patolojiatlasi.com/EN/'
+  #         consumer-key: ${{ secrets.API_KEY }}
+  #         consumer-secret: ${{ secrets.API_SECRET_KEY }}
+  #         access-token: ${{ secrets.ACCESS_TOKEN }}
+  #         access-token-secret: ${{ secrets.ACCESS_TOKEN_SECRET }}
+
+
+  # lecture-notes:
+  #   if: "contains(github.event.head_commit.message, 'lecture')"
+  #   needs: quarto-render-and-deploy
+  #   runs-on: ubuntu-latest
+  #   env:
+  #     RENV_PATHS_ROOT: ~/.local/share/renv
+  #     GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+  #   steps:
+  #     - name: "actions checkout"
+  #       uses: actions/checkout@v3
+  #
+  #     - name: "Setup Quarto"
+  #       uses: quarto-dev/quarto-actions/setup@v2
+  #
+  #     - name: "Install curl for Bioconductor"
+  #       run: |
+  #         sudo apt -y install libcurl4-openssl-dev
+  #
+  #     - uses: r-lib/actions/setup-r@v2
+  #
+  #     - uses: r-lib/actions/setup-renv@v2
+  #
+  #
+  #
+  #     - name: Restore R package cache
+  #       uses: actions/cache@v3
+  #       with:
+  #         path: ${{ env.R_LIBS_USER }}
+  #         key: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-${{ hashFiles('.github/depends.Rds') }}
+  #         restore-keys: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-
+  #
+  #
+  #     - name: Install R dependencies
+  #       run: |
+  #           if (!requireNamespace("remotes", quietly = TRUE)) {install.packages("remotes", dependencies = TRUE, quiet = TRUE, verbose = FALSE)}
+  #           remotes::install_deps(dependencies = TRUE)
+  #           if (!requireNamespace("renv", quietly = TRUE)) install.packages("renv", dependencies = TRUE, quiet = TRUE, verbose = FALSE)
+  #           renv::restore()
+  #           if (!requireNamespace("fs", quietly = TRUE)) install.packages("fs", dependencies = TRUE, quiet = TRUE, verbose = FALSE)
+  #           if (!requireNamespace("quarto", quietly = TRUE)) install.packages("quarto", dependencies = TRUE, quiet = TRUE, verbose = FALSE)
+  #           saveRDS(remotes::dev_package_deps(dependencies = TRUE), ".github/depends.Rds", version = 2)
+  #           writeLines(sprintf("R-%i.%i", getRversion()$major, getRversion()$minor), ".github/R-version")
+  #       shell: Rscript {0}
+  #
+  #
+  #     - name: "Render patoloji-ders-notlari"
+  #       shell: Rscript {0}
+  #       run: |
+  #         filestorender <- list.files(path = "./lecture-notes/", pattern = ".qmd", full.names = TRUE, recursive = TRUE)
+  #         purrr::map(.x = filestorender, .f= quarto::quarto_render)
+  #         # quarto::quarto_render(input = "./lecture-notes/*.qmd")
+  #
+  #
+  #     - name: Commit results to main branch
+  #       run: |
+  #         git config --local user.email "actions@github.com"
+  #         git config --local user.name "GitHub Actions"
+  #         git add .
+  #         git commit -m "CI added changes `date +'%Y-%m-%d %H:%M:%S'`" || echo "No changes to commit"
+  #         git push origin || echo "No changes to commit"
+  #
+  #     - name: Push changes # push the output folder to your repo
+  #       uses: ad-m/github-push-action@master
+  #       with:
+  #         branch: main
+  #         github_token: ${{ secrets.GITHUB_TOKEN }}
+  #         # WORKFLOW_GITHUB_TOKEN
+  #         force: true
+  #
+  #     - name: Pushes to patoloji-ders-notlari
+  #       uses: cpina/github-action-push-to-another-repository@main
+  #       env:
+  #         API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+  #       with:
+  #         source-directory: 'lecture-notes'
+  #         destination-github-username: 'sbalci'
+  #         destination-repository-name: 'patoloji-ders-notlari'
+  #         user-email: drserdarbalci@gmail.com
+  #         target-branch: main
+
+  # build-to-gitlab:
+  #   needs: quarto-render-and-deploy
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   - uses: actions/checkout@v3
+  #     with:
+  #       fetch-depth: 0
+  #   - name: Mirror + trigger CI
+  #     uses: SvanBoxel/gitlab-mirror-and-ci-action@master
+  #     with:
+  #       args: "https://gitlab.com/patolojiatlasi/tr"
+  #     env:
+  #       FORCE_PUSH: "true"
+  #       GITLAB_HOSTNAME: "gitlab.com"
+  #       GITLAB_USERNAME: "patolojiatlasi"
+  #       GITLAB_PASSWORD: ${{ secrets.GITLAB_PASSWORD }} # // Generate here: https://gitlab.com/profile/personal_access_tokens
+  #       GITLAB_PROJECT_ID: "36540563" # // https://gitlab.com/<namespace>/<repository>/edit
+  #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # // https://docs.github.com/en/actions/reference/authentication-in-a-workflow#about-the-github_token-secret
+
+
+  # push-to-gitlab:
+  #   needs: quarto-render-and-deploy
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   - name: Checkout repository
+  #     uses: actions/checkout@v3
+  #     with:
+  #       lfs: true
+  #
+  #
+  #   - name: Setup Git LFS
+  #     run: |
+  #       sudo apt-get install git-lfs
+  #       git lfs install
+  #
+  #   - name: Push LFS objects to GitLab
+  #     run: |
+  #       git lfs push --all "https://oauth2:${{ secrets.GITLAB_PASSWORD }}@gitlab.com/patolojiatlasi/patolojiatlasi.gitlab.io.git"
+  #
+  #
+  #
+  #   - name: Push to GitLab
+  #     run: |
+  #       git config --global user.name "GitHub Action"
+  #       git config --global user.email "action@github.com"
+  #       git remote add gitlab "https://oauth2:${{ secrets.GITLAB_PASSWORD }}@gitlab.com/patolojiatlasi/patolojiatlasi.gitlab.io.git"
+  #       git fetch --unshallow
+  #       git push --force gitlab main --no-tags
+
+
+#
+  # build-to-gitlab2:
+  #   needs: quarto-render-and-deploy
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   - uses: actions/checkout@v1
+  #   - name: Mirror + trigger CI
+  #     uses: SvanBoxel/gitlab-mirror-and-ci-action@master
+  #     with:
+  #       args: "https://gitlab.com/patolojiatlasi/patolojiatlasi.gitlab.io"
+  #     env:
+  #       FORCE_PUSH: "true"
+  #       GITLAB_HOSTNAME: "gitlab.com"
+  #       GITLAB_USERNAME: "PatolojiAtlasi"
+  #       GITLAB_PASSWORD: ${{ secrets.GITLAB_PASSWORD }} # // Generate here: https://gitlab.com/profile/personal_access_tokens
+  #       GITLAB_PROJECT_ID: "48371083" # // https://gitlab.com/<namespace>/<repository>/edit
+  #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # // https://docs.github.com/en/actions/reference/authentication-in-a-workflow#about-the-github_token-secret
+
+
+
+
+  # build-to-gitlab3:
+  #   needs: quarto-render-and-deploy
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   - uses: actions/checkout@v1
+  #   - name: Mirror + trigger CI
+  #     uses: SvanBoxel/gitlab-mirror-and-ci-action@master
+  #     with:
+  #       args: "https://gitlab.com/patolojiatlasi/patolojiatlasi2"
+  #     env:
+  #       FORCE_PUSH: "true"
+  #       GITLAB_HOSTNAME: "gitlab.com"
+  #       GITLAB_USERNAME: "PatolojiAtlasi"
+  #       GITLAB_PASSWORD: ${{ secrets.GITLAB_PASSWORD }} # // Generate here: https://gitlab.com/profile/personal_access_tokens
+  #       GITLAB_PROJECT_ID: "48375788" # // https://gitlab.com/<namespace>/<repository>/edit
+  #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # // https://docs.github.com/en/actions/reference/authentication-in-a-workflow#about-the-github_token-secret
+
+
+
+
+  # quartopub:
+  #   needs: quarto-render-and-deploy
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Check out repository
+  #       uses: actions/checkout@v3
+  #
+  #     - name: Set up Quarto
+  #       uses: quarto-dev/quarto-actions/setup@v2
+  #
+  #     - name: Render and Publish
+  #       uses: quarto-dev/quarto-actions/publish@v2
+  #       with:
+  #         target: quarto-pub
+  #         path: docs
+  #         render: false
+  #         QUARTO_PUB_AUTH_TOKEN: ${{ secrets.QUARTO_PUB_AUTH_TOKEN }}
+  #         GITHUB_EMAIL: drserdarbalci@gmail.com
+  #         GITHUB_USERNAME: sbalci

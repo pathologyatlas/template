@@ -1,0 +1,14 @@
+project:
+  title: "template for Histopathology Atlas (Patoloji Atlası)"
+
+editor: visual
+
+execute:
+  freeze: false
+
+format:
+  gfm:
+    preview-mode: raw
+#  pdf: default
+#  epub: default
+  html: default
