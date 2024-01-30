@@ -1,0 +1,91 @@
+<html> <!-- do not use <!DOCTYPE html> -->
+
+<head>
+
+    <title>multiple images</title>
+
+    <script src="https://images.patolojiatlasi.com/openseadragon/openseadragon.min.js"></script>
+    <script src="./openseadragon/openseadragon.min.js"></script>
+
+</head>
+
+<body>
+
+    <div id="openseadragon1" style="width: 100%; height: 95%;"></div>
+
+
+    <script type="text/javascript">
+
+        var viewer = OpenSeadragon({
+            id: "openseadragon1",
+            prefixUrl: "https://openseadragon.github.io/openseadragon/images/",
+            tileSources: [
+                {
+                    Image: {
+                        Url: './HE_files/',
+                        TileSize: '254',
+                        Overlap: '1',
+                        Format: 'jpeg',
+                        ServerFormat: 'Default',
+                        xmlns: 'http://schemas.microsoft.com/deepzoom/2008',
+                        Size: {
+                            Width: '79923',
+                            Height: '42180'
+                        }
+                    },
+                    title: "Your notes for Image 1" // This is your note for the first image
+                },
+
+
+                {
+                    Image: {
+                        Url: './CD3_files/',
+                        TileSize: '254',
+                        Overlap: '1',
+                        Format: 'jpeg',
+                        ServerFormat: 'Default',
+                        xmlns: 'http://schemas.microsoft.com/deepzoom/2008',
+                        Size: {
+                            Width: '76638', // see .dzi file
+                            Height: '51504' // see .dzi file
+                        }
+                    }
+                },
+                {
+                    Image: {
+                        Url: './CD8_files/', // name of image folder
+                        TileSize: '254', // see .dzi file
+                        Overlap: '1', // see .dzi file
+                        Format: 'jpeg', // see .dzi file
+                        ServerFormat: 'Default', // optional
+                        xmlns: 'http://schemas.microsoft.com/deepzoom/2008', // see .dzi file
+                        Size: {
+                            Width: '82344', // see .dzi file
+                            Height: '44080' // see .dzi file
+                        }
+                    }
+                },
+                {
+                    Image: {
+                        Url: './CD20_files/', // name of image folder
+                        TileSize: '254', // see .dzi file
+                        Overlap: '1', // see .dzi file
+                        Format: 'jpeg', // see .dzi file
+                        ServerFormat: 'Default', // optional
+                        xmlns: 'http://schemas.microsoft.com/deepzoom/2008', // see .dzi file
+                        Size: {
+                            Width: '83965', // see .dzi file
+                            Height: '41871' // see .dzi file
+                        }
+                    }
+                }
+                // Add other images as required
+            ],
+            sequenceMode: true,
+            showReferenceStrip: true
+        });
+
+    </script>
+</body>
+
+</html>
