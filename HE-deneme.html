@@ -1,0 +1,94 @@
+<html> <!-- do not use <!DOCTYPE html> -->
+
+<head>
+    <title>HE deneme</title>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="https://images.patolojiatlasi.com/img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://images.patolojiatlasi.com/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://images.patolojiatlasi.com/img/favicon-16x16.png">
+    <link rel="manifest" href="https://images.patolojiatlasi.com/img/site.webmanifest">
+    <link rel="icon" href="https://images.patolojiatlasi.com/img/favicon.ico" type="image/x-icon" />
+
+
+    <script src="https://images.patolojiatlasi.com/openseadragon/openseadragon.min.js"></script>
+    <script src="./openseadragon/openseadragon.min.js"></script>
+
+
+    <style>
+        .highlight {
+            background-color: rgba(255, 0, 0, 0.6);
+            /* Semi-transparent red */
+        }
+    </style>
+
+
+
+</head>
+
+<body>
+    <div>
+        <button id="toggle-overlay">Toggle Overlay</button>
+    </div>
+
+
+    <div id="openseadragon1" style="width: 100%; height: 95%;"></div>
+
+
+
+    <script type="text/javascript">
+        var viewer = OpenSeadragon({
+            id: 'openseadragon1',
+            //        prefixUrl: 'https://images.patolojiatlasi.com/openseadragon/images/',
+            prefixUrl: './openseadragon/images/',
+
+            showHomeControl: false,
+            showRotationControl: true,
+            showNavigator: true,
+            showFlipControl: true,
+            navigatorBackground: 'rgb(240, 240, 240)',
+
+
+            tileSources: {
+                Image: {
+                    Url: './HE2_files/', // name of image folder
+                    TileSize: '254', // see .dzi file
+                    Overlap: '1', // see .dzi file
+                    Format: 'jpeg', // see .dzi file
+                    ServerFormat: 'Default', // optional
+                    xmlns: 'http://schemas.microsoft.com/deepzoom/2008', // see .dzi file
+                    Size: {
+                        Width: '13198', // see .dzi file
+                        Height: '11685' // see .dzi file
+                    }
+                }
+            }
+
+
+        });
+
+
+        var overlayExists = false; // Changed variable name for clarity
+
+        document.querySelector('#toggle-overlay').addEventListener('click', function () {
+            if (overlayExists) {
+                viewer.removeOverlay("runtime-overlay");
+            } else {
+                var elt = document.createElement("div");
+                elt.id = "runtime-overlay";
+                elt.className = "highlight";
+                viewer.addOverlay({
+                    element: elt,
+                    location: new OpenSeadragon.Rect(0.1, 0.2, 0.3, 0.25)
+                });
+            }
+            overlayExists = !overlayExists; // Toggle the state
+        });
+
+
+
+
+
+    </script>
+</body>
+
+</html>
