@@ -22,6 +22,17 @@
 
     <link rel="stylesheet" href="https://images.patolojiatlasi.com/annotorious/annotorious.min.css">
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+
+
+
+
+    <!-- OpenSeadragon annotations -->
+    <script src="./openseadragon-annotations/dist/openseadragon-annotations.js"></script>
+
+
+
+
+
     <style>
         .navigator .highlight {
             opacity: 0.4;
@@ -64,8 +75,16 @@
         <button id="featureButton2">Feature Area 2</button>
         <button id="featureButton3">Feature Area 3</button>
         <button id="toggleButton">Toggle Overlay</button>
+        <button id="startDrawButton">Start Drawing</button>
+        <button id="cleanDrawButton">Clean Drawing</button>
+        <button id="stopDrawButton">Stop Drawing</button>
+
 
     </div>
+
+    <!-- <div>
+            <button id="toolbarDiv">toolbarDiv</button>
+    </div> -->
 
     <div id="openseadragon2" style="width: 100%; height: 95%;"></div>
 
@@ -92,6 +111,18 @@
                 showNavigator: true,
                 showFlipControl: true,
                 navigatorBackground: 'rgb(240, 240, 240)',
+
+                // https://openseadragon.github.io/examples/ui-toolbar/
+                // toolbar: "toolbarDiv",
+
+                // https://openseadragon.github.io/examples/ui-binding-custom-buttons/
+                // zoomInButton: "zoom-in",
+                // zoomOutButton: "zoom-out",
+                // homeButton: "home",
+                // fullPageButton: "full-page",
+                // nextButton: "next",
+                // previousButton: "previous",
+
 
                 tileSources: [{
                     Image: {
@@ -152,7 +183,6 @@
             //     xOffset: '10',
             //     yOffset: '10'
             // });
-
 
             // Add a keydown event listener to the document
             document.addEventListener("keydown", function (event) {
@@ -254,7 +284,7 @@
 
 
             $(document).ready(function () {
-                var overlayExists = false; // Move this outside the click handler
+                var overlayExists = false;  // State of the overlay
 
                 $('#toggleButton').click(function () {
                     if (overlayExists) {
@@ -271,6 +301,26 @@
                     overlayExists = !overlayExists; // Toggle the state
                 });
             });
+
+
+            $(document).ready(function () {
+                $('#startDrawButton').click(function () {
+                    viewer.initializeAnnotations(); // Initialize annotations
+                });
+            });
+
+            $(document).ready(function () {
+                $('#cleanDrawButton').click(function () {
+                    viewer.annotations.clean(); // Clean annotations
+                });
+            });
+
+            $(document).ready(function () {
+                $('#stopDrawButton').click(function () {
+                    viewer.shutdownAnnotations(); // Shutdown annotations
+                });
+            });
+
 
 
 
@@ -300,6 +350,7 @@
             }, function () {
                 tip.hide(); //Hide tooltip
             });
+
 
 
         }
