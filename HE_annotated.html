@@ -86,6 +86,8 @@
         <button id="startDrawButton">Start Drawing</button>
         <button id="cleanDrawButton">Clean Drawing</button>
         <button id="stopDrawButton">Stop Drawing</button>
+        <button id="toggleTracking">Toggle Tracking</button>
+
 
 
     </div>
@@ -380,6 +382,61 @@
                     viewer.shutdownAnnotations(); // Shutdown annotations
                 });
             });
+
+
+
+            $(document).ready(function () {
+                // https://codepen.io/imoskvin/pen/RaeWaL
+                // Initial state of the tracking
+                var isTrackingEnabled = false;
+
+                // Function to toggle tracking state
+                function toggleTracking() {
+                    isTrackingEnabled = !isTrackingEnabled;
+                }
+
+                // Button click event to toggle tracking
+                $('#toggleTracking').click(toggleTracking);
+
+                // Existing code
+                var containerSize;
+                var viewerBounds = new OpenSeadragon.Rect(0, 0, 0, 0);
+
+                function updateDimensions() {
+                    containerSize = viewer.viewport.getContainerSize();
+                    viewerBounds.width = containerSize.x;
+                    viewerBounds.height = containerSize.y;
+                }
+
+                updateDimensions();
+                $(window).resize(updateDimensions);
+
+                var tracker = new OpenSeadragon.MouseTracker({
+                    element: viewer.canvas,
+                    moveHandler: function (event) {
+                        // Check if tracking is enabled
+                        if (!isTrackingEnabled) {
+                            return;
+                        }
+
+                        // Existing moveHandler code
+                        var pixel = event.position;
+                        var xRatio = (pixel.x - viewerBounds.x) / viewerBounds.width;
+                        var yRatio = (pixel.y - viewerBounds.y) / viewerBounds.height;
+
+                        var viewportBounds = viewer.viewport.getBounds();
+                        var imageBounds = viewer.world.getItemAt(0).getBounds();
+
+                        var newBounds = viewportBounds.clone();
+                        newBounds.x = imageBounds.x + ((imageBounds.width - viewportBounds.width) * xRatio);
+                        newBounds.y = imageBounds.y + ((imageBounds.height - viewportBounds.height) * yRatio);
+                        viewer.viewport.fitBounds(newBounds, false);
+                    }
+                });
+            });
+
+
+
 
 
 

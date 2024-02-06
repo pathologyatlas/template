@@ -62,6 +62,7 @@
         <button id="featureButton2">Feature Area 2</button>
         <button id="featureButton3">Feature Area 3</button>
         <button id="toggleButton">Toggle Overlay</button>
+        <button id="toggleTracking">Toggle Tracking</button>
     </div>
 
     <div>
@@ -128,20 +129,23 @@
                     }]
                 }]
 
-                // ,
-                // tileSources: "yourwsi.dzi",
-                // sequenceMode: false,
-                // autoHideControls: true,
-                // animationTime: 1.0,
-                // blendTime: 0.6,
-                // constrainDuringPan: true,
-                // maxZoomPixelRatio: 1,
-                // visibilityRatio: 1,
-                // zoomPerScrolli: 1,
-                // defaultZoomLevel: 1,
-                // showReferenceStrip: true,
-                // showNavigator: true,
-                // showFullPageControl: false
+
+
+
+  // ,
+  // tileSources: "yourwsi.dzi",
+  // sequenceMode: false,
+  // autoHideControls: true,
+  // animationTime: 1.0,
+  // blendTime: 0.6,
+  // constrainDuringPan: true,
+  // maxZoomPixelRatio: 1,
+  // visibilityRatio: 1,
+  // zoomPerScrolli: 1,
+  // defaultZoomLevel: 1,
+  // showReferenceStrip: true,
+  // showNavigator: true,
+  // showFullPageControl: false
 
             });
 
@@ -181,34 +185,6 @@
 
 
 
-
-            $(document).mousedown(function (event) {
-                console.log("Mouse button pressed:", event.button);
-            });
-
-
-
-            var isShiftPanning = false;
-
-
-            viewer.addHandler('canvas-drag', function (event) {
-                if (isShiftPanning) {
-                    var delta = viewer.viewport.deltaPointsFromPixels(event.delta);
-                    viewer.viewport.panBy(delta);
-                }
-            });
-
-            // Listen for shift key press and release
-            $(document).keydown(function (event) {
-                if (event.shiftKey) {
-                    isShiftPanning = true;
-                }
-            }).keyup(function (event) {
-                isShiftPanning = false;
-            });
-
-
-
             // https://github.com/usnistgov/OpenSeadragonScalebar
             // viewer.scalebar({
             //     minWidth: '100px',
@@ -220,8 +196,6 @@
             //     xOffset: '10',
             //     yOffset: '10'
             // });
-
-
 
 
 
@@ -316,7 +290,6 @@
                 }
             });
 
-
             $('#rotation-slider').on('input', function () {
                 var rotationAngle = $(this).val();
                 viewer.viewport.setRotation(parseFloat(rotationAngle));
@@ -324,8 +297,7 @@
 
 
             $(document).ready(function () {
-                var overlayExists = false; // Move this outside the click handler
-
+                var overlayExists = false;
                 $('#toggleButton').click(function () {
                     if (overlayExists) {
                         viewer.removeOverlay("runtime-overlay");
@@ -341,6 +313,66 @@
                     overlayExists = !overlayExists; // Toggle the state
                 });
             });
+
+
+            $(document).ready(function () {
+                // Initial state of the tracking
+                var isTrackingEnabled = false;
+
+                // Function to toggle tracking state
+                function toggleTracking() {
+                    isTrackingEnabled = !isTrackingEnabled;
+                }
+
+                // Button click event to toggle tracking
+                $('#toggleTracking').click(toggleTracking);
+
+                // Existing code
+                var containerSize;
+                var viewerBounds = new OpenSeadragon.Rect(0, 0, 0, 0);
+
+                function updateDimensions() {
+                    containerSize = viewer.viewport.getContainerSize();
+                    viewerBounds.width = containerSize.x;
+                    viewerBounds.height = containerSize.y;
+                }
+
+                updateDimensions();
+                $(window).resize(updateDimensions);
+
+                var tracker = new OpenSeadragon.MouseTracker({
+                    element: viewer.canvas,
+                    moveHandler: function (event) {
+                        // Check if tracking is enabled
+                        if (!isTrackingEnabled) {
+                            return;
+                        }
+
+                        // Existing moveHandler code
+                        var pixel = event.position;
+                        var xRatio = (pixel.x - viewerBounds.x) / viewerBounds.width;
+                        var yRatio = (pixel.y - viewerBounds.y) / viewerBounds.height;
+
+                        var viewportBounds = viewer.viewport.getBounds();
+                        var imageBounds = viewer.world.getItemAt(0).getBounds();
+
+                        var newBounds = viewportBounds.clone();
+                        newBounds.x = imageBounds.x + ((imageBounds.width - viewportBounds.width) * xRatio);
+                        newBounds.y = imageBounds.y + ((imageBounds.height - viewportBounds.height) * yRatio);
+                        viewer.viewport.fitBounds(newBounds, false);
+                    }
+                });
+            });
+
+
+
+
+
+
+
+
+
+
 
 
 
