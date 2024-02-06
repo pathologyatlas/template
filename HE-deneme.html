@@ -8,14 +8,22 @@
     <!-- OpenSeadragon annotations -->
     <script src="./openseadragon-annotations/dist/openseadragon-annotations.js"></script>
 
-
+    <style>
+        .loading {
+            position: absolute;
+            left: 50px;
+            top: 50px;
+            font-size: 30px;
+            z-index: 10;
+        }
+    </style>
 
 </head>
 
 <body>
 
     <div id="openseadragon1" style="width: 100%; height: 95%;"></div>
-
+    <div class="loading">LOADING!</div>
 
 
     <script type="text/javascript">
@@ -44,6 +52,47 @@
         });
 
         viewer.initializeAnnotations();
+
+
+
+
+        function areAllFullyLoaded() {
+            var tiledImage;
+            var count = viewer.world.getItemCount();
+            for (var i = 0; i < count; i++) {
+                tiledImage = viewer.world.getItemAt(i);
+                if (!tiledImage.getFullyLoaded()) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        var isFullyLoaded = false;
+
+        function updateLoadingIndicator() {
+            // Note that this function gets called every time isFullyLoaded changes, which it will do as you 
+            // zoom and pan around. All we care about is the initial load, though, so we are just hiding the 
+            // loading indicator and not showing it again. 
+            if (isFullyLoaded) {
+                document.querySelector('.loading').style.display = 'none';
+            }
+        }
+
+        viewer.world.addHandler('add-item', function (event) {
+            var tiledImage = event.item;
+            tiledImage.addHandler('fully-loaded-change', function () {
+                var newFullyLoaded = areAllFullyLoaded();
+                if (newFullyLoaded !== isFullyLoaded) {
+                    isFullyLoaded = newFullyLoaded;
+                    updateLoadingIndicator();
+                }
+            });
+        });
+
+
+
+
 
     </script>
 </body>
