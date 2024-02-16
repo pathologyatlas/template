@@ -38,7 +38,7 @@ jobs:
 
       - name: "render EN"
         run: |
-          quarto render
+          quarto render README2.qmd
 
 
       # - uses: r-lib/actions/setup-tinytex@v2
@@ -75,12 +75,12 @@ jobs:
       # - name: Setup renv
       #   uses: r-lib/actions/setup-renv@v2
 
-      - name: Publish to GitHub Pages (and render)
-        uses: quarto-dev/quarto-actions/publish@v2
-        with:
-          target: gh-pages
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # this secret is always available for github actions
+      # - name: Publish to GitHub Pages (and render)
+      #   uses: quarto-dev/quarto-actions/publish@v2
+      #   with:
+      #     target: gh-pages
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # this secret is always available for github actions
 
       # - uses: r-lib/actions/setup-r-dependencies@v2
 
