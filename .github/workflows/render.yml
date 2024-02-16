@@ -1,8 +1,8 @@
 name: Quarto Render Chapter for Histopathology Atlas (Patoloji Atlası)
 
-# on:
-  # workflow_dispatch:
-  # push:
+on:
+  workflow_dispatch:
+  push:
 
 jobs:
   quarto-render-and-deploy:
@@ -20,12 +20,12 @@ jobs:
       # - name: "Setup pandoc"
       #   uses: r-lib/actions/setup-pandoc@v2
 
-      - name: Install VIPS
-        run: sudo apt-get install -y libvips-tools
+      # - name: Install VIPS
+      #   run: sudo apt-get install -y libvips-tools
 
-      - name: Convert Images
-        run: |
-          for file in ./screenshots/*.png; do vips copy "$file" "${file%.png}.jpg"; done
+      # - name: Convert Images
+      #   run: |
+      #     for file in ./screenshots/*.png; do vips copy "$file" "${file%.png}.jpg"; done
 
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
