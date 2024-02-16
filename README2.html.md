@@ -26,6 +26,7 @@ citation:
 
 
 
+
 # template
 
 
@@ -296,7 +297,10 @@ asis, echo = (language == "EN")
 
 
 
+
 {{< video https://www.youtube.com/embed/youtube_link >}}
+
+
 
 
 

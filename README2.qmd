@@ -4,6 +4,7 @@ author: Serdar Balcı
 format:
   gfm:
     preview-mode: raw
+  html: default
 date: last-modified 
 toc: true
 keep-yaml: true

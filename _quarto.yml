@@ -1,6 +1,5 @@
 project:
   title: "template for Histopathology Atlas (Patoloji Atlası)"
-  output-dir: docs
 
 editor: visual
 
