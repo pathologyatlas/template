@@ -6,19 +6,19 @@ on:
 
 jobs:
   quarto-render-and-deploy:
-    if: "!contains(github.event.head_commit.message, 'WIP') && !contains(github.event.head_commit.message, 'merge') && !contains(github.event.head_commit.message, 'lecture')"
+    # if: "!contains(github.event.head_commit.message, 'WIP') && !contains(github.event.head_commit.message, 'merge') && !contains(github.event.head_commit.message, 'lecture')"
     runs-on: ubuntu-latest
     # continue-on-error: true
     env:
-      RENV_PATHS_ROOT: ~/.local/share/renv
+      # RENV_PATHS_ROOT: ~/.local/share/renv
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
       - name: "actions checkout"
         uses: actions/checkout@v3
 
-      # - name: "Setup pandoc"
-      #   uses: r-lib/actions/setup-pandoc@v2
+      - name: "Setup pandoc"
+        uses: r-lib/actions/setup-pandoc@v2
 
       # - name: Install VIPS
       #   run: sudo apt-get install -y libvips-tools
@@ -168,11 +168,11 @@ jobs:
       #     fs::file_copy(path = TR_chapter_qmd, new_path = EN_chapter_qmd, overwrite = TRUE)
       #     xfun::gsub_files(files = EN_chapter_qmd, pattern = ".qmd >}}", replacement = "_EN.qmd >}}")
 
-      - name: "Render Book EN"
-        shell: Rscript {0}
-        run: |
-          # Render EN
-          quarto::quarto_render(".", as_job = FALSE)
+      # - name: "Render Book EN"
+      #   shell: Rscript {0}
+      #   run: |
+      #     # Render EN
+      #     quarto::quarto_render(".", as_job = FALSE)
 
 #      - name: "render EN"
 #        run: |
