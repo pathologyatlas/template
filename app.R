@@ -40,8 +40,11 @@ ui <- fluidPage(
       checkboxInput("diagnosis", "Diagnosis", value = FALSE),
       checkboxInput("use_youtube", "Use YouTube", value = FALSE),
       textInput("youtube_link", "YouTube Link", value = "youtube_link"),
-      actionButton("generate", "Generate qmd"),
-      downloadButton('downloadFile', 'Download newfile.qmd')
+      actionButton("generate", "Generate Code"),
+      br(),
+      downloadButton('downloadFile_qmd', 'Download qmd file'),
+      br(),
+      downloadButton('downloadFile_readme', 'Download readme file')
     ),
     mainPanel(
       h4("QMD Text:"),
@@ -101,21 +104,30 @@ server <- function(input, output) {
     readme_data()
   })
 
-  output$downloadFile <- downloadHandler(
-    filename = function() {
-      paste("output", ".qmd", sep = "")
-    },
-    content = function(file) {
-      writeLines(qmd_data(), file)
-    },
-    contentType = "text/qmd"
-  )
 
+  output$downloadFile_qmd <- downloadHandler(
+    filename = function() {
+      paste0("_", input$template, ".qmd")
+    },
+      content = function(file) {
+        writeLines(qmd_data(), file)
+      },
+      contentType = "text/qmd"
+    )
   observeEvent(input$generate, {
     output$fileWriteStatus <- renderText("File written successfully.")
   })
 
 
+  output$downloadFile_readme <- downloadHandler(
+    filename = function() {
+      paste0("README.md")
+    },
+    content = function(file) {
+      writeLines(readme_data(), file)
+    },
+    contentType = "text/markdown"
+  )
 
 
   # JavaScript actions for the selection buttons

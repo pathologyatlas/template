@@ -503,6 +503,7 @@ return(qmd_text)
 
 # README TEXT ----
 
+
 readme_text <- function(
     base_template = FALSE,
     TemplateTR = "TemplateTR",
@@ -514,9 +515,11 @@ readme_text <- function(
     youtube_link = "youtube_link"
 ) {
 
-  # base_string ----
 
-  base_string <- '
+
+  ## base_string ----
+
+base_string <- '
 
 # {{template}}
 
@@ -526,7 +529,23 @@ readme_text <- function(
 
 '
 
-  # head_string ----
+
+## yaml string ----
+
+yaml_string <- '
+
+# {{template}}
+
+
+**{{template}} for pathology atlas repositories**
+
+
+'
+
+
+
+
+  ## head_string ----
 
   head_string <- '
 
@@ -561,7 +580,7 @@ asis {{TemplateEN}} EN, echo = (language == "EN")
 '
 
 
-  # screenshot_string ----
+  ## screenshot_string ----
 
   screenshot_string <- '
 
@@ -578,7 +597,7 @@ webshot2::webshot(
 
 '
 
-# tab1 ----
+  ## tab1 ----
 
 tab1 <- '
 
@@ -590,7 +609,7 @@ tab1 <- '
 
 '
 
-# wsi_link_string ----
+   # wsi_link_string ----
 
 wsi_link_string <- '
 
