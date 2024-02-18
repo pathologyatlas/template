@@ -577,6 +577,9 @@ yaml_string <- "
   - histopatholohy
   - whole slide image
   screenshot: https://www.patolojiatlasi.com/screenshots/thumbnail_{{template}}-{{stain}}.png
+  github: https:///github.com/pathologyatlas/{{template}}
+  githubpage: https://pathologyatlas.github.io/{{template}}
+  youtube: https://www.youtube.com/watch?v={{youtube_link}}
 
 "
 
@@ -682,7 +685,8 @@ for (s in stain) {
     TemplateTR = TemplateTR,
     TemplateEN = TemplateEN,
     template = template,
-    stain = s
+    stain = s,
+    youtube_link = youtube_link
   )
 
   yaml_text <- whisker::whisker.render(yaml_string, data_yaml)
