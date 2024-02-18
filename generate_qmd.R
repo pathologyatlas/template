@@ -517,7 +517,7 @@ readme_text <- function(
 
 
 
-  ## base_string ----
+## base_string ----
 
 base_string <- '
 
@@ -530,268 +530,119 @@ base_string <- '
 '
 
 
-## yaml string ----
 
-yaml_string <- '
+## head_string ----
 
-# {{template}}
-
-
-**{{template}} for pathology atlas repositories**
-
-
-'
-
-
-
-
-  ## head_string ----
-
-  head_string <- '
-
-
+head_string <- '
 
 <title>{{TemplateEN}} {{TemplateTR}}</title>
 <meta name="keywords" content="{{TemplateEN}}, {{TemplateTR}}, patoloji, atlas, pathology, whole slide image">
 <meta name="description" content="{{TemplateEN}} {{TemplateTR}}">
 
-
-
-
-
-```
-r language {{template}}, echo=FALSE, include=TRUE
-source("./R/language.R")
-output_type <- knitr::opts_knit$get("rmarkdown.pandoc.to")
-```
-
-
-```
-asis {{TemplateTR}} TR, echo = (language == "TR")
-## {{template}} - {{TemplateTR}} {#sec-{{template}} }
-```
-
-
-```
-asis {{TemplateEN}} EN, echo = (language == "EN")
-## {{template}} - {{TemplateEN}} {#sec-{{template}} }
-```
-
 '
 
 
-  ## screenshot_string ----
 
-  screenshot_string <- '
+## yaml string ----
+
+yaml_string <- "
+
+- stainname: {{template}}-{{stain}}
+  reponame: {{template}}
+  titleTR: {{TemplateTR}}
+  titleEN: {{TemplateEN}}
+  organ: ''
+  speciality: ''
+  type: published
+  author:
+  - Serdar Balci
+  - Memorial Patoloji
+  date: ''
+  url: https://images.patolojiatlasi.com/{{template}}/{{stain}}.html
+  note: ''
+  categoriesTR:
+  - ''
+  - ''
+  - ''
+  - patoloji
+  - atlas
+  - histopatoloji
+  - whole slide image
+  categoriesEN:
+  - ''
+  - ''
+  - ''
+  - pathology
+  - atlas
+  - histopatholohy
+  - whole slide image
+  screenshot: https://www.patolojiatlasi.com/screenshots/thumbnail_{{template}}-{{stain}}.png
+
+"
 
 
-```
-r {{template}} screenshot {{stain}}, eval=TRUE, include=FALSE
-if (!file.exists("./screenshots/thumbnail_{{template}}-{{stain}}.png")) {
-webshot2::webshot(
-  url = "https://images.patolojiatlasi.com/{{template}}/{{stain}}.html",
-  file = "./screenshots/thumbnail_{{template}}-{{stain}}.png"
-)
-}
-```
-
-'
-
-  ## tab1 ----
-
-tab1 <- '
-
-::::: panel-tabset
 
 
-### WSI - Link
-
-
-'
-
-   # wsi_link_string ----
+## wsi_link_string ----
 
 wsi_link_string <- '
-
-
-
-
 
 [https://images.patolojiatlasi.com/{{template}}/{{stain}}.html](https://images.patolojiatlasi.com/{{template}}/{{stain}}.html)
 
 
-
-
-
-```
-asis, echo = (language == "TR")
-
 **{{TemplateTR}}**
 
 
-[![Tam Ekran Görmek İçin Resmi Tıklayın](./screenshots/thumbnail_{{template}}-{{stain}}.png){width="25%"}](https://images.patolojiatlasi.com/{{template}}/{{stain}}.html) [Tam Ekran Görmek İçin Resmi Tıklayın](https://images.patolojiatlasi.com/{{template}}/{{stain}}.html)
-```
+[![Tam Ekran Görmek İçin Resmi Tıklayın](https://www.patolojiatlasi.com/screenshots/thumbnail_{{template}}-{{stain}}.png){width="25%"}](https://images.patolojiatlasi.com/{{template}}/{{stain}}.html) [Tam Ekran Görmek İçin Resmi Tıklayın](https://images.patolojiatlasi.com/{{template}}/{{stain}}.html)
 
-```
-asis, echo = (language == "EN")
 
 **{{TemplateEN}}**
 
-[![Click for Full Screen WSI](./screenshots/thumbnail_{{template}}-{{stain}}.png){width="25%"}](https://images.patolojiatlasi.com/{{template}}/{{stain}}.html) [Click for Full Screen WSI](https://images.patolojiatlasi.com/{{template}}/{{stain}}.html)
-
-```
-
-'
-
-# tab2 ----
-
-tab2 <- '
-
-### WSI
+[![Click for Full Screen WSI](https://www.patolojiatlasi.com/screenshots/thumbnail_{{template}}-{{stain}}.png){width="25%"}](https://images.patolojiatlasi.com/{{template}}/{{stain}}.html) [Click for Full Screen WSI](https://images.patolojiatlasi.com/{{template}}/{{stain}}.html)
 
 
 '
 
 
-# wsi_string ----
+## wsi_string ----
 
 wsi_string <- '
 
 
-
-```
-asis, echo = ((language=="TR") & (output_type=="html"))
 Mikroskopik görüntüleri inceleyin:
 
 <iframe src="https://images.patolojiatlasi.com/{{template}}/{{stain}}.html" style="height:600px;width:100%;" data-external="1"></iframe>
 
-```
-
-
-
-
-
-```
-asis, echo = ((language == "EN") & (output_type=="html"))
 
 See Microscopy with viewer:
 
 <iframe src="https://images.patolojiatlasi.com/{{template}}/{{stain}}.html" style="height:600px;width:100%;" data-external="1"></iframe>
 
-```
-
 '
 
 
-
-# diagnosis_string ----
-
-
-diagnosis_string <-
-  '
-
-### Diagnosis
-
-
-```
-asis, echo = (language == "TR")
-
-
-::: {.callout-tip collapse="true" appearance="default" icon="true"}
-### Tanı için tıklayın
-
-{{TemplateTR}}
-
-:::
-
-
-```
-
-
-```
-asis, echo = (language == "EN")
-
-
-::: {.callout-tip collapse="true" appearance="default" icon="true"}
-### Click for Diagnosis
-
-{{TemplateEN}}
-
-:::
-
-```
-
-
-
-
-'
-
-# youtube_string ----
+## youtube_string ----
 
 
 youtube_string <-
 
   '
 
-### Video
-
-
-
-```
-asis, echo = (language == "TR")
-
 [Video İçin Tıklayın](https://www.youtube.com/watch?v={{youtube_link}})
 
-```
-
-
-```
-asis, echo = (language == "EN")
 
 [Click for Video](https://www.youtube.com/watch?v={{youtube_link}})
 
-```
-
-
-
-::: {.content-visible when-format="html"}
-
-((< video https://www.youtube.com/embed/{{youtube_link}} >))
-
-:::
 
 '
 
-
-# end_string ----
-
-end_string <-
-  '
-
-
-:::::
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-'
 
 # readme_text ----
 
 readme_text <- ''
 
 
-# base render ----
+## base render ----
 
 if (base_template) {
 
@@ -810,7 +661,7 @@ if (base_template) {
 
 
 
-# head render ----
+## head render ----
 
 
 data_head <- list(
@@ -824,30 +675,28 @@ head_text <- whisker::whisker.render(head_string, data_head)
 readme_text <- paste(readme_text, head_text, sep = "\n\n")
 
 
-
-# screenshot render ----
+## yaml_string render ----
 
 for (s in stain) {
-  data_screenshot <- list(
+  data_yaml <- list(
+    TemplateTR = TemplateTR,
+    TemplateEN = TemplateEN,
     template = template,
     stain = s
   )
 
-  screenshot_text <- whisker::whisker.render(screenshot_string, data_screenshot)
+  yaml_text <- whisker::whisker.render(yaml_string, data_yaml)
 
 
-  readme_text <- paste(readme_text, screenshot_text, sep = "\n\n")
+  readme_text <- paste(readme_text, yaml_text, sep = "\n\n")
 
 }
 
 
 
-readme_text <- paste(readme_text, tab1, sep = "\n\n")
 
 
-
-
-# wsi_link_string render ----
+## wsi_link_string render ----
 
 for (s in stain) {
   data_wsi_link <- list(
@@ -866,12 +715,9 @@ for (s in stain) {
 
 
 
-readme_text <- paste(readme_text, tab2, sep = "\n\n")
 
 
-
-
-# wsi_string render ----
+## wsi_string render ----
 
 for (s in stain) {
   data_wsi <- list(
@@ -890,25 +736,7 @@ for (s in stain) {
 
 
 
-
-# diagnosis render ----
-
-if (diagnosis) {
-
-  data_diagnosis <- list(
-    TemplateTR = TemplateTR,
-    TemplateEN = TemplateEN,
-    template = template)
-
-  diagnosis_string <- whisker::whisker.render(diagnosis_string, data_diagnosis)
-
-
-  readme_text <- paste(readme_text, diagnosis_string, sep = "\n\n")
-
-}
-
-
-# youtube render ----
+## youtube render ----
 
 if (use_youtube) {
 
@@ -923,9 +751,9 @@ if (use_youtube) {
 
 }
 
-# end render ----
+## end render ----
 
-readme_text <- paste(readme_text, end_string, sep = "\n\n")
+readme_text <- paste(readme_text, sep = "\n\n")
 
 
 readme_text <- gsub(pattern = "((<", replacement = "{{<", x = readme_text, fixed = TRUE)
