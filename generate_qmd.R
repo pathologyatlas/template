@@ -527,6 +527,10 @@ base_string <- '
 **{{template}} for pathology atlas repositories**
 
 
+((< include ./_subchapters/_{{template}}.qmd >))
+
+
+
 '
 
 
@@ -545,8 +549,8 @@ head_string <- '
 
 ## yaml string ----
 
-yaml_string <- "
-
+yaml_string <- paste0("
+```yaml
 - stainname: {{template}}-{{stain}}
   reponame: {{template}}
   titleTR: {{TemplateTR}}
@@ -557,7 +561,7 @@ yaml_string <- "
   author:
   - Serdar Balci
   - Memorial Patoloji
-  date: ''
+  date: ", Sys.Date(), "
   url: https://images.patolojiatlasi.com/{{template}}/{{stain}}.html
   note: ''
   categoriesTR:
@@ -574,15 +578,15 @@ yaml_string <- "
   - ''
   - pathology
   - atlas
-  - histopatholohy
+  - histopathology
   - whole slide image
   screenshot: https://www.patolojiatlasi.com/screenshots/thumbnail_{{template}}-{{stain}}.png
   github: https:///github.com/pathologyatlas/{{template}}
   githubpage: https://pathologyatlas.github.io/{{template}}
   youtube: https://www.youtube.com/watch?v={{youtube_link}}
-
+```
 "
-
+)
 
 
 

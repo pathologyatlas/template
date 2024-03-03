@@ -32,12 +32,12 @@ ui <- fluidPage(
 
   sidebarLayout(
     sidebarPanel(
-      checkboxInput("base_template", "Base Template", value = FALSE),
+      checkboxInput("base_template", "Base Template", value = TRUE),
       textInput("TemplateTR", "Enter TemplateTR", value = "TemplateTR"),
       textInput("TemplateEN", "Enter TemplateEN", value = "TemplateEN"),
       textInput("template", "Enter template", value = "template"),
       textAreaInput("stain", "Enter stain (comma separated)", value = "HE1, HE2"),
-      checkboxInput("diagnosis", "Diagnosis", value = FALSE),
+      checkboxInput("diagnosis", "Diagnosis", value = TRUE),
       checkboxInput("use_youtube", "Use YouTube", value = FALSE),
       textInput("youtube_link", "YouTube Link", value = "youtube_link"),
       actionButton("generate", "Generate Code"),
