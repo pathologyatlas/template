@@ -555,7 +555,8 @@ yaml_string <- paste0("
   reponame: {{template}}
   titleTR: {{TemplateTR}}
   titleEN: {{TemplateEN}}
-  organ: ''
+  organTR: ''
+  organEN: ''
   speciality: ''
   type: published
   author:
