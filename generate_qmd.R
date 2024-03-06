@@ -21,49 +21,11 @@ base_string <- '
 **{{template}} for pathology atlas repositories**
 
 
-```
-see [make-html-WSI](https://github.com/pathologyatlas/make-html-WSI) for more information and [TODO](https://github.com/pathologyatlas/TODO) to add cases
-```
-
-```
-update html file heading:
-
-<title>{{TemplateEN}} {{TemplateTR}}</title>
-
-<meta name="keywords" content="{{TemplateEN}}, {{TemplateTR}}, patoloji, atlas, pathology, whole slide image">
-
-<meta name="description" content="{{TemplateEN}} {{TemplateTR}}">
-
-```
-
-
-
-```zsh
-
-vips dzsave HE.svs HE
-
-```
-
-
-```
-update html file to match .dzi file
-
-```
-
-
-> consider using git_push.sh script to upload files to github, since the number of generated files is huge
-
-> after upload complete, do not forget to activate github pages for the new repository
-
 '
 
 # head_string ----
 
 head_string <- '
-
-
-((< include ./_subchapters/_{{template}}.qmd >))
-
 
 
 ```{comment}
@@ -530,6 +492,39 @@ base_string <- '
 ((< include ./_subchapters/_{{template}}.qmd >))
 
 
+```
+see [make-html-WSI](https://github.com/pathologyatlas/make-html-WSI) for more information and [TODO](https://github.com/pathologyatlas/TODO) to add cases
+```
+
+```
+update html file heading:
+
+<title>{{TemplateEN}} {{TemplateTR}}</title>
+
+<meta name="keywords" content="{{TemplateEN}}, {{TemplateTR}}, patoloji, atlas, pathology, whole slide image">
+
+<meta name="description" content="{{TemplateEN}} {{TemplateTR}}">
+
+```
+
+
+
+```zsh
+
+vips dzsave HE.svs HE
+
+```
+
+
+```
+update html file to match .dzi file
+
+```
+
+
+> consider using git_push.sh script to upload files to github, since the number of generated files is huge
+
+> after upload complete, do not forget to activate github pages for the new repository
 
 '
 
