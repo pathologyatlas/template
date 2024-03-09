@@ -661,6 +661,9 @@ end_string <-
 
 - For social media based pathology notes [click here](https://www.patolojinotlari.com/).
 
+<a href="https://www.patolojinotlari.com/"><img src ="https://www.patolojiatlasi.com/images/patolojinotlari.com.png" style="width:50%;"></a>
+
+
 
 <iframe width="160" height="400" src="https://leanpub.com/patolojiatlasi/embed" frameborder="0" allowtransparency="true"></iframe>
 
