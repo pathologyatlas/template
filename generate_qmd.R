@@ -88,10 +88,6 @@ if (!file.exists("./qrcodes/{{template}}-{{stain}}_qrcode.svg")) {
 
 
 
-
-
-
-
 '
 
 # tab1 ----
@@ -735,6 +731,61 @@ head_text <- whisker::whisker.render(head_string, data_head)
 readme_text <- paste(readme_text, head_text, sep = "\n\n")
 
 
+## wsi_link_string render ----
+
+for (s in stain) {
+  data_wsi <- list(
+    TemplateTR = TemplateTR,
+    TemplateEN = TemplateEN,
+    template = template,
+    stain = s
+  )
+
+  wsi_link_text <- whisker::whisker.render(wsi_link_string, data_wsi)
+
+  wsi_text <- whisker::whisker.render(wsi_string, data_wsi)
+
+  readme_text <- paste(readme_text, wsi_link_text, wsi_text, sep = "\n\n")
+
+}
+
+#
+#
+# ## wsi_string render ----
+#
+# for (s in stain) {
+#   data_wsi <- list(
+#     TemplateTR = TemplateTR,
+#     TemplateEN = TemplateEN,
+#     template = template,
+#     stain = s
+#   )
+#
+#   wsi_text <- whisker::whisker.render(wsi_string, data_wsi)
+#
+#
+#   readme_text <- paste(readme_text, wsi_text, sep = "\n\n")
+#
+# }
+#
+
+
+## youtube render ----
+
+if (use_youtube) {
+
+  data_youtube <- list(
+    youtube_link = youtube_link
+  )
+
+  youtube_string <- whisker::whisker.render(youtube_string, data_youtube)
+
+
+  readme_text <- paste(readme_text, youtube_string, sep = "\n\n")
+
+}
+
+
 ## yaml_string render ----
 
 for (s in stain) {
@@ -755,62 +806,6 @@ for (s in stain) {
 
 
 
-
-
-## wsi_link_string render ----
-
-for (s in stain) {
-  data_wsi_link <- list(
-    TemplateTR = TemplateTR,
-    TemplateEN = TemplateEN,
-    template = template,
-    stain = s
-  )
-
-  wsi_link_text <- whisker::whisker.render(wsi_link_string, data_wsi_link)
-
-
-  readme_text <- paste(readme_text, wsi_link_text, sep = "\n\n")
-
-}
-
-
-
-
-
-## wsi_string render ----
-
-for (s in stain) {
-  data_wsi <- list(
-    TemplateTR = TemplateTR,
-    TemplateEN = TemplateEN,
-    template = template,
-    stain = s
-  )
-
-  wsi_text <- whisker::whisker.render(wsi_string, data_wsi)
-
-
-  readme_text <- paste(readme_text, wsi_text, sep = "\n\n")
-
-}
-
-
-
-## youtube render ----
-
-if (use_youtube) {
-
-  data_youtube <- list(
-    youtube_link = youtube_link
-  )
-
-  youtube_string <- whisker::whisker.render(youtube_string, data_youtube)
-
-
-  readme_text <- paste(readme_text, youtube_string, sep = "\n\n")
-
-}
 
 ## end render ----
 
