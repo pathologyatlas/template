@@ -496,17 +496,6 @@ base_string <- '
 see [make-html-WSI](https://github.com/pathologyatlas/make-html-WSI) for more information and [TODO](https://github.com/pathologyatlas/TODO) to add cases
 ```
 
-```
-update html file heading:
-
-<title>{{TemplateEN}} {{TemplateTR}}</title>
-
-<meta name="keywords" content="{{TemplateEN}}, {{TemplateTR}}, patoloji, atlas, pathology, whole slide image">
-
-<meta name="description" content="{{TemplateEN}} {{TemplateTR}}">
-
-```
-
 
 
 ```zsh
@@ -534,6 +523,7 @@ update html file to match .dzi file
 
 head_string <- '
 
+update html file heading:
 <title>{{TemplateEN}} {{TemplateTR}}</title>
 <meta name="keywords" content="{{TemplateEN}}, {{TemplateTR}}, patoloji, atlas, pathology, whole slide image">
 <meta name="description" content="{{TemplateEN}} {{TemplateTR}}">
