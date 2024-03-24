@@ -15,7 +15,7 @@ qmd_text <- function(
 
 base_string <- '
 
-# {{template}}
+## {{template}}
 
 
 **{{template}} for pathology atlas repositories**
