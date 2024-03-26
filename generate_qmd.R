@@ -574,7 +574,7 @@ yaml_string <- paste0("
 
 ## wsi_link_string ----
 
-wsi_link_string <- '
+wsi_link_wsi_string <- '
 
 
 [https://images.patolojiatlasi.com/{{template}}/](https://images.patolojiatlasi.com/{{template}}/)
@@ -589,25 +589,16 @@ wsi_link_string <- '
 <a href="https://images.patolojiatlasi.com/{{template}}/{{stain}}.html"><img alt="Tam Ekran Görmek İçin Resmi Tıklayın" src ="https://www.patolojiatlasi.com/screenshots/thumbnail_{{template}}-{{stain}}.png" style="width:25%;"></a>
 
 
+Mikroskopik görüntüleri inceleyin:
+
+<iframe src="https://images.patolojiatlasi.com/{{template}}/{{stain}}.html" style="height:600px;width:100%;" data-external="1"></iframe>
+
 
 **{{TemplateEN}}**
 
 [Click for Full Screen WSI](https://images.patolojiatlasi.com/{{template}}/{{stain}}.html)
 
 <a href="https://images.patolojiatlasi.com/{{template}}/{{stain}}.html"><img alt="Click for Full Screen WSI" src ="https://www.patolojiatlasi.com/screenshots/thumbnail_{{template}}-{{stain}}.png" style="width:25%;"></a>
-
-
-'
-
-
-## wsi_string ----
-
-wsi_string <- '
-
-
-Mikroskopik görüntüleri inceleyin:
-
-<iframe src="https://images.patolojiatlasi.com/{{template}}/{{stain}}.html" style="height:600px;width:100%;" data-external="1"></iframe>
 
 
 See Microscopy with viewer:
@@ -734,11 +725,14 @@ for (s in stain) {
     stain = s
   )
 
-  wsi_link_text <- whisker::whisker.render(wsi_link_string, data_wsi)
+  wsi_link_wsi_text <- whisker::whisker.render(wsi_link_wsi_string, data_wsi)
 
-  wsi_text <- whisker::whisker.render(wsi_string, data_wsi)
+  # wsi_text <- whisker::whisker.render(wsi_string, data_wsi)
 
-  readme_text <- paste(readme_text, wsi_link_text, wsi_text, sep = "\n\n")
+  readme_text <- paste(readme_text, wsi_link_wsi_text,
+  # wsi_text,
+  sep = "\n\n"
+  )
 
 }
 
