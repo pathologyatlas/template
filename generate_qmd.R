@@ -628,8 +628,9 @@ youtube_string <-
 ## end_string ----
 
 end_string <-
-  '
+  ''
 
+'
 <hr>
 
 <a href="https://www.patolojiatlasi.com/"><img src ="https://www.patolojiatlasi.com/images/coverTR.png" style="width:50%;"></a>
@@ -671,10 +672,10 @@ end_string <-
 | <a href="https://twitter.com/intent/tweet?text=Wow:&url=https%3A%2F%2Fwww.patolojiatlasi.com%2F%20@patolojinotlari%20@serdarbalci%20"><img src="https://img.shields.io/twitter/url?label=Patoloji%20Atlas%C4%B1&amp;style=social&amp;url=https%3A%2F%2Fwww.patolojiatlasi.com%2F" alt="Twitter"/></a>    |
 | <a href="https://twitter.com/intent/tweet?text=Wow:&url=https%3A%2F%2Fwww.patolojinotlari.com%2F%20@patolojinotlari%20@serdarbalci%20"><img src="https://img.shields.io/twitter/url?label=Patoloji%20Notlar%C4%B1&amp;style=social&amp;url=https%3A%2F%2Fwww.patolojinotlari.com%2F" alt="Twitter"/></a> |
 
-
-
-
 '
+
+
+
 
 
 # readme_text ----
