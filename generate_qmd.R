@@ -41,7 +41,7 @@ bibliography: references.bib
 
 
 
-```{r language {{template}}, echo=FALSE, include=TRUE}
+```{r echo=FALSE, include=TRUE}
 source("./R/language.R")
 output_type <- knitr::opts_knit$get("rmarkdown.pandoc.to")
 ```
