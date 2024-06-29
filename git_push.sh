@@ -28,8 +28,17 @@
 # mapfile -t files < <(git ls-files)
 
 
-# Get all tracked files, respecting .gitignore
-IFS=$'\n' read -d '' -r -a files < <(git ls-files)
+# Get all tracked files
+IFS=$'\n' read -d '' -r -a tracked_files < <(git ls-files)
+
+# Get all files, including untracked ones, but respecting .gitignore
+IFS=$'\n' read -d '' -r -a all_files < <(git ls-files --others --exclude-standard; printf '%s\n' "${tracked_files[@]}")
+
+# Remove duplicates
+IFS=$'\n' read -d '' -r -a files < <(printf '%s\n' "${all_files[@]}" | sort -u)
+
+
+
 
 
 batch_size=4000
