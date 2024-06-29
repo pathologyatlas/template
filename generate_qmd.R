@@ -41,19 +41,19 @@ bibliography: references.bib
 
 
 
-```{r echo=FALSE, include=TRUE}
+```{r language {{template}}, echo=FALSE, include=TRUE}
 source("./R/language.R")
 output_type <- knitr::opts_knit$get("rmarkdown.pandoc.to")
 ```
 
 
 ```{asis {{TemplateTR}} TR , echo = (language == "TR")}
-## {{TemplateTR}} {#sec-{{template}} }
+## {{template}} - {{TemplateTR}} {#sec-{{template}} }
 ```
 
 
 ```{asis {{TemplateEN}} EN , echo = (language == "EN")}
-## {{TemplateEN}} {#sec-{{template}} }
+## {{template}} - {{TemplateEN}} {#sec-{{template}} }
 ```
 
 '
@@ -574,7 +574,7 @@ yaml_string <- paste0("
 
 ## wsi_link_string ----
 
-wsi_link_wsi_string <- '
+wsi_link_string <- '
 
 
 [https://images.patolojiatlasi.com/{{template}}/](https://images.patolojiatlasi.com/{{template}}/)
@@ -589,16 +589,25 @@ wsi_link_wsi_string <- '
 <a href="https://images.patolojiatlasi.com/{{template}}/{{stain}}.html"><img alt="Tam Ekran Görmek İçin Resmi Tıklayın" src ="https://www.patolojiatlasi.com/screenshots/thumbnail_{{template}}-{{stain}}.png" style="width:25%;"></a>
 
 
-Mikroskopik görüntüleri inceleyin:
-
-<iframe src="https://images.patolojiatlasi.com/{{template}}/{{stain}}.html" style="height:600px;width:100%;" data-external="1"></iframe>
-
 
 **{{TemplateEN}}**
 
 [Click for Full Screen WSI](https://images.patolojiatlasi.com/{{template}}/{{stain}}.html)
 
 <a href="https://images.patolojiatlasi.com/{{template}}/{{stain}}.html"><img alt="Click for Full Screen WSI" src ="https://www.patolojiatlasi.com/screenshots/thumbnail_{{template}}-{{stain}}.png" style="width:25%;"></a>
+
+
+'
+
+
+## wsi_string ----
+
+wsi_string <- '
+
+
+Mikroskopik görüntüleri inceleyin:
+
+<iframe src="https://images.patolojiatlasi.com/{{template}}/{{stain}}.html" style="height:600px;width:100%;" data-external="1"></iframe>
 
 
 See Microscopy with viewer:
@@ -628,9 +637,8 @@ youtube_string <-
 ## end_string ----
 
 end_string <-
-  ''
+  '
 
-'
 <hr>
 
 <a href="https://www.patolojiatlasi.com/"><img src ="https://www.patolojiatlasi.com/images/coverTR.png" style="width:50%;"></a>
@@ -672,10 +680,10 @@ end_string <-
 | <a href="https://twitter.com/intent/tweet?text=Wow:&url=https%3A%2F%2Fwww.patolojiatlasi.com%2F%20@patolojinotlari%20@serdarbalci%20"><img src="https://img.shields.io/twitter/url?label=Patoloji%20Atlas%C4%B1&amp;style=social&amp;url=https%3A%2F%2Fwww.patolojiatlasi.com%2F" alt="Twitter"/></a>    |
 | <a href="https://twitter.com/intent/tweet?text=Wow:&url=https%3A%2F%2Fwww.patolojinotlari.com%2F%20@patolojinotlari%20@serdarbalci%20"><img src="https://img.shields.io/twitter/url?label=Patoloji%20Notlar%C4%B1&amp;style=social&amp;url=https%3A%2F%2Fwww.patolojinotlari.com%2F" alt="Twitter"/></a> |
 
+
+
+
 '
-
-
-
 
 
 # readme_text ----
@@ -726,14 +734,11 @@ for (s in stain) {
     stain = s
   )
 
-  wsi_link_wsi_text <- whisker::whisker.render(wsi_link_wsi_string, data_wsi)
+  wsi_link_text <- whisker::whisker.render(wsi_link_string, data_wsi)
 
-  # wsi_text <- whisker::whisker.render(wsi_string, data_wsi)
+  wsi_text <- whisker::whisker.render(wsi_string, data_wsi)
 
-  readme_text <- paste(readme_text, wsi_link_wsi_text,
-  # wsi_text,
-  sep = "\n\n"
-  )
+  readme_text <- paste(readme_text, wsi_link_text, wsi_text, sep = "\n\n")
 
 }
 
