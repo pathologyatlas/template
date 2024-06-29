@@ -25,7 +25,12 @@
 # files=( $(find ./ -type f) )
 
 # Get all tracked files, respecting .gitignore
-mapfile -t files < <(git ls-files)
+# mapfile -t files < <(git ls-files)
+
+
+# Get all tracked files, respecting .gitignore
+IFS=$'\n' read -d '' -r -a files < <(git ls-files)
+
 
 batch_size=4000
 total_files=${#files[@]}
