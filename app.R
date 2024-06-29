@@ -40,6 +40,7 @@ ui <- fluidPage(
       checkboxInput("diagnosis", "Diagnosis", value = TRUE),
       checkboxInput("use_youtube", "Use YouTube", value = FALSE),
       textInput("youtube_link", "YouTube Link", value = "youtube_link"),
+      checkboxInput("end_template", "End Template", value = FALSE),
       actionButton("generate", "Generate Code"),
       br(),
       downloadButton('downloadFile_qmd', 'Download qmd file'),
@@ -95,7 +96,8 @@ server <- function(input, output) {
       stain = stain,
       diagnosis = input$diagnosis,
       use_youtube = input$use_youtube,
-      youtube_link = input$youtube_link
+      youtube_link = input$youtube_link,
+      end_template = input$end_template
     )
   })
 

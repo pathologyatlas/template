@@ -470,7 +470,8 @@ readme_text <- function(
     stain = c("HE1", "HE2"),
     diagnosis = FALSE,
     use_youtube = FALSE,
-    youtube_link = "youtube_link"
+    youtube_link = "youtube_link",
+    end_template = FALSE
 ) {
 
 
@@ -530,6 +531,7 @@ update html file heading:
 
 ## yaml string ----
 
+
 yaml_string <- paste0("
 ```yaml
 - stainname: {{template}}-{{stain}}
@@ -565,7 +567,7 @@ yaml_string <- paste0("
   screenshot: https://www.patolojiatlasi.com/screenshots/thumbnail_{{template}}-{{stain}}.png
   github: https:///github.com/pathologyatlas/{{template}}
   githubpage: https://pathologyatlas.github.io/{{template}}
-  youtube: https://www.youtube.com/watch?v={{youtube_link}}
+  youtube:" , ifelse(use_youtube, paste0("https://www.youtube.com/watch?v=", youtube_link), "''"), "
 ```
 "
 )
@@ -797,12 +799,24 @@ for (s in stain) {
 
 }
 
+if (!use_youtube) {
+  readme_text <- gsub(pattern = "youtube: https://www.youtube.com/watch\\?v=.+", replacement = "youtube: ''", x = readme_text, perl = TRUE)
+  }
+
 
 
 
 ## end render ----
 
-readme_text <- paste(readme_text, end_string, sep = "\n\n")
+
+
+if (end_template) {
+
+  readme_text <- paste(readme_text, end_string, sep = "\n\n")
+
+}
+
+
 
 
 readme_text <- gsub(pattern = "((<", replacement = "{{<", x = readme_text, fixed = TRUE)
