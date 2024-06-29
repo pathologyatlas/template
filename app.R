@@ -3,6 +3,7 @@ library(shiny)
 library(whisker)
 
 source("./generate_qmd.R")
+source("./generate_html.R")
 
 # UI definition
 ui <- fluidPage(
@@ -45,7 +46,9 @@ ui <- fluidPage(
       br(),
       downloadButton('downloadFile_qmd', 'Download qmd file'),
       br(),
-      downloadButton('downloadFile_readme', 'Download readme file')
+      downloadButton('downloadFile_readme', 'Download readme file'),
+      br(),
+      downloadButton('downloadFile_html', 'Download html file')
     ),
     mainPanel(
       h4("QMD Text:"),
@@ -54,6 +57,9 @@ ui <- fluidPage(
       h4("README Text:"),
       actionButton("select_readme", "Select README Text"),
       div(id = "readmetext-container", verbatimTextOutput("readmetext")),
+      h4("html Text:"),
+      actionButton("select_html", "Select html Text"),
+      div(id = "htmltext-container", verbatimTextOutput("htmltext")),
       textOutput("fileWriteStatus")
     )
   )
@@ -107,6 +113,30 @@ server <- function(input, output) {
   })
 
 
+  html_data <- eventReactive(input$generate, {
+    stain <- strsplit(input$stain, ",")[[1]]
+    stain <- trimws(stain)
+
+    html_text(
+      # base_template = input$base_template,
+      TemplateTR = input$TemplateTR,
+      TemplateEN = input$TemplateEN,
+      # template = input$template,
+      stain = stain,
+      # diagnosis = input$diagnosis,
+      # use_youtube = input$use_youtube,
+      # youtube_link = input$youtube_link,
+      # end_template = input$end_template
+    )
+  })
+
+  output$htmltext <- renderText({
+    req(html_data())
+    html_data()
+  })
+
+
+
   output$downloadFile_qmd <- downloadHandler(
     filename = function() {
       paste0("_", input$template, ".qmd")
@@ -131,13 +161,28 @@ server <- function(input, output) {
     contentType = "text/markdown"
   )
 
+  output$downloadFile_html <- downloadHandler(
+    filename = function() {
+      paste0("htmltext.html")
+    },
+    content = function(file) {
+      writeLines(html_data(), file)
+    },
+    contentType = "text/markdown"
+  )
+
+
 
   # JavaScript actions for the selection buttons
   observeEvent(input$select_qmd, {
     shinyjs::runjs('selectText("qmdtext-container")')
   })
+
   observeEvent(input$select_readme, {
     shinyjs::runjs('selectText("readmetext-container")')
+  })
+  observeEvent(input$select_html, {
+    shinyjs::runjs('selectText("htmltext-container")')
   })
 
 

@@ -1,0 +1,199 @@
+# QMD TEXT ----
+
+html_text <- function(
+    base_template = FALSE,
+    TemplateTR = "TemplateTR",
+    TemplateEN = "TemplateEN",
+    template = "template",
+    stain = c("HE1", "HE2"),
+    diagnosis = FALSE,
+    use_youtube = FALSE,
+    youtube_link = "youtube_link"
+    ) {
+
+# base_string ----
+
+
+html_string <- '
+<html> <!-- do not use <!DOCTYPE html> -->
+
+<head>
+  <title>{{TemplateEN}} {{TemplateTR}}</title>
+  <meta name="keywords" content="{{TemplateEN}}, {{TemplateTR}}, patoloji, atlas, pathology, whole slide image">
+
+  <meta name="description" content="{{TemplateEN}} {{TemplateTR}}">
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="https://images.patolojiatlasi.com/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://images.patolojiatlasi.com/img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://images.patolojiatlasi.com/img/favicon-16x16.png">
+  <link rel="manifest" href="https://images.patolojiatlasi.com/img/site.webmanifest">
+  <link rel="icon" href="https://images.patolojiatlasi.com/img/favicon.ico" type="image/x-icon" />
+
+
+  <script src="https://images.patolojiatlasi.com/openseadragon/openseadragon.min.js"></script>
+  <script src="./openseadragon/openseadragon.min.js"></script>
+
+  <!-- <script src="openseadragon/openseadragon-scalebar.js"></script> -->
+
+</head>
+
+<body>
+  <div>
+    <label for="rotation-slider">Rotate Image:</label>
+    <input type="range" id="rotation-slider" min="0" max="360" value="0">
+  </div>
+
+  <div id="openseadragon1" style="width: 100%; height: 95%;"></div>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    var viewer = OpenSeadragon({
+      id: "openseadragon1",
+      //        prefixUrl: "https://images.patolojiatlasi.com/openseadragon/images/",
+      prefixUrl: "./openseadragon/images/",
+
+      showHomeControl: true,
+      showRotationControl: true,
+      showNavigator: true,
+      showFlipControl: true,
+      navigatorBackground: "rgb(240, 240, 240)",
+
+
+      tileSources: {
+        Image: {
+          Url: "./{{stain}}_files/", // name of image folder
+          TileSize: "254", // see .dzi file
+          Overlap: "1", // see .dzi file
+          Format: "jpeg", // see .dzi file
+          ServerFormat: "Default", // optional
+          xmlns: "http://schemas.microsoft.com/deepzoom/2008", // see .dzi file
+          Size: {
+            Width: "51792", // see .dzi file
+            Height: "30580" // see .dzi file
+          }
+        }
+      }
+      // ,
+      // tileSources: "yourwsi.dzi",
+      // sequenceMode: false,
+      // autoHideControls: true,
+      // animationTime: 1.0,
+      // blendTime: 0.6,
+      // constrainDuringPan: true,
+      // maxZoomPixelRatio: 1,
+      // visibilityRatio: 1,
+      // zoomPerScrolli: 1,
+      // defaultZoomLevel: 1,
+      // showReferenceStrip: true,
+      // showNavigator:  true,
+      // showFullPageControl: false
+
+
+    });
+
+    /*     viewer.scalebar({
+            minWidth: "100px",
+            pixelsPerMeter: "1.98255e+06",
+            fontFamily: "Arial",
+            backgroundColor: "rgba(255, 255, 255, 0.5)",
+            fontSize: "small",
+            barThickness: "2",
+            xOffset: "10",
+            yOffset: "10"
+        }); */
+
+
+
+
+
+
+    // Add a keydown event listener to the document
+    document.addEventListener("keydown", function (event) {
+
+
+      switch (event.keyCode) {
+        case 90: // "Z" key for zoom in
+          viewer.viewport.zoomBy(1.2);
+          viewer.viewport.applyConstraints();
+          break;
+        case 88: // "X" key for zoom out
+          viewer.viewport.zoomBy(0.8);
+          viewer.viewport.applyConstraints();
+          break;
+        case 37: // Left arrow key
+        case 65: // "A" key
+          viewer.viewport.panBy(new OpenSeadragon.Point(-0.05, 0));
+          viewer.viewport.applyConstraints();
+          break;
+        case 38: // Up arrow key
+        case 87: // "W" key
+          viewer.viewport.panBy(new OpenSeadragon.Point(0, -0.05));
+          viewer.viewport.applyConstraints();
+          break;
+        case 39: // Right arrow key
+        case 68: // "D" key
+          viewer.viewport.panBy(new OpenSeadragon.Point(0.05, 0));
+          viewer.viewport.applyConstraints();
+          break;
+        case 40: // Down arrow key
+        case 83: // "S" key
+          viewer.viewport.panBy(new OpenSeadragon.Point(0, 0.05));
+          viewer.viewport.applyConstraints();
+          break;
+      }
+    });
+
+
+    document.getElementById("rotation-slider").addEventListener("input", function (event) {
+      var rotationAngle = event.target.value;
+      viewer.viewport.setRotation(parseFloat(rotationAngle));
+    });
+
+  </script>
+</body>
+
+</html>
+
+'
+
+
+
+# html_text ----
+
+html_text <- ''
+
+
+# text render ----
+
+for (s in stain) {
+  data_1 <- list(
+    TemplateTR = TemplateTR,
+    TemplateEN = TemplateEN,
+    stain = s
+  )
+
+  text_1 <- whisker::whisker.render(html_string, data_1)
+
+
+  html_text <- paste(html_text, text_1, sep = "\n\n")
+
+}
+
+
+
+
+return(html_text)
+
+}
+
+
