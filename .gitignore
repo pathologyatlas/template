@@ -28,3 +28,10 @@ TwoChannelExample.zip
 /.quarto/
 
 docs
+app1.py
+app1.spec
+remove_files_1.py
+remove_files_2.sh
+remove_files_3.sh
+build
+dist
