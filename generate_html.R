@@ -29,6 +29,10 @@ html_text <- function(TemplateTR, TemplateEN, stain, dzi_info) {
 
 </head>
 <body>
+  <div>
+    <label for="rotation-slider">Rotate Image:</label>
+    <input type="range" id="rotation-slider" min="0" max="360" value="0">
+  </div>
   <div id="openseadragon1" style="width: 100%; height: 95%;"></div>
   <script type="text/javascript">
     var viewer = OpenSeadragon({
@@ -53,7 +57,6 @@ html_text <- function(TemplateTR, TemplateEN, stain, dzi_info) {
           }
         }
       }
-    });
 
       // ,
       // tileSources: "yourwsi.dzi",
