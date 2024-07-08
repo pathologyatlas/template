@@ -54,7 +54,7 @@ do
   do
     if [ -e "${files[$j]}" ]; then
       git add "${files[$j]}"
-      echo "Added: ${files[$j]}"
+      # echo "Added: ${files[$j]}"
     else
       git rm "${files[$j]}" 2>/dev/null && echo "Removed: ${files[$j]}" || echo "Skipped: ${files[$j]}"
     fi
