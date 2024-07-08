@@ -567,7 +567,7 @@ yaml_string <- paste0("
   screenshot: https://www.patolojiatlasi.com/screenshots/thumbnail_{{template}}-{{stain}}.png
   github: https:///github.com/pathologyatlas/{{template}}
   githubpage: https://pathologyatlas.github.io/{{template}}
-  youtube:" , ifelse(use_youtube, paste0("https://www.youtube.com/watch?v=", youtube_link), "''"), "
+  youtube: " , ifelse(use_youtube, paste0("https://www.youtube.com/watch?v=", youtube_link), "''"), "
 ```
 "
 )

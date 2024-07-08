@@ -1,8 +1,7 @@
 html_text <- function(TemplateTR, TemplateEN, stain, dzi_info) {
-  html_string <- '<!DOCTYPE html>
-<html lang="en">
-<head>
+  html_string <- '<html> <!-- do not use <!DOCTYPE html> -->
 
+<head>
 
   <title>{{TemplateEN}} {{TemplateTR}}</title>
   <meta name="keywords" content="{{TemplateEN}}, {{TemplateTR}}, patoloji, atlas, pathology, whole slide image">
