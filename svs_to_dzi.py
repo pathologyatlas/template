@@ -25,7 +25,7 @@ def convert_svs_to_dzi():
         # Run the VIPS command
         try:
             subprocess.run(["vips", "dzsave", file_path, output_path], check=True)
-            messagebox.showinfo("Success", f"Converted {filename}.svs to DZI format.")
+            # messagebox.showinfo("Success", f"Converted {filename}.svs to DZI format.")
         except subprocess.CalledProcessError as e:
             messagebox.showerror("Error", f"Failed to convert {filename}.svs: {str(e)}")
 
