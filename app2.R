@@ -137,7 +137,7 @@ server <- function(input, output) {
     req(input$dzi_files)
     dzi_paths <- input$dzi_files$datapath
     stains <- tools::file_path_sans_ext(input$dzi_files$name)
-    stains <- trimws(stains)  # Apply trimws to remove leading/trailing whitespace
+    stains <- sapply(stains, trimws)  # Apply trimws to each stain name individually
 
     print("DZI file paths:")
     print(dzi_paths)
@@ -159,7 +159,7 @@ server <- function(input, output) {
 
   html_data <- eventReactive(input$generate, {
     stains <- strsplit(input$stain, ",")[[1]]
-    stains <- trimws(stains)
+    stains <- sapply(stains, trimws)  # Apply trimws to each stain name individually
     dzi_info_list <- dzi_info()
 
     # Print debugging information
@@ -218,7 +218,8 @@ dzi_info <- reactive({
 
   dzi_paths <- input$dzi_files$datapath
   stains <- tools::file_path_sans_ext(input$dzi_files$name)
-  stains <- trimws(stains)  # Apply trimws here as well
+  stains <- sapply(stains, trimws)  # Apply trimws to each stain name individually
+
 
   print("DZI file paths:")
   print(dzi_paths)
@@ -266,7 +267,7 @@ observeEvent(input$dzi_files, {
 
   readme_data <- eventReactive(input$generate, {
     stain <- strsplit(input$stain, ",")[[1]]
-    stain <- trimws(stain)
+    stains <- sapply(stain, trimws)  # Apply trimws to each stain name individually
     readme_text(
       base_template = input$base_template,
       TemplateTR = input$TemplateTR,
@@ -288,7 +289,7 @@ observeEvent(input$dzi_files, {
 
   html_data <- eventReactive(input$generate, {
     stains <- strsplit(input$stain, ",")[[1]]
-    stains <- trimws(stains)
+    stains <- sapply(stains, trimws)  # Apply trimws to each stain name individually
     dzi_info_list <- dzi_info()
 
     # Print debugging information
@@ -322,7 +323,7 @@ observeEvent(input$dzi_files, {
   output$download_buttons <- renderUI({
     req(html_data())
     stains <- strsplit(input$stain, ",")[[1]]
-    stains <- trimws(stains)
+    stains <- sapply(stains, trimws)  # Apply trimws to each stain name individually
     buttons <- lapply(stains, function(stain) {
       downloadButton(paste0('downloadFile_html_', stain), paste('Download ', stain, '.html'))
     })
@@ -332,7 +333,7 @@ observeEvent(input$dzi_files, {
   observe({
     req(html_data())
     stains <- strsplit(input$stain, ",")[[1]]
-    stains <- trimws(stains)
+    stains <- sapply(stains, trimws)  # Apply trimws to each stain name individually
     for (stain in stains) {
       local({
         s <- stain
