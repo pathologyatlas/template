@@ -137,6 +137,7 @@ server <- function(input, output) {
     req(input$dzi_files)
     dzi_paths <- input$dzi_files$datapath
     stains <- tools::file_path_sans_ext(input$dzi_files$name)
+    stains <- trimws(stains)  # Apply trimws to remove leading/trailing whitespace
 
     print("DZI file paths:")
     print(dzi_paths)
@@ -217,6 +218,7 @@ dzi_info <- reactive({
 
   dzi_paths <- input$dzi_files$datapath
   stains <- tools::file_path_sans_ext(input$dzi_files$name)
+  stains <- trimws(stains)  # Apply trimws here as well
 
   print("DZI file paths:")
   print(dzi_paths)
