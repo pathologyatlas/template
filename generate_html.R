@@ -141,7 +141,7 @@ html_text <- function(TemplateTR, TemplateEN, stain, dzi_info) {
 '
 
   html_text_list <- list()
-  for (s in stain) {
+  for (s in trimws(stain)) {
     data <- list(
       TemplateTR = TemplateTR,
       TemplateEN = TemplateEN,

@@ -349,7 +349,7 @@ qmd_text <- paste(qmd_text, head_text, sep = "\n\n")
 
 # screenshot render ----
 
-for (s in stain) {
+for (s in trimws(stain)) {
   data_screenshot <- list(
     template = template,
     stain = s
@@ -371,7 +371,7 @@ qmd_text <- paste(qmd_text, tab1, sep = "\n\n")
 
 # wsi_link_string render ----
 
-for (s in stain) {
+for (s in trimws(stain)) {
   data_wsi_link <- list(
     TemplateTR = TemplateTR,
     TemplateEN = TemplateEN,
@@ -395,7 +395,7 @@ qmd_text <- paste(qmd_text, tab2, sep = "\n\n")
 
 # wsi_string render ----
 
-for (s in stain) {
+for (s in trimws(stain)) {
   data_wsi <- list(
     TemplateTR = TemplateTR,
     TemplateEN = TemplateEN,
@@ -728,7 +728,7 @@ readme_text <- paste(readme_text, head_text, sep = "\n\n")
 
 ## wsi_link_string render ----
 
-for (s in stain) {
+for (s in trimws(stain)) {
   data_wsi <- list(
     TemplateTR = TemplateTR,
     TemplateEN = TemplateEN,
@@ -748,7 +748,7 @@ for (s in stain) {
 #
 # ## wsi_string render ----
 #
-# for (s in stain) {
+# for (s in trimws(stain)) {
 #   data_wsi <- list(
 #     TemplateTR = TemplateTR,
 #     TemplateEN = TemplateEN,
@@ -783,7 +783,7 @@ if (use_youtube) {
 
 ## yaml_string render ----
 
-for (s in stain) {
+for (s in trimws(stain)) {
   data_yaml <- list(
     TemplateTR = TemplateTR,
     TemplateEN = TemplateEN,
