@@ -12,7 +12,7 @@ items_to_remove=(
     "./all.html" "./app.R" "./app2.R" "./generate_html.R" "./generate_qmd.R"
     "./git_push.sh" "./HE_annotated-deneme.html" "./HE_annotated.html"
     "./HE-deneme.html" "./multiple.html" "./openseadragon-plugins.qmd"
-    "./svs_to_dzi.py" "./svsCombiner.py" "./remove-files.sh" "sablon.md"
+    "./svs_to_dzi.py" "./svsCombiner.py" "./remove-files.sh" "./sablon.md"
 )
 
 # Function to list all files and folders in the project
