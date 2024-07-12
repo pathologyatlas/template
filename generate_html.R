@@ -4,7 +4,7 @@ html_text <- function(TemplateTR, TemplateEN, stain, dzi_info) {
 <head>
 
   <title>{{TemplateEN}} {{TemplateTR}}</title>
-  <meta name="keywords" content="{{TemplateEN}}, {{TemplateTR}}, patoloji, atlas, pathology, whole slide image">
+  <meta name="keywords" content="{{TemplateEN}}, {{TemplateTR}}, patoloji, atlas, pathology, whole slide image, virtual microscopy, virtual microscope, sanal mikroskop">
 
   <meta name="description" content="{{TemplateEN}} {{TemplateTR}}">
 

@@ -16,7 +16,7 @@ update html file heading:
 
 <title>TemplateEN TemplateTR</title>
 
-<meta name="keywords" content="TemplateEN, TemplateTR, patoloji, atlas, pathology, whole slide image">
+<meta name="keywords" content="TemplateEN, TemplateTR, patoloji, atlas, pathology, whole slide image, virtual microscopy, virtual microscope, sanal mikroskop">
 
 <meta name="description" content="TemplateEN TemplateTR">
 
@@ -46,7 +46,7 @@ update html file to match .dzi file
 
 
 <title>TemplateEN TemplateTR</title>
-<meta name="keywords" content="TemplateEN, TemplateTR, patoloji, atlas, pathology, whole slide image">
+<meta name="keywords" content="TemplateEN, TemplateTR, patoloji, atlas, pathology, whole slide image, virtual microscopy, virtual microscope, sanal mikroskop">
 <meta name="description" content="TemplateEN TemplateTR">
 
 
@@ -155,6 +155,7 @@ See Microscopy with viewer:
   - atlas
   - histopatoloji
   - whole slide image
+  - sanal mikroskop
   categoriesEN:
   - ''
   - ''
@@ -163,6 +164,8 @@ See Microscopy with viewer:
   - atlas
   - histopathology
   - whole slide image
+  - virtual microscopy
+  - virtual microscope
   screenshot: https://www.patolojiatlasi.com/screenshots/thumbnail_template-HE1.png
   github: https:///github.com/pathologyatlas/template
   githubpage: https://pathologyatlas.github.io/template
@@ -194,6 +197,7 @@ See Microscopy with viewer:
   - atlas
   - histopatoloji
   - whole slide image
+  - sanal mikroskop
   categoriesEN:
   - ''
   - ''
@@ -202,6 +206,8 @@ See Microscopy with viewer:
   - atlas
   - histopathology
   - whole slide image
+  - virtual microscopy
+  - virtual microscope
   screenshot: https://www.patolojiatlasi.com/screenshots/thumbnail_template-HE2.png
   github: https:///github.com/pathologyatlas/template
   githubpage: https://pathologyatlas.github.io/template

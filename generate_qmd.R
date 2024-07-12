@@ -31,7 +31,7 @@ head_string <- '
 ```{comment}
 ---
 description: |
-    {{TemplateTR}}, {{TemplateEN}}, patoloji, atlas, pathology, whole slide image
+    {{TemplateTR}}, {{TemplateEN}}, patoloji, atlas, pathology, whole slide image, virtual microscopy, virtual microscope, sanal mikroskop
 date: last-modified
 categories: [{{TemplateTR}}, {{TemplateEN}}]
 page-layout: full
@@ -522,7 +522,7 @@ head_string <- '
 
 update html file heading:
 <title>{{TemplateEN}} {{TemplateTR}}</title>
-<meta name="keywords" content="{{TemplateEN}}, {{TemplateTR}}, patoloji, atlas, pathology, whole slide image">
+<meta name="keywords" content="{{TemplateEN}}, {{TemplateTR}}, patoloji, atlas, pathology, whole slide image, virtual microscopy, virtual microscope, sanal mikroskop">
 <meta name="description" content="{{TemplateEN}} {{TemplateTR}}">
 
 '
@@ -556,6 +556,7 @@ yaml_string <- paste0("
   - atlas
   - histopatoloji
   - whole slide image
+  - sanal mikroskop
   categoriesEN:
   - ''
   - ''
@@ -564,6 +565,8 @@ yaml_string <- paste0("
   - atlas
   - histopathology
   - whole slide image
+  - virtual microscopy
+  - virtual microscope
   screenshot: https://www.patolojiatlasi.com/screenshots/thumbnail_{{template}}-{{stain}}.png
   github: https:///github.com/pathologyatlas/{{template}}
   githubpage: https://pathologyatlas.github.io/{{template}}
