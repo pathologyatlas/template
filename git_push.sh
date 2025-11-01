@@ -67,7 +67,13 @@ do
     git commit -m "WIP Adding files from $start to $end"
     echo "Committing after adding files from $start to $end. There are $total_files files in total."
     echo "Batch number $((i+1)) is being processed."
-    git push origin
+
+    # Get current branch name
+    current_branch=$(git branch --show-current)
+
+    # Push with -u flag to set upstream (safe for both first and subsequent pushes)
+    git push -u origin "$current_branch"
+
     echo "Pushed files from $start to $end. There are $total_files files in total."
     echo "Batch number $((i+1)) has been processed."
   fi
